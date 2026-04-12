@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BigLinker EC 코칭</title>
+  <link rel="stylesheet" href="./style.css">
   <style>
     :root {
       --header-bg: #f6f7fb; --header-surface: #ffffff; --header-line: #e5e8ef;
@@ -14,6 +15,12 @@
       --white: #fff; --max: 1320px; --radius-xl: 28px; --radius-lg: 22px;
       --radius-md: 18px; --radius-sm: 12px; --radius-xs: 8px;
       --shadow: 0 24px 60px rgba(0,0,0,0.28); --shadow-card: 0 18px 36px rgba(36,46,78,0.08);
+      --shadow-float: 0 16px 40px rgba(0,0,0,0.22);
+      --toast-bg: rgba(22,26,38,0.96);
+      --toast-border: rgba(255,255,255,0.12);
+      --toast-border-brand: rgba(74,104,255,0.3);
+      --toast-border-success: rgba(52,211,153,0.22);
+      --urgency-border: rgba(74,104,255,0.2);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -235,10 +242,8 @@
     .footer-policy-links { display: flex; gap: 16px; }
     .footer-policy-links a { font-size: 12px; color: var(--muted-dark); font-weight: 600; }
 
-    /* ── MOBILE ── */
-    .mobile-floating-cta { display: none; position: fixed; bottom: 20px; left: 16px; right: 16px; border-radius: 16px; background: var(--brand); padding: 14px 18px; box-shadow: 0 16px 40px rgba(74,104,255,0.4); align-items: center; gap: 12px; z-index: 900; }
-    .mobile-floating-cta strong { display: block; font-size: 14px; font-weight: 800; color: #fff; }
-    .mobile-floating-cta span { font-size: 12px; color: rgba(255,255,255,0.75); }
+    /* ── MOBILE CTA — style.css에서 통합 관리 ── */
+    .mobile-floating-cta { position: fixed; z-index: 900; }
 
     @media (max-width: 760px) {
       .wrap, .inner { padding: 0 16px; }
@@ -249,7 +254,6 @@
       .category-tabs, .category-utility { justify-content: flex-start; }
       .category-utility { width: auto; overflow-x: auto; scrollbar-width: none; white-space: nowrap; padding-bottom: 8px; }
       .category-utility::-webkit-scrollbar { display: none; }
-      .mobile-floating-cta { display: flex; }
       .need-grid { grid-template-columns: 1fr; }
       .program-grid { grid-template-columns: 1fr; }
       .timeline { grid-template-columns: 1fr 1fr; }
@@ -284,7 +288,7 @@
         <div class="main-header-wrap">
           <div class="header-promo">2026 합격전략 가이드 오픈</div>
           <a class="brand" href="./index.html">
-            <img class="brand-mark" src="./biglinker-logo.png" alt="빅링커 로고">
+            <img class="brand-mark" src="./assets/biglinker-logo.png" alt="빅링커 로고">
             <div class="brand-copy"><span>입시·대학원·학업계획서·논문·면접 코칭 전문</span></div>
           </a>
           <div class="header-actions"><a class="cta-btn" href="#cta">상담 신청</a></div>
@@ -357,9 +361,40 @@
             <strong>3개월 집중 완성</strong>
             <p>주차별 체계적 로드맵으로<br>확실한 성과 달성</p>
           </div>
+        </div><!-- /hero-diff-cards -->
+        <!-- Hero Stat Row -->
+        <div style="display:flex;justify-content:center;gap:0;margin-top:44px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">3개월</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">집중 완성 코스</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);align-self:stretch;"></div>
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">1:1</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">맞춤형 로드맵 설계</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);align-self:stretch;"></div>
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">논문·대회</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">산출물 완성 지원</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);align-self:stretch;"></div>
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">전문가</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">교수·연구원 멘토링</div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- ══ Urgency Banner ══ -->
+    <div class="urgency-band">
+      <div class="urgency-band__inner wrap">
+        <span class="urgency-band__icon">⚡</span>
+        <span class="urgency-band__text"><strong id="urgency-spots">이번 달 잔여 6자리</strong> · <span class="urgency-month">5월 신청 마감 임박</span></span>
+        <a class="urgency-band__cta" href="#cta">지금 신청하기</a>
+      </div>
+    </div>
 
     <!-- ══ WHY EC ══ -->
     <section class="section-dark" id="why">
@@ -373,19 +408,19 @@
           <div>
             <div style="font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--brand-2); margin-bottom:16px;">EC 코칭이 필요한 이유</div>
             <div class="need-grid">
-              <div class="need-item">
+              <div class="need-item reveal-item">
                 <div class="need-ic">01</div>
                 <p>학교 성적과 스펙만으로는 차별화하기 어려운 시대</p>
               </div>
-              <div class="need-item">
+              <div class="need-item reveal-item">
                 <div class="need-ic">02</div>
                 <p>국내·국제 대회, 맞춤형 리서치, 창의 프로젝트 등 다양한 활동 기회</p>
               </div>
-              <div class="need-item">
+              <div class="need-item reveal-item">
                 <div class="need-ic">03</div>
                 <p>자기주도적 비교과 활동이 대학 입시·취업에서 강력한 경쟁력</p>
               </div>
-              <div class="need-item">
+              <div class="need-item reveal-item">
                 <div class="need-ic">04</div>
                 <p>학생의 주도성과 성취를 이끌어 내는 전략적 프로그램 필요</p>
               </div>
@@ -406,23 +441,23 @@
           </div>
           <div class="target-list">
             <div class="target-item">
-              <div class="t-ic">📄</div>
+              <div class="t-ic">▤</div>
               논문, 특허, 각종 대회 준비가 막막한 학생
             </div>
             <div class="target-item">
-              <div class="t-ic">🎯</div>
+              <div class="t-ic">◎</div>
               입시에 쓸 자기주도 프로젝트를 만들고 싶은 학생
             </div>
             <div class="target-item">
-              <div class="t-ic">🚀</div>
+              <div class="t-ic">▲</div>
               학부 연구, 창업 아이디어, 자율탐구 등으로 스토리를 만들고 싶은 대학생
             </div>
             <div class="target-item">
-              <div class="t-ic">🔬</div>
+              <div class="t-ic">◈</div>
               교수·멘토의 피드백을 받아 실제 연구나 산출물을 완성하고 싶은 학생
             </div>
             <div class="target-item">
-              <div class="t-ic">🌏</div>
+              <div class="t-ic">◎</div>
               해외 명문대 진학을 위해 차별화된 비교과 성과를 준비하고 싶은 학생
             </div>
           </div>
@@ -439,9 +474,9 @@
           <p style="color:var(--header-muted); font-size:15px; line-height:1.8; max-width:560px;">4가지 핵심 영역을 통해 학생만의 차별화된 비교과 스토리를 완성합니다.</p>
         </div>
         <div class="program-grid">
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">🔬</div>
+              <div class="p-icon">◈</div>
               <h3>프로젝트 &amp; 리서치</h3>
             </div>
             <ul class="program-list">
@@ -449,9 +484,9 @@
               <li>개별 리서치, 실험, 탐구·공모전 아이템 준비</li>
             </ul>
           </div>
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">🏆</div>
+              <div class="p-icon">★</div>
               <h3>대회 &amp; 포트폴리오</h3>
             </div>
             <ul class="program-list">
@@ -459,9 +494,9 @@
               <li>발표자료, 에세이, 포트폴리오 완성</li>
             </ul>
           </div>
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">🎤</div>
+              <div class="p-icon">◈</div>
               <h3>커뮤니케이션 &amp; 발표</h3>
             </div>
             <ul class="program-list">
@@ -469,9 +504,9 @@
               <li>입시 면접·자기소개서에서 차별화된 스토리 구축</li>
             </ul>
           </div>
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">📈</div>
+              <div class="p-icon">↗</div>
               <h3>자기주도 &amp; 피드백</h3>
             </div>
             <ul class="program-list">
@@ -559,15 +594,15 @@
           <h3 style="font-size:18px; font-weight:700; color:var(--header-text); margin-bottom:4px;">빅링커 EC 코칭 실제 사례</h3>
         </div>
         <div class="case-grid">
-          <div class="case-card">
+          <div class="case-card reveal-item">
             <div class="c-tag">고1 학생</div>
             <p>학교 주도 리서치 대회에서 최우수상 수상, 자기소개서에 핵심 스토리로 활용</p>
           </div>
-          <div class="case-card">
+          <div class="case-card reveal-item">
             <div class="c-tag">대학생</div>
             <p>창업 공모전 참가 후 포트폴리오에 실전 프로젝트 추가, 취업 면접 강점으로 어필</p>
           </div>
-          <div class="case-card">
+          <div class="case-card reveal-item">
             <div class="c-tag">고3 수험생</div>
             <p>논문 결과를 바탕으로 의대 자소서·면접 준비 완성, 최종 합격</p>
           </div>
@@ -787,6 +822,22 @@
     <a class="cta-btn" href="#cta" style="flex-shrink:0;">신청하기</a>
   </div>
 
+  <!-- Social Proof Toast Layer -->
+  <div class="sp-layer" aria-label="실시간 현황">
+    <div id="sp-visitor" class="sp-toast sp-toast--visitor is-hidden" role="status" aria-live="polite">
+      <span class="sp-toast__dot"></span>
+      <span class="sp-toast__text">현재 <strong id="sp-visitor-count">23</strong>명이 보고 계십니다</span>
+    </div>
+    <div id="sp-success" class="sp-toast sp-toast--success is-hidden" role="status" aria-live="polite">
+      <span class="sp-toast__avatar">박</span>
+      <div class="sp-toast__body">
+        <strong class="sp-toast__name">박○○ 학생</strong>
+        <span class="sp-toast__action">국제학술대회 논문 게재</span>
+        <span class="sp-toast__time">방금 전</span>
+      </div>
+    </div>
+  </div>
+
   <script>
     const topShell = document.getElementById('topShell');
     let lastY = 0;
@@ -797,5 +848,7 @@
       lastY = y;
     }, { passive: true });
   </script>
+  <script src="./script.js"></script>
+  <script src="./consult-panel.js"></script>
 </body>
 </html>

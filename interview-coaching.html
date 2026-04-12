@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BigLinker 면접 코칭</title>
+  <link rel="stylesheet" href="./style.css">
   <style>
     /* ══════════════════════════════════════════
        DESIGN TOKENS
@@ -36,6 +37,11 @@
       --shadow: 0 24px 60px rgba(0,0,0,0.28);
       --shadow-card: 0 18px 36px rgba(36,46,78,0.08);
       --shadow-float: 0 16px 40px rgba(0,0,0,0.22);
+      --toast-bg: rgba(22,26,38,0.96);
+      --toast-border: rgba(255,255,255,0.12);
+      --toast-border-brand: rgba(74,104,255,0.3);
+      --toast-border-success: rgba(52,211,153,0.22);
+      --urgency-border: rgba(74,104,255,0.2);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1297,23 +1303,9 @@
     .footer-policy-links a:hover { color: var(--brand-2); }
 
     /* ══════════════════════════════════════════
-       MOBILE CTA
+       MOBILE CTA — style.css에서 통합 관리
     ══════════════════════════════════════════ */
-    .mobile-floating-cta {
-      display: none;
-      position: fixed;
-      bottom: 20px; left: 16px; right: 16px;
-      border-radius: 16px;
-      background: var(--brand);
-      padding: 14px 18px;
-      box-shadow: 0 16px 40px rgba(74,104,255,0.4);
-      align-items: center;
-      gap: 12px;
-      z-index: 900;
-    }
-    .mobile-floating-cta img { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: rgba(255,255,255,0.2); }
-    .mobile-floating-cta strong { display: block; font-size: 14px; font-weight: 800; color: #fff; }
-    .mobile-floating-cta span { font-size: 12px; color: rgba(255,255,255,0.75); }
+    .mobile-floating-cta { position: fixed; z-index: 900; }
     @media (max-width: 760px) {
       /* ── 레이아웃 ── */
       .wrap, .inner { padding: 0 16px; }
@@ -1342,7 +1334,6 @@
       .category-utility::-webkit-scrollbar { display: none; }
 
       /* ── 콘텐츠 ── */
-      .mobile-floating-cta { display: flex; }
       .showcase { grid-template-columns: 1fr; gap: 32px; }
       .showcase.reverse { grid-template-columns: 1fr; }
       .showcase.reverse > *:first-child { order: 2; }
@@ -1380,7 +1371,7 @@
         <div class="main-header-wrap">
           <div class="header-promo">2026 합격전략 가이드 오픈</div>
           <a class="brand" href="./index.html">
-            <img class="brand-mark" src="./biglinker-logo.png" alt="빅링커 로고">
+            <img class="brand-mark" src="./assets/biglinker-logo.png" alt="빅링커 로고">
             <div class="brand-copy">
               <span>입시·대학원·학업계획서·논문·면접 코칭 전문</span>
             </div>
@@ -1464,6 +1455,15 @@
         </div>
       </div>
     </section>
+
+    <!-- ══ Urgency Banner ══ -->
+    <div class="urgency-band">
+      <div class="urgency-band__inner wrap">
+        <span class="urgency-band__icon">⚡</span>
+        <span class="urgency-band__text"><strong id="urgency-spots">이번 달 잔여 4자리</strong> · <span class="urgency-month">5월 신청 마감 임박</span></span>
+        <a class="urgency-band__cta" href="#cta">지금 신청하기</a>
+      </div>
+    </div>
 
     <!-- ══ 면접이란 (2-col + Competency Wheel) ══ -->
     <section class="section-dark" id="overview">
@@ -1572,22 +1572,22 @@
               <p style="font-size:14px; color:var(--header-muted); line-height:1.75; margin:0;">지원자의 잠재력과 연구 역량을 확인하는 4가지 핵심 기준</p>
             </div>
           </div>
-          <div style="font-size:56px; opacity:0.12; flex-shrink:0;">🧠</div>
+          <div style="font-size:56px; opacity:0.1; flex-shrink:0; color:var(--brand-2);">◉</div>
         </div>
 
         <!-- Radial Eval Grid -->
         <div class="eval-grid">
           <!-- Top-left -->
-          <div class="eval-card">
-            <div class="eval-icon">🧪</div>
+          <div class="eval-card reveal-item">
+            <div class="eval-icon">◈</div>
             <strong>연구 적합성</strong>
             <p>연구 관심사가 학과 및 연구실의 방향성과 얼마나 부합하는가</p>
           </div>
           <!-- Top-center (empty) -->
           <div></div>
           <!-- Top-right -->
-          <div class="eval-card">
-            <div class="eval-icon">🧠</div>
+          <div class="eval-card reveal-item">
+            <div class="eval-icon">◉</div>
             <strong>논리적 사고력</strong>
             <p>질문에 대해 체계적으로 분석하고 명확하게 생각을 설명할 수 있는가</p>
           </div>
@@ -1601,16 +1601,16 @@
           <!-- Mid-right (empty) -->
           <div></div>
           <!-- Bottom-left -->
-          <div class="eval-card">
-            <div class="eval-icon">📖</div>
+          <div class="eval-card reveal-item">
+            <div class="eval-icon">≡</div>
             <strong>학문적 태도</strong>
             <p>연구에 대한 진지한 열정과 끈기, 그리고 깊이 있는 학문적 호기심</p>
           </div>
           <!-- Bottom-center note -->
           <div class="eval-center-note">'연구자로서의 가능성'을 평가합니다</div>
           <!-- Bottom-right -->
-          <div class="eval-card">
-            <div class="eval-icon">📊</div>
+          <div class="eval-card reveal-item">
+            <div class="eval-icon">▬</div>
             <strong>전공 이해도</strong>
             <p>전공 분야의 기초 개념 이해와 최신 학문 동향에 대한 파악 수준</p>
           </div>
@@ -1680,20 +1680,20 @@
           <div class="principles-inner">
             <div class="principles-label">PART 01. 면접 답변의 3대 핵심 원칙</div>
             <div class="principles-grid">
-              <div class="principle-card">
-                <div class="principle-icon">📢</div>
+              <div class="principle-card reveal-item">
+                <div class="principle-icon">▷</div>
                 <strong>핵심 내용 우선 전달</strong>
                 <div class="principle-divider"></div>
                 <p>질문의 의도를 명확히 파악하여 결론부터 간결하게 답변 시작</p>
               </div>
-              <div class="principle-card">
-                <div class="principle-icon">💡</div>
+              <div class="principle-card reveal-item">
+                <div class="principle-icon">◆</div>
                 <strong>구체적 경험 중심</strong>
                 <div class="principle-divider"></div>
                 <p>추상적인 설명 대신 실질적인 사례를 통해 역량을 증명</p>
               </div>
-              <div class="principle-card">
-                <div class="principle-icon">🔍</div>
+              <div class="principle-card reveal-item">
+                <div class="principle-icon">◎</div>
                 <strong>연구 관심 분야 연결</strong>
                 <div class="principle-divider"></div>
                 <p>모든 답변을 지원 학과의 방향성 및 자신의 연구 목표와 결부</p>
@@ -1766,7 +1766,7 @@
             <h2>1:1 맞춤형 모의 면접 코칭 프로세스</h2>
             <p>체계적인 단계별 분석과 실전 연습을 통해 합격 가능성을 극대화합니다.</p>
           </div>
-          <div class="head-right">🎬</div>
+          <div class="head-right">▷</div>
         </div>
 
         <!-- Phase 01 -->
@@ -1797,7 +1797,7 @@
         <div>
           <div class="phase-label">PHASE 02: 회차별 실전 코칭 (Intensive Coaching)</div>
           <div class="phase-sessions">
-            <div class="session-card">
+            <div class="session-card reveal-item">
               <strong>1회차: 기초 및 전략 수립</strong>
               <ul>
                 <li>면접의 중요성 이해 및 마인드셋</li>
@@ -1815,7 +1815,7 @@
               </ul>
               <div class="session-focus">FOCUS: 전달력 강화 및 전공 지식 점검</div>
             </div>
-            <div class="session-card">
+            <div class="session-card reveal-item">
               <strong>3회차: 실전 완성 및 피드백</strong>
               <ul>
                 <li>압박 면접 및 꼬리 질문 대응 훈련</li>
@@ -2024,12 +2024,28 @@
   </footer>
 
   <a class="mobile-floating-cta" href="#cta">
-    <img src="./biglinker-logo.png" alt="빅링커 로고">
+    <img src="./assets/biglinker-logo.png" alt="빅링커 로고">
     <div>
       <strong>상담 신청</strong>
       <span>면접 코칭 바로 연결</span>
     </div>
   </a>
+
+  <!-- Social Proof Toast Layer -->
+  <div class="sp-layer" aria-label="실시간 현황">
+    <div id="sp-visitor" class="sp-toast sp-toast--visitor is-hidden" role="status" aria-live="polite">
+      <span class="sp-toast__dot"></span>
+      <span class="sp-toast__text">현재 <strong id="sp-visitor-count">23</strong>명이 보고 계십니다</span>
+    </div>
+    <div id="sp-success" class="sp-toast sp-toast--success is-hidden" role="status" aria-live="polite">
+      <span class="sp-toast__avatar">김</span>
+      <div class="sp-toast__body">
+        <strong class="sp-toast__name">김○○ 학생</strong>
+        <span class="sp-toast__action">한양대 면접 합격</span>
+        <span class="sp-toast__time">방금 전</span>
+      </div>
+    </div>
+  </div>
 
   <script>
     const topShell = document.getElementById('topShell');
@@ -2040,5 +2056,7 @@
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
   </script>
+  <script src="./script.js"></script>
+  <script src="./consult-panel.js"></script>
 </body>
 </html>

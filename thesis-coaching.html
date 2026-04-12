@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BigLinker 논문 코칭</title>
+  <link rel="stylesheet" href="./style.css">
   <style>
     /* ══════════════════════════════════════════
        DESIGN TOKENS
@@ -36,6 +37,11 @@
       --shadow: 0 24px 60px rgba(0,0,0,0.28);
       --shadow-card: 0 18px 36px rgba(36,46,78,0.08);
       --shadow-float: 0 16px 40px rgba(0,0,0,0.22);
+      --toast-bg: rgba(22,26,38,0.96);
+      --toast-border: rgba(255,255,255,0.12);
+      --toast-border-brand: rgba(74,104,255,0.3);
+      --toast-border-success: rgba(52,211,153,0.22);
+      --urgency-border: rgba(74,104,255,0.2);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -562,13 +568,8 @@
     /* ══════════════════════════════════════════
        MOBILE
     ══════════════════════════════════════════ */
-    .mobile-floating-cta {
-      display: none; position: fixed; bottom: 20px; left: 16px; right: 16px;
-      border-radius: 16px; background: var(--brand); padding: 14px 18px;
-      box-shadow: 0 16px 40px rgba(74,104,255,0.4); align-items: center; gap: 12px; z-index: 900;
-    }
-    .mobile-floating-cta strong { display: block; font-size: 14px; font-weight: 800; color: #fff; }
-    .mobile-floating-cta span { font-size: 12px; color: rgba(255,255,255,0.75); }
+    /* mobile-floating-cta: style.css에서 통합 관리 */
+    .mobile-floating-cta { position: fixed; z-index: 900; }
 
     @media (max-width: 760px) {
       .wrap, .inner { padding: 0 16px; }
@@ -579,7 +580,6 @@
       .category-tabs, .category-utility { justify-content: flex-start; }
       .category-utility { width: auto; overflow-x: auto; scrollbar-width: none; white-space: nowrap; padding-bottom: 8px; }
       .category-utility::-webkit-scrollbar { display: none; }
-      .mobile-floating-cta { display: flex; }
       .pain-grid { grid-template-columns: 1fr; }
       .philosophy-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr 1fr; }
@@ -614,7 +614,7 @@
         <div class="main-header-wrap">
           <div class="header-promo">2026 합격전략 가이드 오픈</div>
           <a class="brand" href="./index.html">
-            <img class="brand-mark" src="./biglinker-logo.png" alt="빅링커 로고">
+            <img class="brand-mark" src="./assets/biglinker-logo.png" alt="빅링커 로고">
             <div class="brand-copy">
               <span>입시·대학원·학업계획서·논문·면접 코칭 전문</span>
             </div>
@@ -691,9 +691,40 @@
             <strong>10단계 전 과정 관리</strong>
             <p>주제 선정부터 최종 제출까지<br>단계별 체계적 코칭</p>
           </div>
-        </div>
-      </div>
+        </div><!-- /hero-diff-cards -->
+        <!-- Hero Stat Row -->
+        <div class="hero-stat-row" style="display:flex;justify-content:center;gap:0;margin-top:44px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">100%</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">논문 심사 통과율</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);align-self:stretch;"></div>
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">3:1</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">전담 코칭 전문가</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);align-self:stretch;"></div>
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">10단계</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">전 과정 체계 관리</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);align-self:stretch;"></div>
+          <div style="flex:1;text-align:center;padding:0 20px;">
+            <div style="font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.01em;">SKY·KAIST</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">주요 배출 대학원</div>
+          </div>
+        </div><!-- /hero-stat-row -->
+      </div><!-- /wrap -->
     </section>
+
+    <!-- ══ Urgency Banner ══ -->
+    <div class="urgency-band">
+      <div class="urgency-band__inner wrap">
+        <span class="urgency-band__icon">⚡</span>
+        <span class="urgency-band__text"><strong id="urgency-spots">이번 달 잔여 2자리</strong> · <span class="urgency-month">5월 신청 마감 임박</span></span>
+        <a class="urgency-band__cta" href="#cta">지금 신청하기</a>
+      </div>
+    </div>
 
     <!-- ══ WHY: 공감 + 철학 ══ -->
     <section class="section-dark" id="why">
@@ -735,18 +766,18 @@
           <div class="section-eyebrow" style="margin-bottom:20px;">OUR PHILOSOPHY</div>
         </div>
         <div class="philosophy-grid">
-          <div class="philosophy-card">
-            <div class="phi-icon">🎓</div>
+          <div class="philosophy-card reveal-item">
+            <div class="phi-icon">◆</div>
             <strong>박사급 교육 전문가 그룹</strong>
             <p>각 분야 최고 전문가들이 주제 선정부터 심사 대비까지 단계별로 코칭합니다.</p>
           </div>
-          <div class="philosophy-card">
-            <div class="phi-icon">💬</div>
+          <div class="philosophy-card reveal-item">
+            <div class="phi-icon">◻</div>
             <strong>연구자 맞춤형 소통 시스템</strong>
             <p>대표 포함 3:1 긴밀한 환경으로 빠른 피드백과 철저한 진도 관리를 제공합니다.</p>
           </div>
-          <div class="philosophy-card">
-            <div class="phi-icon">🔒</div>
+          <div class="philosophy-card reveal-item">
+            <div class="phi-icon">⊠</div>
             <strong>안정적인 연구 완성 지원</strong>
             <p>지역·교수 배치 제한 없이, 완성도 높은 논문을 한 학기 내 마무리할 수 있도록 함께합니다.</p>
           </div>
@@ -767,7 +798,7 @@
             <h2 style="font-size:clamp(24px,3vw,38px); font-weight:700; letter-spacing:-0.045em; line-height:1.24; color:var(--text); margin-bottom:10px;">논문 코칭 10단계 프로세스</h2>
             <p style="font-size:14px; color:var(--muted); line-height:1.8;">주제 선정부터 최종 제출까지, 전 과정을 체계적으로 지원합니다.</p>
           </div>
-          <div style="font-size:52px; opacity:0.15; flex-shrink:0; padding-top:4px;">📋</div>
+          <div style="font-size:52px; opacity:0.1; flex-shrink:0; padding-top:4px; color:var(--brand-2);">≡</div>
         </div>
 
         <div style="margin-bottom:16px;">
@@ -857,28 +888,28 @@
         </div>
 
         <div class="filter-grid">
-          <div class="filter-card">
-            <div class="f-icon">👥</div>
+          <div class="filter-card reveal-item">
+            <div class="f-icon">◉</div>
             <strong>대상 (Target)</strong>
             <p>누구를 연구의 중심으로 삼는가?</p>
           </div>
-          <div class="filter-card">
-            <div class="f-icon">⚙️</div>
+          <div class="filter-card reveal-item">
+            <div class="f-icon">⚙</div>
             <strong>변수 (Variable)</strong>
             <p>무엇을 측정하고 비교할 것인가?</p>
           </div>
-          <div class="filter-card">
-            <div class="f-icon">🌐</div>
+          <div class="filter-card reveal-item">
+            <div class="f-icon">◎</div>
             <strong>맥락 (Context)</strong>
             <p>어떤 상황이나 환경에 놓여 있는가?</p>
           </div>
-          <div class="filter-card">
-            <div class="f-icon">📅</div>
+          <div class="filter-card reveal-item">
+            <div class="f-icon">▤</div>
             <strong>기간 (Period)</strong>
             <p>언제까지 현실적으로 완료 가능한가?</p>
           </div>
-          <div class="filter-card">
-            <div class="f-icon">📊</div>
+          <div class="filter-card reveal-item">
+            <div class="f-icon">▬</div>
             <strong>데이터 (Data)</strong>
             <p>어떻게 객관적인 자료를 확보하는가?</p>
           </div>
@@ -952,17 +983,17 @@
           <p style="color:var(--muted); font-size:14px; line-height:1.8;">대표 포함 3인의 전문가가 한 명의 연구자를 위해 유기적으로 움직입니다.</p>
         </div>
         <div class="system-grid">
-          <div class="system-card">
-            <div class="s-icon">🥇</div>
+          <div class="system-card reveal-item">
+            <div class="s-icon">★</div>
             <strong>1:1 맞춤형 밀착 케어</strong>
             <p>연구자의 진도와 요구에 맞춘 최적화된 코칭 스케줄 제공</p>
           </div>
-          <div class="system-card">
-            <div class="s-icon">📋</div>
+          <div class="system-card reveal-item">
+            <div class="s-icon">≡</div>
             <strong>체계적 효율 극대화</strong>
             <p>리스트 기반 관리 시스템으로 연구에만 몰입할 수 있는 환경</p>
           </div>
-          <div class="system-card">
+          <div class="system-card reveal-item">
             <div class="s-icon">∞</div>
             <strong>All-in-One 시스템</strong>
             <p>주제 선정부터 최종 PASS까지 전 과정을 책임지고 완주합니다</p>
@@ -983,9 +1014,9 @@
         </div>
 
         <div class="program-grid">
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">🎓</div>
+              <div class="p-icon">◆</div>
               <h3>리드 논문 코칭</h3>
             </div>
             <ul class="program-list">
@@ -995,9 +1026,9 @@
               <li>1:1 밀착 전담 코칭 프로세스</li>
             </ul>
           </div>
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">📊</div>
+              <div class="p-icon">▬</div>
               <h3>리드 통계 코칭</h3>
             </div>
             <ul class="program-list">
@@ -1007,9 +1038,9 @@
               <li>데이터 정제 및 결과 해석 지도</li>
             </ul>
           </div>
-          <div class="program-card">
+          <div class="program-card reveal-item">
             <div class="p-top">
-              <div class="p-icon">🧩</div>
+              <div class="p-icon">◈</div>
               <h3>맞춤형 전문 서비스</h3>
             </div>
             <ul class="program-list">
@@ -1218,6 +1249,22 @@
     <a class="cta-btn" href="#cta" style="flex-shrink:0;">신청하기</a>
   </div>
 
+  <!-- Social Proof Toast Layer -->
+  <div class="sp-layer" aria-label="실시간 현황">
+    <div id="sp-visitor" class="sp-toast sp-toast--visitor is-hidden" role="status" aria-live="polite">
+      <span class="sp-toast__dot"></span>
+      <span class="sp-toast__text">현재 <strong id="sp-visitor-count">23</strong>명이 보고 계십니다</span>
+    </div>
+    <div id="sp-success" class="sp-toast sp-toast--success is-hidden" role="status" aria-live="polite">
+      <span class="sp-toast__avatar">김</span>
+      <div class="sp-toast__body">
+        <strong class="sp-toast__name">김○○ 학생</strong>
+        <span class="sp-toast__action">서울대 대학원 논문 통과</span>
+        <span class="sp-toast__time">방금 전</span>
+      </div>
+    </div>
+  </div>
+
   <script>
     // 헤더 스크롤 콜랩스
     const topShell = document.getElementById('topShell');
@@ -1232,5 +1279,7 @@
       lastY = y;
     }, { passive: true });
   </script>
+  <script src="./script.js"></script>
+  <script src="./consult-panel.js"></script>
 </body>
 </html>
