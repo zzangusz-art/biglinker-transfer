@@ -2,8 +2,8 @@
   'use strict';
 
   // ── CUSTOMIZE ────────────────────────────────────────────────────────────
-  var SLACK_WEBHOOK = '/api/notify'; // CUSTOMIZE
-  var PAGE_TITLE    = document.title || location.pathname;
+  var NOTIFY_URL = '/api/notify'; // Vercel 서버리스 함수 (env: SLACK_WEBHOOK)
+  var PAGE_TITLE = document.title || location.pathname;
   // ─────────────────────────────────────────────────────────────────────────
 
   var PANEL_HTML = '\
@@ -245,9 +245,8 @@
       ]
     };
 
-    fetch(SLACK_WEBHOOK, {
+    fetch(NOTIFY_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).catch(function () {
