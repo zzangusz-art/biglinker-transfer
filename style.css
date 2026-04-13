@@ -673,11 +673,11 @@
     }
 
     /* ──────────────────────────────────────────────────────
-       스크롤 시 category-utility 숨김 (모바일 전용)
+       category-utility 모바일 항상 숨김 (tabs만 노출)
     ────────────────────────────────────────────────────── */
     @media (max-width: 760px) {
-      .top-shell.is-collapsed ~ .sticky-category-shell .category-utility {
-        display: none;
+      .sticky-category-shell .category-utility {
+        display: none !important;
       }
     }
 
@@ -932,4 +932,14 @@
     .cp-hint-toast.is-visible {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
+    }
+    /* ── wrap 모바일 패딩 ── */
+    @media (max-width: 760px) {
+      .wrap { padding: 0 16px !important; }
+      .section-dark,
+      .section-light,
+      .section-panel { padding: 56px 0; }
+      h1 { word-break: keep-all; }
+      h2 { word-break: keep-all; }
+      p  { word-break: keep-all; }
     }

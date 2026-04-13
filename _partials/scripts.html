@@ -1,0 +1,15 @@
+  <script>
+    const topShell = document.getElementById('topShell');
+    const collapsePoint = 220;
+    function handleScroll() {
+      if (window.scrollY > collapsePoint) {
+        topShell.classList.add('is-collapsed');
+      } else {
+        topShell.classList.remove('is-collapsed');
+      }
+    }
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  </script>
+  <script src="./script.js"></script>
+  <script src="./consult-panel.js"></script>
