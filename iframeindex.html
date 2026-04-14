@@ -710,29 +710,39 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 .cases-track { display: flex; transition: transform 0.42s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
 .cases-slide { flex: 0 0 100%; min-width: 0; }
 .cases-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.carousel-case-card {
-  display: flex; align-items: center; gap: 12px;
+/* Cases carousel card — transfer와 동일, .cases-grid 스코프로 마키 .case-card와 충돌 방지 */
+.cases-grid .case-card {
+  display: flex; align-items: center; gap: 14px; flex-direction: row;
   background: #fff; border: 1.5px solid var(--line);
-  border-radius: var(--r-lg); padding: 14px 16px;
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--r-lg); padding: 16px 16px;
+  box-shadow: var(--shadow-xs);
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.22s;
-  min-width: 0;
+  min-width: 0; width: auto; flex-shrink: 1;
 }
-.carousel-case-card:hover { border-color: var(--brand-mid); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.carousel-case-logo {
-  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
-  border: 1.5px solid var(--line); background: #fff;
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
+.cases-grid .case-card:hover {
+  border-color: var(--brand-mid); box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
 }
-.carousel-case-logo img { width: 36px; height: 36px; object-fit: contain; }
-.carousel-case-logo.placeholder {
+.case-logo-wrap {
+  width: 50px; height: 50px; flex-shrink: 0; border-radius: 50%;
+  border: 1.5px solid var(--line); overflow: hidden; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.case-logo-wrap img { width: 38px; height: 38px; object-fit: contain; }
+.case-logo-wrap.placeholder {
   background: linear-gradient(135deg, var(--brand), #7c6ff7);
-  border: none; font-size: 12px; font-weight: 800; color: #fff;
+  border: none; font-size: 13px; font-weight: 800; color: #fff;
+  letter-spacing: -0.03em;
 }
-.carousel-case-info { flex: 1; min-width: 0; }
-.carousel-case-tag { display: inline-block; margin-bottom: 3px; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 999px; }
-.carousel-case-name { display: block; font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.carousel-case-dept { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.case-info { flex: 1; min-width: 0; }
+.case-name {
+  display: block; font-size: 14px; font-weight: 700; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.case-dept {
+  display: block; font-size: 12px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .cases-dots { display: flex; justify-content: center; gap: 6px; margin-top: 20px; margin-bottom: 56px; }
 .cases-dot { width: 8px; height: 8px; border-radius: 4px; background: var(--line-2); cursor: pointer; border: none; transition: background 0.25s, width 0.25s; }
 .cases-dot.is-active { background: var(--brand); width: 22px; }
@@ -1542,215 +1552,357 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 
 
 <script>
-/* ── Cases Carousel (hub page) ── */
-(function(){
-  var UNIV_CASES=[
-    {logo:'서울대학교',dept:'경영학과',name:'김○○',tag:'수시 종합전형',year:'2025'},
-    {logo:'연세대학교',dept:'신문방송학과',name:'이○○',tag:'편입 최종합격',year:'2025'},
-    {logo:'고려대학교',dept:'심리학부',name:'박○○',tag:'자기소개서 코칭',year:'2025'},
-    {logo:'성균관대학교',dept:'경제학과',name:'정○○',tag:'면접 코칭',year:'2025'},
-    {logo:'한양대학교',dept:'디자인학부',name:'오○○',tag:'포트폴리오 코칭',year:'2025'},
-    {logo:'이화여자대학교',dept:'국어국문학과',name:'강○○',tag:'EC 전략',year:'2025'},
-    {logo:'서강대학교',dept:'컴퓨터공학과',name:'최○○',tag:'수시 종합전형',year:'2025'},
-    {logo:'중앙대학교',dept:'사회학과',name:'노○○',tag:'자기소개서 코칭',year:'2025'},
-    {logo:'경희대학교',dept:'호텔경영학과',name:'유○○',tag:'편입 최종합격',year:'2025'},
-    {logo:'건국대학교',dept:'생명공학과',name:'홍○○',tag:'수시 종합전형',year:'2025'},
-    {logo:'동국대학교',dept:'경찰행정학과',name:'임○○',tag:'면접 코칭',year:'2025'},
-    {logo:'숙명여자대학교',dept:'통계학과',name:'윤○○',tag:'수시 종합전형',year:'2025'},
-  ];
-  var JOB_CASES=[
-    {logo:'삼성전자',dept:'SW개발팀',name:'김○○',tag:'대기업 최종합격',year:'2025'},
-    {logo:'LG전자',dept:'마케팅본부',name:'이○○',tag:'자소서·면접 코칭',year:'2025'},
-    {logo:'카카오',dept:'Product 기획',name:'박○○',tag:'IT업계 취업',year:'2025'},
-    {logo:'현대자동차',dept:'연구개발팀',name:'정○○',tag:'대기업 최종합격',year:'2025'},
-    {logo:'네이버',dept:'Data Analytics',name:'최○○',tag:'IT업계 취업',year:'2025'},
-    {logo:'SK하이닉스',dept:'반도체 공정',name:'오○○',tag:'대기업 최종합격',year:'2025'},
-    {logo:'롯데그룹',dept:'유통전략팀',name:'강○○',tag:'자소서·면접 코칭',year:'2025'},
-    {logo:'CJ그룹',dept:'콘텐츠사업부',name:'유○○',tag:'대기업 최종합격',year:'2025'},
-    {logo:'포스코',dept:'기술연구소',name:'홍○○',tag:'대기업 최종합격',year:'2025'},
-    {logo:'KT',dept:'디지털혁신팀',name:'임○○',tag:'IT업계 취업',year:'2025'},
-    {logo:'한국투자증권',dept:'IB본부',name:'노○○',tag:'금융권 최종합격',year:'2025'},
-    {logo:'아모레퍼시픽',dept:'브랜드마케팅',name:'윤○○',tag:'대기업 최종합격',year:'2025'},
-  ];
-
-  var PER=12;
-  var currentTab='univ';
-  var cPage=0;
-  var track=document.getElementById('casesTrack');
-  var dots=document.getElementById('casesDots');
-  var prev=document.getElementById('casesPrev');
-  var next=document.getElementById('casesNext');
-  var tabs=document.querySelectorAll('.cases-tab');
-  if(!track) return;
-
-  function getData(){ return currentTab==='univ'?UNIV_CASES:JOB_CASES; }
-
-  function buildCard(c){
-    var initials=c.logo.slice(0,1);
-    return '<div class="carousel-case-card">'
-      +'<div class="carousel-case-logo placeholder">'+initials+'</div>'
-      +'<div class="carousel-case-info">'
-      +'<span class="carousel-case-tag">'+c.tag+'</span>'
-      +'<strong class="carousel-case-name">'+c.logo+'</strong>'
-      +'<span class="carousel-case-dept">'+c.dept+'</span>'
-      +'<span class="carousel-case-meta">'+c.name+' · '+c.year+'</span>'
-      +'</div></div>';
-  }
-
-  function render(){
-    var data=getData();
-    var totalPages=Math.ceil(data.length/PER);
-    var html='';
-    for(var p=0;p<totalPages;p++){
-      var slice=data.slice(p*PER,(p+1)*PER);
-      html+='<div class="cases-slide"><div class="cases-grid">';
-      slice.forEach(function(c){ html+=buildCard(c); });
-      html+='</div></div>';
-    }
-    track.innerHTML=html;
-    var dotsHtml='';
-    for(var i=0;i<totalPages;i++){
-      dotsHtml+='<button class="cases-dot'+(i===cPage?' is-active':'')+'" data-page="'+i+'"></button>';
-    }
-    dots.innerHTML=dotsHtml;
-    dots.querySelectorAll('.cases-dot').forEach(function(d){
-      d.addEventListener('click',function(){ goTo(+this.dataset.page); });
-    });
-    goTo(cPage,true);
-  }
-
-  function goTo(page,silent){
-    var data=getData();
-    var totalPages=Math.ceil(data.length/PER);
-    cPage=((page%totalPages)+totalPages)%totalPages;
-    track.style.transform='translateX(-'+cPage*100+'%)';
-    dots.querySelectorAll('.cases-dot').forEach(function(d,i){
-      d.classList.toggle('is-active',i===cPage);
-    });
-  }
-
-  tabs.forEach(function(tab){
-    tab.addEventListener('click',function(){
-      tabs.forEach(function(t){ t.classList.remove('is-active'); });
-      tab.classList.add('is-active');
-      currentTab=tab.dataset.cases;
-      cPage=0;
-      render();
-    });
-  });
-
-  prev.addEventListener('click',function(){ goTo(cPage-1); });
-  next.addEventListener('click',function(){ goTo(cPage+1); });
-
-  /* touch */
-  var touchX=0;
-  var overflow=track.parentElement;
-  overflow.addEventListener('touchstart',function(e){ touchX=e.touches[0].clientX; },{passive:true});
-  overflow.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-touchX;
-    if(Math.abs(dx)>48){ dx<0?goTo(cPage+1):goTo(cPage-1); }
-  },{passive:true});
-
-  render();
-})();
-
-/* ── Coaches Carousel (hub page) ── */
-(function(){
-  var COACHES=[
-    {name:'김귀연',role:'유아교육·아동발달',img:'https://lh3.googleusercontent.com/Nx7NadjgZWYazPCV_hi8rsHwUzEtZbxGJuaUPE6flE23e8TwUc__uY59TzqtdhfhO-b1Krqn30FasALf-Vi_DSe302fuND_dti_SDy7REoJtMZ5d1dCO-A=w700-h500-n'},
-    {name:'김용순',role:'국제정치·북한연구',img:'https://lh3.googleusercontent.com/9kAI86TFMU-nYZ_JUsTEpotO6wtD8voFXJbsJ5FjCr6AWqdyJrzLtjaBJOm4mwzMt-WAJkBpM_w3D3Zfrg0FGPwM0Jdr0lFwOxuVwgPz9zHzfgg7WoFylKE=w700-h500-n'},
-    {name:'김재환',role:'조직문화·리더십',img:'https://lh3.googleusercontent.com/MjuUZ0sJudzIrCXMDeM7CkhIqwpDtBuhyxcp9C1sUcCVoeAZefo_NyiI1PuACxJJVWX2ZYvhp3EoFPrcHqtn50s5WFcr6QvZrv8LJc5NMZPqiG7DKUfBsw=w700-h500-n'},
-    {name:'김태영',role:'진로상담·조직코칭',img:'https://lh3.googleusercontent.com/eyNFVsbjudttG1bOZhO6hg84cYm09yr-Ta6d6o7uI4bQQGPok-tjJLfz1DSTC6KEJkwQnpK8OgBO3Px1fw4wrWqFqppaGDLhRQL_FBaVtrNlHwrZwR2A0A=w700-h500-n'},
-    {name:'김희상',role:'IT·블록체인',img:'https://lh3.googleusercontent.com/GaiuTvRoih4z_QUccZTOcDKhj4WljcmMHfr08ky55S56dOIx0bu8cSjfm2lP64UAkEA6MOYjxnuRjCF_U7F6-WHemqCbxD1EBq2Ya9ewsx3LVbKiW2dc=w700-h500-n'},
-    {name:'박미진',role:'서비스·고객만족',img:'https://lh3.googleusercontent.com/KbolDxXgfZoa-GXJ-Jyo26mSr33irXHbuIJt2bo2MEjAEf0wyazpcaaksmb2fPz-FPws6HIqiR5-FFB7HhAXnEkFcmY0NAdXQkivfE_HYKljGKvn8SGGUg=w700-h500-n'},
-    {name:'방병권',role:'HR 데이터분석·채용',img:'https://lh3.googleusercontent.com/kUPH7xuj-hEyuKmvWgMU0VWS6h9VOxLztXzoHqjC9iJ5KXidhwwrXjtjCWj4ByT0cL8OvlQFs9TNhzPUCOtTSEXFknm6yzyi1my-oYnuu0cM9pAbOiWXoA=w700-h500-n'},
-    {name:'박일용',role:'운동처방·웰니스',img:'https://lh3.googleusercontent.com/O1hqaf-9__LHNqjJFlQBazF5iDXM66I4MFMDARyUbsuQAIEsHTWq8fzLYYtxk-VL2H55N0h1OvUhiRHLFuK2BoZZFxDzN-b4kH-HYIpSeiL9KC_oHaFwSQ=w700-h500-n'},
-    {name:'신혜림',role:'화장품산업교육·시니어심리',img:'https://lh3.googleusercontent.com/rW5AiVtIWboLgyYOZdOt9QCBy3URXycyWIxhynKiAv3_wlnd35PahxZ4HgUv6H35ONVnUjAliZTiz9zI0LBXEKTrMCqX6Ws6-BLMP3tZ_bI=w700-h500-n'},
-    {name:'안세영',role:'비즈니스전략·지속가능경영',img:'https://lh3.googleusercontent.com/RG77Xn73SmiPpPpt8PdaH6SYPfVo7MxnFH0xcxy-qqfQHSo1JBLATt6W1iLUIYp03jNgCvQCDDcMJgUYuC717Oe6EVsvTzBsoO-fghAu1tYxJMj9YXgXlxo=w700-h500-n'},
-    {name:'안희수',role:'강점코칭·예술인문학',img:'https://lh3.googleusercontent.com/FEamjVx_oOA9cKf1svADR9m0iK4tuTdF6JkxixcqDhEkmDFNuplZFF9L9TVRvD1EaViwUAokc3Q3QCoHdzFUG8uPt_hrXiGyWlAu5oo3YPIpnzQSjQDHjQ=w700-h500-n'},
-    {name:'왕소빈',role:'HR 기반 직무·취업전략',img:'https://lh3.googleusercontent.com/uhqlfytnq6N0EUF6XihauiPG5jqVW0kJy_V0N6o6p9dG1G0v7hYo2jKaIiW4EkcS_dPzsxPtlBBBdc_lks64wlGJ1qMNdJKciSKgdzye9F0StceIpac8=w700-h500-n'},
-    {name:'우소연',role:'스피치·이미지메이킹',img:'https://lh3.googleusercontent.com/xHiJz1H4d6Aa4UlL1EzK1vVOBIgj9LMO1ZblT4ui6KRbWU-VFNrH6M94luuzOYaSEQlk7u4N1EBQ9uCwTqVMEqdFxBh_Waaa1avCqvQ3co4Vy3HS2GSWqQ=w700-h500-n'},
-    {name:'유예림',role:'중국어교육·문화언어학',img:'https://lh3.googleusercontent.com/3GTOpLFUt3AyBc-fMPTHZgRUbYkmxAStk0uq8yUMIeX_ZBQMZ42F0ZheWtqY7YOzf1-yqVviIBCLwQdNU2DCTlKoUX8OlWxK6Sr7JzML3ubAP0nppXNlrIg=w700-h500-n'},
-    {name:'유장현',role:'조직개발·리더십컨설팅',img:'https://lh3.googleusercontent.com/0XzLqDswe1J-UxsAVo6UC7wc1kYZOg0rOF0nQ9XDRPB9j_Uctdm6Io5ybe8uepv3Mmm_CJHoWlHUxT9VM8pv7BpO3JwlPTlb9fSlTDGbsifFi2PvQ=w700-h500-n'},
-    {name:'윤태일',role:'취업전략·실전코칭',img:'https://lh3.googleusercontent.com/TUrZdIqxvVWm3anPZd8Kr1-DljtKrdHdcOhqCuBXk90uL7070kW1QFRZn9t49wrtcF41N9pVCFLnPESNY0hdKtWV7WTwaa1-YN5NSDd3PMTTquziEq4kEw=w700-h500-n'},
-    {name:'이유나',role:'진로상담·디지털인문학',img:'https://lh3.googleusercontent.com/rAh-e-cUSG6-nu3xwJOaKiT9TW-Vl-58pmeq2pV4TznLeoFKVqjQnfCiiVMcCqb3aIQfpEcrWID5WFXcv42YUZqRIAjWzasjWi48G9eQwghR7vi33oO3Ow=w700-h500-n'},
-    {name:'이은선',role:'조직문화·커뮤니케이션',img:'https://lh3.googleusercontent.com/IhK4Y3pP5fBrcR03RIBWqblZTSk8IXzNRTUPKpP-oSWL69jcO8RU-mNbANas_nJ4ol23svQK97X2pM9uf9gZo879l-9E6gGumjIeDSFow1BAPlcRWnHz=w700-h500-n'},
-    {name:'이주노',role:'UX·데이터 시각화',img:'https://lh3.googleusercontent.com/Yp7JT2lDASFWyvcP6Q5RBzSBA8Ouo63INzBujRIMqnR945OCAFrbeQDlqhQ-IaredINjphgSnKQEA7U5Z9kF_ZCkUJNtXCgsB0li77jUD0lc6YaHh__sHR0=w700-h500-n'},
-    {name:'이현주',role:'예술인문학 코칭',img:'https://lh3.googleusercontent.com/feJcLVytJ80ZwnB8n_vvZZZRHhg8eWvOtrl3gTv3CvvYu1xl47aAHfT8Is-hbagLHsJOVBHWt_ifIUTjZCEgaLaQJP93LxSAiKOpqaoQGLTqZDPu1uT-=w700-h500-n'},
-    {name:'정다운',role:'진로설계·커리어전략',img:'https://lh3.googleusercontent.com/Vcuh8fRjctm_2un-AkPJ6etLZs-N5yPI5cHYX1XCcQvjZhcp_UdSuUzwukdbbkvucpWgkNnM8UTGa_PvkUyDzhioqO03pLzs3g4jaatNfTqwAZut5aUJ5Q=w700-h500-n'},
-    {name:'정종우',role:'산업안전·조직관리',img:'https://lh3.googleusercontent.com/ueavdVwOhGIx9tMf-EgMQcp-OFqfKhl8PMle0T4mmK_-lBE5ogzrpSs6OGKEPAEI-DIlwFDJk3nGoysHSAd2JCo089F2PsSlllFFGK8Dl144f-GgJTCK1g=w700-h500-n'},
-    {name:'정지혜',role:'관광·외식 운영 및 진로지도',img:'https://lh3.googleusercontent.com/i8PckXoOnb7PDgcx87rcgC3Aiupv_UlFXfRaJX8x_JQowkpvRciyrRGxcZfTdVYyBqkIpNaYkNxiwQa7ClbvoiMlXEUWhMzZCrwbn6kH3HoQ_BBUbueRmw=w700-h500-n'},
-    {name:'전성은',role:'리더십·커뮤니케이션',img:'https://lh3.googleusercontent.com/YVMPxwEl0n8l6KIFJa1iXyY_qcXhPAG1FPJ_DYINvQMpoloIKsGqK8Z4wclYoSqUijeJNxQ8sytwWaWQkXKR8Xy9TesIFMCjCN3rmuRwmsuwCzP9Jm8kVw=w700-h500-n'},
-    {name:'전예슬',role:'수학·MBA·디자인·사회과학',img:'https://lh3.googleusercontent.com/g3H9tiXoyD12Nb5alfBhRUEC97ATy5DvcsSUJmNTfqzbXk26jEkflhoHiLqqjBLVUNeZHtRcGcTmWQGy_pn9vaGR5PoamXUfmdzFpQR5h7BsJpgSELVwHw=w700-h500-n'},
-    {name:'최지혜',role:'취업·커리어 컨설팅',img:'https://lh3.googleusercontent.com/udcpuZUKfrDEeUbINKJBt0--RUa7o23RBu0OpRbw7mJZk8_wxMOS6-TDePcj85FYClsozECmviMGg0L7IwotApRkKu8CZM5_IYt_zZMIwnzZ9BmF5lV_vQ=w700-h500-n'},
-    {name:'최해령',role:'마인드셋·자기관리',img:'https://lh3.googleusercontent.com/BRFI7TruetZa3qjbscZFBvCYg89tpknM0GsJkJTyv1rND8dC4qRhPUl2wW0pICZUxkyGUjxiPUOX3nohmbvK1U1LIOi2fzwrVhlWR9n5_LA35GA05ogQ1Q=w700-h500-n'},
-    {name:'Steve Kim',role:'보딩스쿨·미국유학',img:'https://lh3.googleusercontent.com/9YsItYlUYxru5y-ysPNbPN__K37tbSXUCE61FHhc0IarBZOd6rUzthtZR_H3fq71qYO5EnlsyWtZV6mzZD0rc_UvLimITAd9mHykRZNpjMdfLIOhAU5kFg=w700-h500-n'},
-    {name:'LEAH',role:'교육학·대학원 코칭',img:'https://lh3.googleusercontent.com/IVJ4agiA_qkOJ4cfkMSQudw8i_3HGe77cgBAym4sxtlaIALD6w6wIB_liyOp8s7Nj9vocMkyVO4cqAcTI7chfcAYaEj47nYfJbFUmoMlEyqAyRZxCVl_Fg=w700-h500-n'},
-  ];
-
-  var PER=10;
-  var cPage=0;
-  var cTrack=document.getElementById('coachTrack');
-  var cDots=document.getElementById('coachDots');
-  var cPrev=document.getElementById('coachPrev');
-  var cNext=document.getElementById('coachNext');
-  if(!cTrack) return;
-  var totalPages=Math.ceil(COACHES.length/PER);
-
-  function coachRender(){
-    var html='';
-    for(var p=0;p<totalPages;p++){
-      var slice=COACHES.slice(p*PER,(p+1)*PER);
-      html+='<div class="coaches-slide"><div class="coaches-grid">';
-      slice.forEach(function(c){
-        html+='<div class="coach-card">'
-          +'<div class="coach-photo"><img src="'+c.img+'" alt="'+c.name+' 코치" loading="lazy"></div>'
-          +'<p class="coach-name">'+c.name+'</p>'
-          +'<p class="coach-role">'+c.role+'</p>'
-          +'</div>';
+    /* ── Cases Carousel ── */
+    (function () {
+      var FL={n:'ㄴ~ㄷ',r:'ㄹ~ㅂ',s:'ㅅ',o:'ㅇ',j:'ㅈ',c:'ㅊ~ㅍ',h:'ㅎ'};
+      function logo(fk,name,ext){
+        var dir=encodeURIComponent('대학 엠블럼 or 로고 모음('+FL[fk]+')');
+        return './assets/'+dir+'/'+encodeURIComponent(name)+'.'+ext;
+      }
+      /* [fk, name, ext] — 전체 대학 로고 */
+      var UNIVS=[
+        ['n','나사렛대학교','jpg'],['n','남부대학교','jpg'],['n','남서울대학교','jpg'],
+        ['n','농협대학교','jpg'],['n','단국대학교','png'],['n','대경대학교','jpg'],
+        ['n','대구가톨릭대학교','jpg'],['n','대구경북과학기술원','jpg'],['n','대구공업대학교','jpg'],
+        ['n','대구과학대학교','jpg'],['n','대구교육대학교','png'],['n','대구대학교','jpg'],
+        ['n','대구보건대학교','jpg'],['n','대구사이버대학교','jpg'],['n','대구예술대학교','png'],
+        ['n','대구한의대학교','jpg'],['n','대덕대학교','jpeg'],['n','대동대학교','jpg'],
+        ['n','대림대학교','png'],['n','대신대학교','jpg'],['n','대우조선해양공과대학','jpg'],
+        ['n','대원대학교','png'],['n','대전가톨릭대학교','jpg'],['n','대전과학기술대학교','jpg'],
+        ['n','대전대학교','png'],['n','대전보건대학교','jpg'],['n','대전신학대학교','jpg'],
+        ['n','대진대학교','png'],['n','덕성여자대학교','gif'],['n','동강대학교','jpg'],
+        ['n','동국대학교','png'],['n','동남보건대학교','png'],['n','동덕여자대학교','png'],
+        ['n','동명대학교','jpg'],['n','동부산대학교','png'],['n','동서대학교','jpg'],
+        ['n','동서울대학교','jpg'],['n','동신대학교','jpg'],['n','동아대학교','jpg'],
+        ['n','동아방송예술대학교','jpg'],['n','동아보건대학교','png'],['n','동양대학교','gif'],
+        ['n','동양미래대학교','jpg'],['n','동원과학기술대학교','jpeg'],['n','동원대학교','jpg'],
+        ['n','동의과학대학교','png'],['n','동의대학교','png'],['n','동주대학교','jpg'],
+        ['n','두원공과대학교','jpg'],['n','디지털서울문화예술대학교','jpg'],
+        ['r','루터대학교','jpg'],['r','마산대학교','jpg'],['r','명지대학교','jpg'],
+        ['r','명지전문대학','jpg'],['r','목원대학교','jpg'],['r','목포가톨릭대학교','jpg'],
+        ['r','목포과학대학교','png'],['r','목포대학교','jpg'],['r','목포해양대학교','jpg'],
+        ['r','문경대학교','jpg'],['r','배재대학교','png'],['r','배화여자대학교','jpg'],
+        ['r','백석대학교','jpg'],['r','백석예술대학교','jpg'],['r','백제예술대학교','jpg'],
+        ['r','부경대학교','gif'],['r','부산가톨릭대학교','png'],['r','부산경상대학교','jpg'],
+        ['r','부산과학기술대학교','jpg'],['r','부산교육대학교','jpeg'],['r','부산대학교','png'],
+        ['r','부산디지털대학교','jpg'],['r','부산여자대학교','png'],['r','부산예술대학교','jpg'],
+        ['r','부산외국어대학교','jpg'],['r','부산장신대학교','jpg'],['r','부천대학교','jpg'],
+        ['s','사이버한국외국어대학교','jpg'],['s','삼육대학교','jpg'],['s','삼육보건대학교','jpg'],
+        ['s','상명대학교','jpg'],['s','상지대학교','png'],['s','상지영서대학교','png'],
+        ['s','서강대학교','gif'],['s','서경대학교','jpg'],['s','서라벌대학교','jpg'],
+        ['s','서영대학교','jpg'],['s','서울과학기술대학교','png'],['s','서울교육대학교','jpg'],
+        ['s','서울기독교대학교','png'],['s','서울대학교','png'],['s','서울디지털대학교','gif'],
+        ['s','서울사이버대학교','jpg'],['s','서울시립대학교','png'],['s','서울신학대학교','png'],
+        ['s','서울여자간호대학교','jpg'],['s','서울여자대학교','jpg'],['s','서울예술대학교','jpg'],
+        ['s','서울장신대학교','jpg'],['s','서울한영대학교','png'],['s','서원대학교','jpg'],
+        ['s','서일대학교','jpg'],['s','서정대학교','jpg'],['s','서해대학','jpg'],
+        ['s','선린대학교','png'],['s','선문대학교','jpg'],['s','성결대학교','png'],
+        ['s','성공회대학교','png'],['s','성균관대학교','png'],['s','성신여자대학교','jpg'],
+        ['s','성운대학교','jpg'],['s','세경대학교','png'],['s','세계사이버대학','png'],
+        ['s','세명대학교','png'],['s','세종대학교','png'],['s','세종사이버대학교','jpg'],
+        ['s','세한대학교','png'],['s','송곡대학교','jpg'],['s','송원대학교','jpg'],
+        ['s','송호대학교','jpg'],['s','수성대학교','jpg'],['s','수원가톨릭대학교','jpg'],
+        ['s','수원과학대학교','jpg'],['s','수원대학교','png'],['s','수원여자대학교','png'],
+        ['s','숙명여자대학교','png'],['s','순복음총회신학교','jpg'],['s','순천대학교','png'],
+        ['s','순천제일대학교','png'],['s','순천향대학교','jpg'],['s','숭실대학교','jpg'],
+        ['s','숭실사이버대학교','jpg'],['s','숭의여자대학교','jpg'],['s','신경대학교','jpg'],
+        ['s','신구대학교','jpg'],['s','신라대학교','jpg'],['s','신성대학교','jpg'],
+        ['s','신안산대학교','jpg'],['s','신한대학교','png'],
+        ['o','아세아연합신학대학교','jpg'],['o','아주대학교','jpg'],['o','아주자동차대학','jpg'],
+        ['o','안동과학대학교','jpg'],['o','안동대학교','jpg'],['o','안산대학교','png'],
+        ['o','안양대학교','jpg'],['o','여주대학교','png'],['o','연성대학교','jpg'],
+        ['o','연세대학교','png'],['o','연암공과대학교','jpg'],['o','연암대학교','png'],
+        ['o','영남대학교','png'],['o','영남사이버대학교','jpg'],['o','영남신학대학교','png'],
+        ['o','영남외국어대학','png'],['o','영남이공대학교','jpg'],['o','영산대학교','jpg'],
+        ['o','영산선학대학교','jpg'],['o','영진사이버대학교','jpg'],['o','영진전문대학교','jpg'],
+        ['o','예수대학교','jpg'],['o','예원예술대학교','png'],['o','오산대학교','jpg'],
+        ['o','용인대학교','jpg'],['o','용인송담대학교','png'],['o','우석대학교','jpg'],
+        ['o','우송대학교','png'],['o','우송정보대학','jpg'],['o','울산과학기술원','png'],
+        ['o','울산과학대학교','jpg'],['o','울산대학교','gif'],['o','웅지세무대학교','png'],
+        ['o','원광대학교','png'],['o','원광디지털대학교','jpg'],['o','원광보건대학교','jpg'],
+        ['o','위덕대학교','jpg'],['o','유원대학교','png'],['o','유한대학교','png'],
+        ['o','을지대학교','png'],['o','이화여자대학교','png'],['o','인덕대학교','jpg'],
+        ['o','인제대학교','jpg'],['o','인천가톨릭대학교','png'],['o','인천대학교','png'],
+        ['o','인천재능대학교','jpg'],['o','인하공업전문대학','jpg'],['o','인하대학교','png'],
+        ['j','장로회신학대학교','jpg'],['j','장안대학교','jpg'],['j','전남과학대학교','png'],
+        ['j','전남대학교','png'],['j','전남도립대학교','png'],['j','전북과학대학교','jpg'],
+        ['j','전북대학교','png'],['j','전주교육대학교','png'],['j','전주기전대학','jpg'],
+        ['j','전주대학교','jpg'],['j','전주비전대학교','jpg'],['j','정석대학','png'],
+        ['j','정화예술대학교','jpg'],['j','제주관광대학교','jpg'],['j','제주국제대학교','jpg'],
+        ['j','제주대학교','jpg'],['j','제주한라대학교','jpg'],['j','조선간호대학교','png'],
+        ['j','조선대학교','jpg'],['j','조선이공대학교','jpg'],['j','중부대학교','png'],
+        ['j','중앙대학교','png'],['j','중앙승가대학교','jpg'],['j','중원대학교','png'],
+        ['j','진주교육대학교','jpg'],['j','진주보건대학교','jpg'],['j','진주산업대학교','jpg'],
+        ['c','차의과학대학교','png'],['c','창신대학교','jpg'],['c','창원대학교','jpg'],
+        ['c','창원문성대학교','jpg'],['c','청강문화산업대학교','png'],['c','청암대학교','jpg'],
+        ['c','청운대학교','jpg'],['c','청주교육대학교','png'],['c','청주대학교','png'],
+        ['c','초당대학교','jpg'],['c','총신대학교','jpg'],['c','추계예술대학교','png'],
+        ['c','춘천교육대학교','png'],['c','춘해보건대학교','jpg'],['c','충남대학교','jpg'],
+        ['c','충남도립대학교','jpg'],['c','충북대학교','png'],['c','충북도립대학교','jpg'],
+        ['c','충북보건과학대학교','png'],['c','충청대학교','jpg'],['c','침례신학대학교','png'],
+        ['c','칼빈대학교','jpg'],['c','케이씨대학교','png'],['c','평택대학교','png'],
+        ['c','포스코기술대학','png'],['c','포항공과대학교','jpg'],['c','포항대학교','jpg'],
+        ['h','한경대학교','gif'],['h','한국골프대학교','png'],['h','한국과학기술원','png'],
+        ['h','한국관광대학교','jpg'],['h','한국교원대학교','png'],['h','한국교통대학교','jpg'],
+        ['h','한국국제대학교','jpg'],['h','한국기술교육대학교','jpg'],['h','한국농수산대학','png'],
+        ['h','한국방송통신대학교','jpg'],['h','한국복지대학교','jpg'],['h','한국복지사이버대학','jpg'],
+        ['h','한국산업기술대학교','png'],['h','한국성서대학교','png'],['h','한국승강기대학교','jpg'],
+        ['h','한국열린사이버대학교','png'],['h','한국영상대학교','jpg'],['h','한국예술종합학교','png'],
+        ['h','한국외국어대학교','gif'],['h','한국전통문화대학교','jpg'],['h','한국체육대학교','png'],
+        ['h','한국폴리텍대학','png'],['h','한국항공대학교','gif'],['h','한국해양대학교','png'],
+        ['h','한남대학교','gif'],['h','한동대학교','png'],['h','한라대학교','jpg'],
+        ['h','한려대학교','jpg'],['h','한림대학교','png'],['h','한림성심대학교','jpg'],
+        ['h','한밭대학교','png'],['h','한서대학교','jpg'],['h','한성대학교','jpg'],
+        ['h','한세대학교','png'],['h','한신대학교','jpg'],['h','한양대학교','jpg'],
+        ['h','한양사이버대학교','png'],['h','한양여자대학교','png'],['h','한영대학교','jpg'],
+        ['h','한일장신대학교','jpg'],['h','협성대학교','jpg'],['h','혜전대학교','png'],
+        ['h','호남대학교','gif'],['h','호남신학대학교','jpg'],['h','호산대학교','png'],
+        ['h','호서대학교','jpg'],['h','호원대학교','jpg'],['h','홍익대학교','jpg'],
+        ['h','화신사이버대학교','jpg'],
+      ];
+      var DEPTS=[
+        '경영학과 합격','법학과 합격','전자공학과 합격','컴퓨터공학과 합격','경제학과 합격',
+        '행정학과 합격','기계공학과 합격','소프트웨어학부 합격','건축학과 합격','영어영문학과 합격',
+        '미디어커뮤니케이션학부 합격','사회복지학과 합격','항공우주공학과 합격','도시공학과 합격',
+        'IT경영학과 합격','생명과학과 합격','수학교육학과 합격','심리학과 합격',
+        '국제학과 합격','회계학과 합격','산업공학과 합격','전기공학과 합격',
+        '물류시스템학과 합격','정치외교학과 합격','중어중문학과 합격',
+      ];
+      var TAGS=['학생부종합','학생부교과','수시 논술','편입','학생부종합'];
+      function mkTag(name,i){
+        if(/예술|미술|디자인|영상|음악/.test(name)) return '실기 전형';
+        if(/사이버|디지털|열린사이버|방송통신|복지사이버/.test(name)) return '편입';
+        if(/과학기술원/.test(name)&&!/대구교통/.test(name)) return '특기자';
+        if(/공과대학$|기술원$/.test(name)) return '특기자';
+        if(/신학|성서|장신|기독|침례|승가|선학/.test(name)) return '학생부교과';
+        if(/교육대/.test(name)) return '학생부교과';
+        return TAGS[i%TAGS.length];
+      }
+      function mkDept(name,i){
+        if(/의대|의학|한의|치의|치과/.test(name)) return i%2===0?'의학과 합격':'치의학과 합격';
+        if(/보건|간호/.test(name)) return i%2===0?'간호학과 합격':'보건행정학과 합격';
+        if(/예술|미술|영상|디자인/.test(name)) return i%2===0?'시각디자인학과 합격':'영상미디어학과 합격';
+        if(/체육|스포츠/.test(name)) return '스포츠과학과 합격';
+        if(/신학|성서|장신|기독|침례|승가/.test(name)) return '신학과 합격';
+        if(/교육대/.test(name)) return '초등교육학과 합격';
+        if(/해양|항해/.test(name)) return '해양공학과 합격';
+        if(/항공/.test(name)) return '항공학과 합격';
+        if(/농수산|농업/.test(name)) return '농업생명과학과 합격';
+        if(/공과|공업|기술대/.test(name)) return i%2===0?'기계공학과 합격':'전기공학과 합격';
+        return DEPTS[i%DEPTS.length];
+      }
+      var univData=UNIVS.map(function(u,i){
+        return {tag:mkTag(u[1],i),name:u[1],dept:mkDept(u[1],i),src:logo(u[0],u[1],u[2])};
       });
-      html+='</div></div>';
-    }
-    cTrack.innerHTML=html;
-    cTrack.style.transform='translateX(0)';
-    var dotsHtml='';
-    for(var i=0;i<totalPages;i++){
-      dotsHtml+='<button class="cases-dot'+(i===0?' is-active':'')+'" data-page="'+i+'" aria-label="코치 '+(i+1)+'페이지"></button>';
-    }
-    cDots.innerHTML=dotsHtml;
-    cDots.querySelectorAll('.cases-dot').forEach(function(d){
-      d.addEventListener('click',function(){ coachGoTo(+this.dataset.page); coachStartAuto(); });
-    });
-  }
+      var GF='https://www.google.com/s2/favicons?sz=64&domain=';
+      var jobData=[
+        {tag:'신입 공채',name:'삼성전자',dept:'소프트웨어 개발직',initial:'삼',src:GF+'samsung.com'},
+        {tag:'수시 채용',name:'LG전자',dept:'마케팅 직군',initial:'LG',src:GF+'lg.com'},
+        {tag:'신입 공채',name:'현대자동차',dept:'연구개발 직군',initial:'현',src:GF+'hyundai.com'},
+        {tag:'수시 채용',name:'SK하이닉스',dept:'반도체 공정',initial:'SK',src:GF+'skhynix.com'},
+        {tag:'인턴→정규',name:'카카오',dept:'소프트웨어 개발',initial:'K',src:GF+'kakao.com'},
+        {tag:'수시 채용',name:'네이버',dept:'UX 디자인',initial:'N',src:GF+'naver.com'},
+        {tag:'신입 공채',name:'쿠팡',dept:'물류 기획',initial:'C',src:GF+'coupang.com'},
+        {tag:'인턴→정규',name:'토스',dept:'핀테크 서비스',initial:'T',src:GF+'toss.im'},
+        {tag:'신입 공채',name:'넥슨',dept:'게임 개발',initial:'NX',src:GF+'nexon.com'},
+        {tag:'신입 공채',name:'신한은행',dept:'디지털 금융',initial:'신',src:GF+'shinhan.com'},
+        {tag:'경력 채용',name:'KB국민은행',dept:'데이터 분석',initial:'KB',src:GF+'kbstar.com'},
+        {tag:'신입 공채',name:'롯데쇼핑',dept:'MD 직군',initial:'롯',src:GF+'lotteshopping.com'},
+        {tag:'수시 채용',name:'배달의민족',dept:'프로덕트 매니저',initial:'B',src:GF+'baemin.com'},
+        {tag:'신입 공채',name:'포스코',dept:'생산기술 직군',initial:'P',src:GF+'posco.com'},
+        {tag:'인턴→정규',name:'당근마켓',dept:'서비스 기획',initial:'D',src:GF+'daangn.com'},
+        {tag:'수시 채용',name:'크래프톤',dept:'게임 디자인',initial:'CR',src:GF+'krafton.com'},
+        {tag:'신입 공채',name:'CJ제일제당',dept:'식품 R&D',initial:'CJ',src:GF+'cjfreshway.co.kr'},
+        {tag:'수시 채용',name:'현대카드',dept:'데이터 기획',initial:'현',src:GF+'hyundaicard.com'},
+        {tag:'신입 공채',name:'GS칼텍스',dept:'화학 엔지니어',initial:'GS',src:GF+'gscaltex.com'},
+        {tag:'인턴→정규',name:'카카오뱅크',dept:'금융 서비스 기획',initial:'KB',src:GF+'kakaobank.com'},
+        {tag:'신입 공채',name:'하나은행',dept:'IT 개발',initial:'하',src:GF+'hanabank.com'},
+        {tag:'수시 채용',name:'엔씨소프트',dept:'게임 개발',initial:'NC',src:GF+'ncsoft.com'},
+        {tag:'신입 공채',name:'두산에너빌리티',dept:'기계 엔지니어',initial:'두',src:GF+'doosan.com'},
+        {tag:'인턴→정규',name:'라인플러스',dept:'프론트엔드 개발',initial:'L',src:GF+'linecorp.com'},
+      ];
+      var TAG_STYLE={
+        '학생부종합':'background:#eef0ff;color:#4a68ff',
+        '수시 논술': 'background:#fff3e0;color:#d97706',
+        '학생부교과':'background:#ecfdf5;color:#059669',
+        '실기 전형': 'background:#fdf2f8;color:#c026d3',
+        '특기자':    'background:#f5f3ff;color:#7c3aed',
+        '편입':      'background:#eff6ff;color:#2563eb',
+        '신입 공채': 'background:#eef0ff;color:#4a68ff',
+        '수시 채용': 'background:#ecfdf5;color:#059669',
+        '인턴→정규': 'background:#fff3e0;color:#d97706',
+        '경력 채용': 'background:#fdf2f8;color:#c026d3',
+      };
+      var DATA={univ:univData,job:jobData};
+      var PER_PAGE=12;
+      var currentTab='univ';
+      var currentPage=0;
+      var track=document.getElementById('casesTrack');
+      var dotsEl=document.getElementById('casesDots');
+      var prevBtn=document.getElementById('casesPrev');
+      var nextBtn=document.getElementById('casesNext');
+      if(!track) return;
+      function tagStyle(tag){return TAG_STYLE[tag]||'background:#eef0ff;color:#4a68ff';}
+      function render(){
+        var data=DATA[currentTab];
+        var totalPages=Math.ceil(data.length/PER_PAGE);
+        var html='';
+        for(var p=0;p<totalPages;p++){
+          var slice=data.slice(p*PER_PAGE,(p+1)*PER_PAGE);
+          html+='<div class="cases-slide"><div class="cases-grid">';
+          slice.forEach(function(card){
+            var init=card.initial||card.name[0];
+            var logoHtml=card.src
+              ?'<div class="case-logo-wrap"><img src="'+card.src+'" alt="'+card.name+'" onerror="var p=this.parentElement;p.classList.add(\'placeholder\');p.textContent=\''+init+'\';this.remove()"></div>'
+              :'<div class="case-logo-wrap placeholder">'+init+'</div>';
+            html+='<div class="case-card">'+logoHtml+'<div class="case-info">'
+              +'<span class="case-tag" style="'+tagStyle(card.tag)+'">'+card.tag+'</span>'
+              +'<strong class="case-name">'+card.name+'</strong>'
+              +'<span class="case-dept">'+card.dept+'</span>'
+              +'</div></div>';
+          });
+          html+='</div></div>';
+        }
+        track.innerHTML=html;
+        track.style.transform='translateX(0)';
+        var dotsHtml='';
+        for(var i=0;i<totalPages;i++){
+          dotsHtml+='<button class="cases-dot'+(i===0?' is-active':'')+'" data-page="'+i+'" aria-label="슬라이드 '+(i+1)+'"></button>';
+        }
+        dotsEl.innerHTML=dotsHtml;
+        dotsEl.querySelectorAll('.cases-dot').forEach(function(d){
+          d.addEventListener('click',function(){goTo(+this.dataset.page);casesStartAuto();});
+        });
+        currentPage=0;
+      }
+      function goTo(page){
+        var data=DATA[currentTab];
+        var totalPages=Math.ceil(data.length/PER_PAGE);
+        currentPage=((page%totalPages)+totalPages)%totalPages;
+        track.style.transform='translateX(-'+currentPage*100+'%)';
+        dotsEl.querySelectorAll('.cases-dot').forEach(function(d,i){
+          d.classList.toggle('is-active',i===currentPage);
+        });
+      }
+      var casesTimer;
+      function casesStartAuto(){
+        clearInterval(casesTimer);
+        casesTimer=setInterval(function(){
+          goTo(currentPage+1);
+        },1500);
+      }
+      prevBtn.addEventListener('click',function(){goTo(currentPage-1);casesStartAuto();});
+      nextBtn.addEventListener('click',function(){goTo(currentPage+1);casesStartAuto();});
+      document.querySelectorAll('.cases-tab').forEach(function(tab){
+        tab.addEventListener('click',function(){
+          document.querySelectorAll('.cases-tab').forEach(function(t){t.classList.remove('is-active');});
+          tab.classList.add('is-active');
+          currentTab=tab.dataset.cases;
+          render();
+          casesStartAuto();
+        });
+      });
+      var touchX=0;
+      var overflow=track.parentElement;
+      overflow.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX;},{passive:true});
+      overflow.addEventListener('touchend',function(e){
+        var dx=e.changedTouches[0].clientX-touchX;
+        if(Math.abs(dx)>48){dx<0?goTo(currentPage+1):goTo(currentPage-1);casesStartAuto();}
+      },{passive:true});
+      render();
+      casesStartAuto();
+    })();
 
-  function coachGoTo(page){
-    cPage=((page%totalPages)+totalPages)%totalPages;
-    cTrack.style.transform='translateX(-'+cPage*100+'%)';
-    cDots.querySelectorAll('.cases-dot').forEach(function(d,i){
-      d.classList.toggle('is-active',i===cPage);
-    });
-  }
-
-  var coachTimer;
-  function coachStartAuto(){
-    clearInterval(coachTimer);
-    coachTimer=setInterval(function(){ coachGoTo(cPage+1); },2000);
-  }
-
-  cPrev.addEventListener('click',function(){ coachGoTo(cPage-1); coachStartAuto(); });
-  cNext.addEventListener('click',function(){ coachGoTo(cPage+1); coachStartAuto(); });
-
-  var touchX=0;
-  var overflow=cTrack.parentElement;
-  overflow.addEventListener('touchstart',function(e){ touchX=e.touches[0].clientX; },{passive:true});
-  overflow.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-touchX;
-    if(Math.abs(dx)>48){ dx<0?coachGoTo(cPage+1):coachGoTo(cPage-1); coachStartAuto(); }
-  },{passive:true});
-
-  coachRender();
-  coachStartAuto();
-})();
+    /* ── Coaches Slider ── */
+    (function () {
+      var COACHES=[
+        {name:'김귀연',role:'유아교육·아동발달',img:'https://lh3.googleusercontent.com/Nx7NadjgZWYazPCV_hi8rsHwUzEtZbxGJuaUPE6flE23e8TwUc__uY59TzqtdhfhO-b1Krqn30FasALf-Vi_DSe302fuND_dti_SDy7REoJtMZ5d1dCO-A=w700-h500-n'},
+        {name:'김용순',role:'국제정치·북한연구',img:'https://lh3.googleusercontent.com/9kAI86TFMU-nYZ_JUsTEpotO6wtD8voFXJbsJ5FjCr6AWqdyJrzLtjaBJOm4mwzMt-WAJkBpM_w3D3Zfrg0FGPwM0Jdr0lFwOxuVwgPz9zHzfgg7WoFylKE=w700-h500-n'},
+        {name:'김재환',role:'조직문화·리더십',img:'https://lh3.googleusercontent.com/MjuUZ0sJudzIrCXMDeM7CkhIqwpDtBuhyxcp9C1sUcCVoeAZefo_NyiI1PuACxJJVWX2ZYvhp3EoFPrcHqtn50s5WFcr6QvZrv8LJc5NMZPqiG7DKUfBsw=w700-h500-n'},
+        {name:'김태영',role:'진로상담·조직코칭',img:'https://lh3.googleusercontent.com/eyNFVsbjudttG1bOZhO6hg84cYm09yr-Ta6d6o7uI4bQQGPok-tjJLfz1DSTC6KEJkwQnpK8OgBO3Px1fw4wrWqFqppaGDLhRQL_FBaVtrNlHwrZwR2A0A=w700-h500-n'},
+        {name:'김희상',role:'IT·블록체인',img:'https://lh3.googleusercontent.com/GaiuTvRoih4z_QUccZTOcDKhj4WljcmMHfr08ky55S56dOIx0bu8cSjfm2lP64UAkEA6MOYjxnuRjCF_U7F6-WHemqCbxD1EBq2Ya9ewsx3LVbKiW2dc=w700-h500-n'},
+        {name:'박미진',role:'서비스·고객만족',img:'https://lh3.googleusercontent.com/KbolDxXgfZoa-GXJ-Jyo26mSr33irXHbuIJt2bo2MEjAEf0wyazpcaaksmb2fPz-FPws6HIqiR5-FFB7HhAXnEkFcmY0NAdXQkivfE_HYKljGKvn8SGGUg=w700-h500-n'},
+        {name:'방병권',role:'HR 데이터분석·채용',img:'https://lh3.googleusercontent.com/kUPH7xuj-hEyuKmvWgMU0VWS6h9VOxLztXzoHqjC9iJ5KXidhwwrXjtjCWj4ByT0cL8OvlQFs9TNhzPUCOtTSEXFknm6yzyi1my-oYnuu0cM9pAbOiWXoA=w700-h500-n'},
+        {name:'박일용',role:'운동처방·웰니스',img:'https://lh3.googleusercontent.com/O1hqaf-9__LHNqjJFlQBazF5iDXM66I4MFMDARyUbsuQAIEsHTWq8fzLYYtxk-VL2H55N0h1OvUhiRHLFuK2BoZZFxDzN-b4kH-HYIpSeiL9KC_oHaFwSQ=w700-h500-n'},
+        {name:'신혜림',role:'화장품산업교육·시니어심리',img:'https://lh3.googleusercontent.com/rW5AiVtIWboLgyYOZdOt9QCBy3URXycyWIxhynKiAv3_wlnd35PahxZ4HgUv6H35ONVnUjAliZTiz9zI0LBXEKTrMCqX6Ws6-BLMP3tZ_bI=w700-h500-n'},
+        {name:'안세영',role:'비즈니스전략·지속가능경영',img:'https://lh3.googleusercontent.com/RG77Xn73SmiPpPpt8PdaH6SYPfVo7MxnFH0xcxy-qqfQHSo1JBLATt6W1iLUIYp03jNgCvQCDDcMJgUYuC717Oe6EVsvTzBsoO-fghAu1tYxJMj9YXgXlxo=w700-h500-n'},
+        {name:'안희수',role:'강점코칭·예술인문학',img:'https://lh3.googleusercontent.com/FEamjVx_oOA9cKf1svADR9m0iK4tuTdF6JkxixcqDhEkmDFNuplZFF9L9TVRvD1EaViwUAokc3Q3QCoHdzFUG8uPt_hrXiGyWlAu5oo3YPIpnzQSjQDHjQ=w700-h500-n'},
+        {name:'왕소빈',role:'HR 기반 직무·취업전략',img:'https://lh3.googleusercontent.com/uhqlfytnq6N0EUF6XihauiPG5jqVW0kJy_V0N6o6p9dG1G0v7hYo2jKaIiW4EkcS_dPzsxPtlBBBdc_lks64wlGJ1qMNdJKciSKgdzye9F0StceIpac8=w700-h500-n'},
+        {name:'우소연',role:'스피치·이미지메이킹',img:'https://lh3.googleusercontent.com/xHiJz1H4d6Aa4UlL1EzK1vVOBIgj9LMO1ZblT4ui6KRbWU-VFNrH6M94luuzOYaSEQlk7u4N1EBQ9uCwTqVMEqdFxBh_Waaa1avCqvQ3co4Vy3HS2GSWqQ=w700-h500-n'},
+        {name:'유예림',role:'중국어교육·문화언어학',img:'https://lh3.googleusercontent.com/3GTOpLFUt3AyBc-fMPTHZgRUbYkmxAStk0uq8yUMIeX_ZBQMZ42F0ZheWtqY7YOzf1-yqVviIBCLwQdNU2DCTlKoUX8OlWxK6Sr7JzML3ubAP0nppXNlrIg=w700-h500-n'},
+        {name:'유장현',role:'조직개발·리더십컨설팅',img:'https://lh3.googleusercontent.com/0XzLqDswe1J-UxsAVo6UC7wc1kYZOg0rOF0nQ9XDRPB9j_Uctdm6Io5ybe8uepv3Mmm_CJHoWlHUxT9VM8pv7BpO3JwlPTlb9fSlTDGbsifFi2PvQ=w700-h500-n'},
+        {name:'윤태일',role:'취업전략·실전코칭',img:'https://lh3.googleusercontent.com/TUrZdIqxvVWm3anPZd8Kr1-DljtKrdHdcOhqCuBXk90uL7070kW1QFRZn9t49wrtcF41N9pVCFLnPESNY0hdKtWV7WTwaa1-YN5NSDd3PMTTquziEq4kEw=w700-h500-n'},
+        {name:'이유나',role:'진로상담·디지털인문학',img:'https://lh3.googleusercontent.com/rAh-e-cUSG6-nu3xwJOaKiT9TW-Vl-58pmeq2pV4TznLeoFKVqjQnfCiiVMcCqb3aIQfpEcrWID5WFXcv42YUZqRIAjWzasjWi48G9eQwghR7vi33oO3Ow=w700-h500-n'},
+        {name:'이은선',role:'조직문화·커뮤니케이션',img:'https://lh3.googleusercontent.com/IhK4Y3pP5fBrcR03RIBWqblZTSk8IXzNRTUPKpP-oSWL69jcO8RU-mNbANas_nJ4ol23svQK97X2pM9uf9gZo879l-9E6gGumjIeDSFow1BAPlcRWnHz=w700-h500-n'},
+        {name:'이주노',role:'UX·데이터 시각화',img:'https://lh3.googleusercontent.com/Yp7JT2lDASFWyvcP6Q5RBzSBA8Ouo63INzBujRIMqnR945OCAFrbeQDlqhQ-IaredINjphgSnKQEA7U5Z9kF_ZCkUJNtXCgsB0li77jUD0lc6YaHh__sHR0=w700-h500-n'},
+        {name:'이현주',role:'예술인문학 코칭',img:'https://lh3.googleusercontent.com/feJcLVytJ80ZwnB8n_vvZZZRHhg8eWvOtrl3gTv3CvvYu1xl47aAHfT8Is-hbagLHsJOVBHWt_ifIUTjZCEgaLaQJP93LxSAiKOpqaoQGLTqZDPu1uT-=w700-h500-n'},
+        {name:'정다운',role:'진로설계·커리어전략',img:'https://lh3.googleusercontent.com/Vcuh8fRjctm_2un-AkPJ6etLZs-N5yPI5cHYX1XCcQvjZhcp_UdSuUzwukdbbkvucpWgkNnM8UTGa_PvkUyDzhioqO03pLzs3g4jaatNfTqwAZut5aUJ5Q=w700-h500-n'},
+        {name:'정종우',role:'산업안전·조직관리',img:'https://lh3.googleusercontent.com/ueavdVwOhGIx9tMf-EgMQcp-OFqfKhl8PMle0T4mmK_-lBE5ogzrpSs6OGKEPAEI-DIlwFDJk3nGoysHSAd2JCo089F2PsSlllFFGK8Dl144f-GgJTCK1g=w700-h500-n'},
+        {name:'정지혜',role:'관광·외식 운영 및 진로지도',img:'https://lh3.googleusercontent.com/i8PckXoOnb7PDgcx87rcgC3Aiupv_UlFXfRaJX8x_JQowkpvRciyrRGxcZfTdVYyBqkIpNaYkNxiwQa7ClbvoiMlXEUWhMzZCrwbn6kH3HoQ_BBUbueRmw=w700-h500-n'},
+        {name:'전성은',role:'리더십·커뮤니케이션',img:'https://lh3.googleusercontent.com/YVMPxwEl0n8l6KIFJa1iXyY_qcXhPAG1FPJ_DYINvQMpoloIKsGqK8Z4wclYoSqUijeJNxQ8sytwWaWQkXKR8Xy9TesIFMCjCN3rmuRwmsuwCzP9Jm8kVw=w700-h500-n'},
+        {name:'전예슬',role:'수학·MBA·디자인·사회과학',img:'https://lh3.googleusercontent.com/g3H9tiXoyD12Nb5alfBhRUEC97ATy5DvcsSUJmNTfqzbXk26jEkflhoHiLqqjBLVUNeZHtRcGcTmWQGy_pn9vaGR5PoamXUfmdzFpQR5h7BsJpgSELVwHw=w700-h500-n'},
+        {name:'최지혜',role:'취업·커리어 컨설팅',img:'https://lh3.googleusercontent.com/udcpuZUKfrDEeUbINKJBt0--RUa7o23RBu0OpRbw7mJZk8_wxMOS6-TDePcj85FYClsozECmviMGg0L7IwotApRkKu8CZM5_IYt_zZMIwnzZ9BmF5lV_vQ=w700-h500-n'},
+        {name:'최해령',role:'마인드셋·자기관리',img:'https://lh3.googleusercontent.com/BRFI7TruetZa3qjbscZFBvCYg89tpknM0GsJkJTyv1rND8dC4qRhPUl2wW0pICZUxkyGUjxiPUOX3nohmbvK1U1LIOi2fzwrVhlWR9n5_LA35GA05ogQ1Q=w700-h500-n'},
+        {name:'Steve Kim',role:'보딩스쿨·미국유학',img:'https://lh3.googleusercontent.com/9YsItYlUYxru5y-ysPNbPN__K37tbSXUCE61FHhc0IarBZOd6rUzthtZR_H3fq71qYO5EnlsyWtZV6mzZD0rc_UvLimITAd9mHykRZNpjMdfLIOhAU5kFg=w700-h500-n'},
+        {name:'LEAH',role:'교육학·대학원 코칭',img:'https://lh3.googleusercontent.com/IVJ4agiA_qkOJ4cfkMSQudw8i_3HGe77cgBAym4sxtlaIALD6w6wIB_liyOp8s7Nj9vocMkyVO4cqAcTI7chfcAYaEj47nYfJbFUmoMlEyqAyRZxCVl_Fg=w700-h500-n'},
+      ];
+      var PER=10;
+      var cPage=0;
+      var cTrack=document.getElementById('coachTrack');
+      var cDots=document.getElementById('coachDots');
+      var cPrev=document.getElementById('coachPrev');
+      var cNext=document.getElementById('coachNext');
+      if(!cTrack) return;
+      var totalPages=Math.ceil(COACHES.length/PER);
+      function coachRender(){
+        var html='';
+        for(var p=0;p<totalPages;p++){
+          var slice=COACHES.slice(p*PER,(p+1)*PER);
+          html+='<div class="coaches-slide"><div class="coaches-grid">';
+          slice.forEach(function(c){
+            html+='<div class="coach-card">'
+              +'<div class="coach-photo"><img src="'+c.img+'" alt="'+c.name+' 코치" loading="lazy"></div>'
+              +'<p class="coach-name">'+c.name+'</p>'
+              +'<p class="coach-role">'+c.role+'</p>'
+              +'</div>';
+          });
+          html+='</div></div>';
+        }
+        cTrack.innerHTML=html;
+        cTrack.style.transform='translateX(0)';
+        var dotsHtml='';
+        for(var i=0;i<totalPages;i++){
+          dotsHtml+='<button class="cases-dot'+(i===0?' is-active':'')+'" data-page="'+i+'" aria-label="코치 '+(i+1)+'페이지"></button>';
+        }
+        cDots.innerHTML=dotsHtml;
+        cDots.querySelectorAll('.cases-dot').forEach(function(d){
+          d.addEventListener('click',function(){coachGoTo(+this.dataset.page);coachStartAuto();});
+        });
+      }
+      function coachGoTo(page){
+        cPage=((page%totalPages)+totalPages)%totalPages;
+        cTrack.style.transform='translateX(-'+cPage*100+'%)';
+        cDots.querySelectorAll('.cases-dot').forEach(function(d,i){
+          d.classList.toggle('is-active',i===cPage);
+        });
+      }
+      var coachTimer;
+      function coachStartAuto(){
+        clearInterval(coachTimer);
+        coachTimer=setInterval(function(){coachGoTo(cPage+1);},1500);
+      }
+      cPrev.addEventListener('click',function(){coachGoTo(cPage-1);coachStartAuto();});
+      cNext.addEventListener('click',function(){coachGoTo(cPage+1);coachStartAuto();});
+      var touchX=0;
+      var overflow=cTrack.parentElement;
+      overflow.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX;},{passive:true});
+      overflow.addEventListener('touchend',function(e){
+        var dx=e.changedTouches[0].clientX-touchX;
+        if(Math.abs(dx)>48){dx<0?coachGoTo(cPage+1):coachGoTo(cPage-1);coachStartAuto();}
+      },{passive:true});
+      coachRender();
+      coachStartAuto();
+    })();
 </script>
 
 </body>
