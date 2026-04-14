@@ -11,10 +11,8 @@ SITE_VARS = {
 
 # 서비스별 category tabs HTML (active_tab 변수는 각 .page.html META에서 읽어옴)
 CATEGORY_TABS_ITEMS = [
-    ("admissions",        "대입코칭"),
-    ("self-introduction", "페이퍼코칭"),
-    ("interview-coaching","면접코칭"),
-    ("thesis-coaching",   "논문코칭"),
-    ("ec-coaching",       "EC코칭"),
-    ("design-coaching",   "디자인코칭"),
+    ("total-admission-coaching", "대입토탈리드코칭"),
+    ("school-record-coaching",   "생기부리드코칭"),
+    ("interview-coaching",       "면접리드코칭"),
+    ("essay-coaching",           "논술리드코칭"),
 ]

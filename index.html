@@ -101,7 +101,7 @@
        §1 HERO
     ══════════════════════════════════════════ */
     .hero-main {
-      position: relative; overflow: hidden;
+      position: relative; overflow: clip;
       padding: 96px 0 80px; text-align: center;
       background: #fff;
     }
@@ -670,9 +670,11 @@
     ══════════════════════════════════════════ */
     .em { position: relative; display: inline; }
     .em svg {
-      position: absolute; left: 0; bottom: -7px;
-      width: 100%; height: 14px; pointer-events: none; overflow: visible;
+      position: absolute; left: -2px; right: -2px; bottom: -12px;
+      width: calc(100% + 4px); height: 12px;
+      pointer-events: none; overflow: visible;
     }
+    .hero-main h1, .cta-band h2 { padding-bottom: 16px; }
     /* ══════════════════════════════════════════
        KOREAN TEXT — WORD BREAK
     ══════════════════════════════════════════ */
@@ -804,8 +806,6 @@
       .trust-item { flex: 0 0 44%; }
       /* footer */
       .footer-nav-grid { grid-template-columns: 1fr; }
-    }
-
     /* ══════════════════════════════════════════
        HEADER — common (partials/header.css)
     ══════════════════════════════════════════ */
@@ -906,40 +906,6 @@
       .sticky-category-shell .category-utility { display: none !important; }
     }
 
-    /* ── Marquee rows (합격 사례 무한 스크롤) ── */
-    @keyframes mq-left  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-    .marquee-rows { display: flex; flex-direction: column; gap: 20px; overflow: hidden; padding: 8px 0; }
-    .marquee-row  { overflow: hidden; }
-    .marquee-track {
-      display: flex; gap: 16px; width: max-content;
-      animation: mq-left 36s linear infinite;
-    }
-    .marquee-row:nth-child(even) .marquee-track { animation-name: mq-right; }
-    .marquee-track--rev { animation-name: mq-right !important; }
-    .mq-card {
-      display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-      width: 260px; min-width: 260px; max-width: 260px; flex-shrink: 0;
-      padding: 20px; border-radius: 14px;
-      background: #fff; border: 1.5px solid var(--line);
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .mq-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .mq-tag { display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 10px; font-weight: 800; background: var(--brand-soft); color: var(--brand); align-self: flex-start; }
-    .mq-tag--grad { background: #f5f3ff; color: #7c3aed; }
-    .mq-tag--job  { background: #f0fdf4; color: #16a34a; }
-    .mq-tag--biz  { background: #fef9ec; color: #ca8a04; }
-    .mq-result { display: block; font-size: 15px; font-weight: 800; color: var(--text); line-height: 1.3; }
-    .mq-desc   { font-size: 12px; color: var(--muted); line-height: 1.7; flex: 1; margin: 0; }
-    .mq-meta   { display: flex; align-items: center; gap: 8px; margin-top: auto; }
-    .mq-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), #a78bfa); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .mq-meta strong { display: block; font-size: 12px; font-weight: 700; color: var(--text); }
-    .mq-meta span   { display: block; font-size: 11px; color: var(--muted); }
-    @media (max-width: 760px) {
-      .mq-card { width: 220px; min-width: 220px; max-width: 220px; padding: 16px; }
-    }
-
   </style>
 </head>
 <body>
@@ -979,12 +945,10 @@
       <div class="category-row">
         <div class="category-balance" aria-hidden="true"></div>
         <nav class="category-tabs" aria-label="서비스 카테고리">
-          <a class="category-tab" href="./admissions.html">대입코칭</a>
-          <a class="category-tab" href="./self-introduction.html">페이퍼코칭</a>
-          <a class="category-tab" href="./interview-coaching.html">면접코칭</a>
-          <a class="category-tab" href="./thesis-coaching.html">논문코칭</a>
-          <a class="category-tab" href="./ec-coaching.html">EC코칭</a>
-          <a class="category-tab" href="./design-coaching.html">디자인코칭</a>
+          <a class="category-tab" href="./total-admission-coaching.html">대입토탈리드코칭</a>
+          <a class="category-tab" href="./school-record-coaching.html">생기부리드코칭</a>
+          <a class="category-tab" href="./interview-coaching.html">면접리드코칭</a>
+          <a class="category-tab" href="./essay-coaching.html">논술리드코칭</a>
         </nav>
         <div class="category-utility" aria-label="콘텐츠 바로가기">
           <button class="utility-link" type="button">블로그</button>
@@ -1311,255 +1275,49 @@
       </div>
     </section>
 
-    <!-- ══ §8 CASES MARQUEE ══ -->
+    <!-- ══ §8 REVIEWS ══ -->
     <section class="sec sec--alt" id="reviews">
       <div class="wrap">
         <div class="sec-head reveal">
-          <p class="sec-eyebrow">CASES</p>
-          <h2>리드코칭 합격 사례</h2>
-          <p>대학·편입·대학원까지, 실제 코칭으로 결과를 만든 케이스입니다.</p>
+          <p class="sec-eyebrow">REVIEW</p>
+          <h2>실제 코칭 후기</h2>
+          <p>대입·자소서·면접·논문·EC·디자인 모든 서비스의 경험담입니다.</p>
         </div>
-      </div>
-
-      <div class="marquee-rows">
-
-        <!-- ── 1행: 왼쪽 → ── -->
-        <div class="marquee-row">
-          <div class="marquee-track">
-            <div class="mq-card mq-card--featured">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">연세대학교 수시 합격</strong>
-              <p class="mq-desc">학생부 세특 방향을 전공 연계로 재설계해 면접까지 일관된 스토리를 완성했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">김</div><div><strong>김○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
+        <div class="reviews-grid">
+          <div class="review-card reveal reveal-d1">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-quote">학생부 분석이 이렇게 섬세할 줄 몰랐어요. 세특 방향이 잡히니까 3학년 1학기가 완전히 달라졌습니다. 덕분에 목표했던 대학에 합격했습니다.</p>
+            <div class="rc-meta">
+              <span class="rc-avatar">김</span>
+              <div>
+                <strong class="rc-name">김○○ 학생</strong>
+                <span class="rc-desc">연세대 수시 합격 · 대입코칭</span>
+              </div>
             </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">고려대학교 대학원 합격</strong>
-              <p class="mq-desc">연구계획서 구조 설계부터 면접 예상 질문 대비까지 한 흐름으로 완성했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">이</div><div><strong>이○○ 학생</strong><span>페이퍼코칭 · 대학원</span></div></div>
+          </div>
+          <div class="review-card review-card--featured reveal reveal-d2">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-quote">자기소개서 1번이 계속 막혔는데, 코치님이 스토리 구조를 잡아주시니 자연스럽게 글이 나왔습니다. 대학원 합격 후기를 꼭 전하고 싶었어요.</p>
+            <div class="rc-meta">
+              <span class="rc-avatar">이</span>
+              <div>
+                <strong class="rc-name">이○○ 학생</strong>
+                <span class="rc-desc">고려대 대학원 합격 · 페이퍼코칭</span>
+              </div>
             </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">상급종합병원 간호사 취업</strong>
-              <p class="mq-desc">병원별 면접 유형 분석과 1:1 모의면접으로 지원 3곳 중 2곳 최종 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">박</div><div><strong>박○○ 씨</strong><span>병원취업코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">제조기업 300인 AI 교육</strong>
-              <p class="mq-desc">현업 적용 중심 AI 교육 설계. 업무 활용도 92점, 만족도 96점을 기록했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">A</div><div><strong>A기업 담당자</strong><span>AI 기업교육 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">서울대학교 수시 합격</strong>
-              <p class="mq-desc">세특·수행평가·소논문을 전공 스토리로 연결. 최종 면접에서 교수님 호평을 받았습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">최</div><div><strong>최○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">대기업 공채 최종 합격</strong>
-              <p class="mq-desc">자기소개서 전략부터 임원 면접 대비까지. 3차 최종 면접에서 역량 질문을 완벽히 소화했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">정</div><div><strong>정○○ 씨</strong><span>하이엔드취업코칭 · 2025</span></div></div>
-            </div>
-            <!-- 루프 복제 -->
-            <div class="mq-card mq-card--featured">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">연세대학교 수시 합격</strong>
-              <p class="mq-desc">학생부 세특 방향을 전공 연계로 재설계해 면접까지 일관된 스토리를 완성했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">김</div><div><strong>김○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">고려대학교 대학원 합격</strong>
-              <p class="mq-desc">연구계획서 구조 설계부터 면접 예상 질문 대비까지 한 흐름으로 완성했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">이</div><div><strong>이○○ 학생</strong><span>페이퍼코칭 · 대학원</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">상급종합병원 간호사 취업</strong>
-              <p class="mq-desc">병원별 면접 유형 분석과 1:1 모의면접으로 지원 3곳 중 2곳 최종 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">박</div><div><strong>박○○ 씨</strong><span>병원취업코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">제조기업 300인 AI 교육</strong>
-              <p class="mq-desc">현업 적용 중심 AI 교육 설계. 업무 활용도 92점, 만족도 96점을 기록했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">A</div><div><strong>A기업 담당자</strong><span>AI 기업교육 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">서울대학교 수시 합격</strong>
-              <p class="mq-desc">세특·수행평가·소논문을 전공 스토리로 연결. 최종 면접에서 교수님 호평을 받았습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">최</div><div><strong>최○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">대기업 공채 최종 합격</strong>
-              <p class="mq-desc">자기소개서 전략부터 임원 면접 대비까지. 3차 최종 면접에서 역량 질문을 완벽히 소화했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">정</div><div><strong>정○○ 씨</strong><span>하이엔드취업코칭 · 2025</span></div></div>
+          </div>
+          <div class="review-card reveal reveal-d3">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-quote">논문 주제 선정에서 반 년을 헤맸는데 첫 상담 후 일주일 만에 확정했습니다. 심사도 무난히 통과했고, 지도 교수님도 놀라워하셨어요.</p>
+            <div class="rc-meta">
+              <span class="rc-avatar">박</span>
+              <div>
+                <strong class="rc-name">박○○ 학생</strong>
+                <span class="rc-desc">석사 논문 심사 통과 · 논문코칭</span>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- ── 2행: 오른쪽 ← (역방향) ── -->
-        <div class="marquee-row">
-          <div class="marquee-track marquee-track--rev">
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">석사 논문 심사 통과</strong>
-              <p class="mq-desc">논문 주제 선정에서 6개월을 헤맸지만 첫 상담 후 일주일 만에 확정. 심사도 무난히 통과했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">박</div><div><strong>박○○ 학생</strong><span>논문코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card mq-card--featured">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">성균관대 면접 최종 합격</strong>
-              <p class="mq-desc">면접 전날까지 답변 구조를 잡지 못했지만 코칭 후 핵심 3가지로 압축해 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">윤</div><div><strong>윤○○ 학생</strong><span>면접코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">임용고시 최종 합격</strong>
-              <p class="mq-desc">수업 시연 피드백과 심층 면접 대비로 3년 만에 최종 합격. 코치님 덕분에 방향을 잡았습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">한</div><div><strong>한○○ 씨</strong><span>임용코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">금융기업 리더십 교육</strong>
-              <p class="mq-desc">팀장급 150명 리더십 역량 강화. 3개월 후 내부 조직 만족도 조사에서 전년 대비 18p 상승했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">B</div><div><strong>B기업 HR팀</strong><span>리더십 기업교육 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">한양대 디자인 수시 합격</strong>
-              <p class="mq-desc">포트폴리오 방향성이 없던 상태에서 전공 연계 스토리로 재구성해 최종 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">오</div><div><strong>오○○ 학생</strong><span>디자인포트폴리오코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">박사과정 연구계획서 합격</strong>
-              <p class="mq-desc">3번 탈락 후 연구 방향과 문제 설정을 전면 재구성. 4번째 지원에서 최종 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">서</div><div><strong>서○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
-            </div>
-            <!-- 루프 복제 -->
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">석사 논문 심사 통과</strong>
-              <p class="mq-desc">논문 주제 선정에서 6개월을 헤맸지만 첫 상담 후 일주일 만에 확정. 심사도 무난히 통과했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">박</div><div><strong>박○○ 학생</strong><span>논문코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card mq-card--featured">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">성균관대 면접 최종 합격</strong>
-              <p class="mq-desc">면접 전날까지 답변 구조를 잡지 못했지만 코칭 후 핵심 3가지로 압축해 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">윤</div><div><strong>윤○○ 학생</strong><span>면접코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">임용고시 최종 합격</strong>
-              <p class="mq-desc">수업 시연 피드백과 심층 면접 대비로 3년 만에 최종 합격. 코치님 덕분에 방향을 잡았습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">한</div><div><strong>한○○ 씨</strong><span>임용코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">금융기업 리더십 교육</strong>
-              <p class="mq-desc">팀장급 150명 리더십 역량 강화. 3개월 후 내부 조직 만족도 조사에서 전년 대비 18p 상승했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">B</div><div><strong>B기업 HR팀</strong><span>리더십 기업교육 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">한양대 디자인 수시 합격</strong>
-              <p class="mq-desc">포트폴리오 방향성이 없던 상태에서 전공 연계 스토리로 재구성해 최종 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">오</div><div><strong>오○○ 학생</strong><span>디자인포트폴리오코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">박사과정 연구계획서 합격</strong>
-              <p class="mq-desc">3번 탈락 후 연구 방향과 문제 설정을 전면 재구성. 4번째 지원에서 최종 합격했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">서</div><div><strong>서○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── 3행: 왼쪽 → (1행과 동일 방향, 다른 카드) ── -->
-        <div class="marquee-row">
-          <div class="marquee-track" style="animation-duration:40s;">
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">공공기관 CS 역량강화</strong>
-              <p class="mq-desc">민원 응대 교육 후 민원 만족도 4.2 → 4.7점. 교육생 전원이 현업 즉시 적용 가능 평가를 받았습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">C</div><div><strong>C기관 교육팀</strong><span>고객서비스 기업교육 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">이화여대 EC 전략 합격</strong>
-              <p class="mq-desc">비교과 활동이 분산돼 있던 스펙을 하나의 스토리로 연결. 자소서 경쟁력이 확연히 달라졌습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">강</div><div><strong>강○○ 학생</strong><span>EC코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card mq-card--featured">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">서울대 대학원 최종 합격</strong>
-              <p class="mq-desc">학업계획서를 4번 고쳤지만 코치님과 방향 잡은 후 5번째에 합격. 면접도 무난히 통과했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">조</div><div><strong>조○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">대형병원 물리치료사 취업</strong>
-              <p class="mq-desc">병원 면접 특화 모의 진행. 지원 2곳 모두 최종 합격, 원하는 병원으로 선택해 입사했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">류</div><div><strong>류○○ 씨</strong><span>병원취업코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">스타트업 면접관 교육</strong>
-              <p class="mq-desc">채용 면접관 20명 역량 강화. 이후 신입 온보딩 이탈률 40% 감소 효과를 확인했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">D</div><div><strong>D사 인사팀</strong><span>면접관역량강화 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">중앙대 자기소개서 합격</strong>
-              <p class="mq-desc">매번 분량 초과와 내용 산만 문제를 반복했지만 3회 코칭 후 완성도 높은 자소서를 완성했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">노</div><div><strong>노○○ 학생</strong><span>자기소개서코칭 · 2025</span></div></div>
-            </div>
-            <!-- 루프 복제 -->
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">공공기관 CS 역량강화</strong>
-              <p class="mq-desc">민원 응대 교육 후 민원 만족도 4.2 → 4.7점. 교육생 전원이 현업 즉시 적용 가능 평가를 받았습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">C</div><div><strong>C기관 교육팀</strong><span>고객서비스 기업교육 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">이화여대 EC 전략 합격</strong>
-              <p class="mq-desc">비교과 활동이 분산돼 있던 스펙을 하나의 스토리로 연결. 자소서 경쟁력이 확연히 달라졌습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">강</div><div><strong>강○○ 학생</strong><span>EC코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card mq-card--featured">
-              <span class="mq-tag mq-tag--grad">대학원·논문</span>
-              <strong class="mq-result">서울대 대학원 최종 합격</strong>
-              <p class="mq-desc">학업계획서를 4번 고쳤지만 코치님과 방향 잡은 후 5번째에 합격. 면접도 무난히 통과했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">조</div><div><strong>조○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--job">취업 코칭</span>
-              <strong class="mq-result">대형병원 물리치료사 취업</strong>
-              <p class="mq-desc">병원 면접 특화 모의 진행. 지원 2곳 모두 최종 합격, 원하는 병원으로 선택해 입사했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">류</div><div><strong>류○○ 씨</strong><span>병원취업코칭 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag mq-tag--biz">기업교육</span>
-              <strong class="mq-result">스타트업 면접관 교육</strong>
-              <p class="mq-desc">채용 면접관 20명 역량 강화. 이후 신입 온보딩 이탈률 40% 감소 효과를 확인했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">D</div><div><strong>D사 인사팀</strong><span>면접관역량강화 · 2025</span></div></div>
-            </div>
-            <div class="mq-card">
-              <span class="mq-tag">대학·편입 코칭</span>
-              <strong class="mq-result">중앙대 자기소개서 합격</strong>
-              <p class="mq-desc">매번 분량 초과와 내용 산만 문제를 반복했지만 3회 코칭 후 완성도 높은 자소서를 완성했습니다.</p>
-              <div class="mq-meta"><div class="mq-avatar">노</div><div><strong>노○○ 학생</strong><span>자기소개서코칭 · 2025</span></div></div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -1946,35 +1704,35 @@
     /* ── Coaches Slider ── */
     (function () {
       var COACHES=[
-        {name:'김귀연',role:'유아교육·아동발달',img:'./assets/coaches/coach_01.webp'},
-        {name:'김용순',role:'국제정치·북한연구',img:'./assets/coaches/coach_02.webp'},
-        {name:'김재환',role:'조직문화·리더십',img:'./assets/coaches/coach_03.webp'},
-        {name:'김태영',role:'진로상담·조직코칭',img:'./assets/coaches/coach_04.webp'},
-        {name:'김희상',role:'IT·블록체인',img:'./assets/coaches/coach_05.webp'},
-        {name:'박미진',role:'서비스·고객만족',img:'./assets/coaches/coach_06.webp'},
-        {name:'방병권',role:'HR 데이터분석·채용',img:'./assets/coaches/coach_07.webp'},
-        {name:'박일용',role:'운동처방·웰니스',img:'./assets/coaches/coach_08.webp'},
+        {name:'김귀연',role:'유아교육·아동발달',img:'https://lh3.googleusercontent.com/Nx7NadjgZWYazPCV_hi8rsHwUzEtZbxGJuaUPE6flE23e8TwUc__uY59TzqtdhfhO-b1Krqn30FasALf-Vi_DSe302fuND_dti_SDy7REoJtMZ5d1dCO-A=w700-h500-n'},
+        {name:'김용순',role:'국제정치·북한연구',img:'https://lh3.googleusercontent.com/9kAI86TFMU-nYZ_JUsTEpotO6wtD8voFXJbsJ5FjCr6AWqdyJrzLtjaBJOm4mwzMt-WAJkBpM_w3D3Zfrg0FGPwM0Jdr0lFwOxuVwgPz9zHzfgg7WoFylKE=w700-h500-n'},
+        {name:'김재환',role:'조직문화·리더십',img:'https://lh3.googleusercontent.com/MjuUZ0sJudzIrCXMDeM7CkhIqwpDtBuhyxcp9C1sUcCVoeAZefo_NyiI1PuACxJJVWX2ZYvhp3EoFPrcHqtn50s5WFcr6QvZrv8LJc5NMZPqiG7DKUfBsw=w700-h500-n'},
+        {name:'김태영',role:'진로상담·조직코칭',img:'https://lh3.googleusercontent.com/eyNFVsbjudttG1bOZhO6hg84cYm09yr-Ta6d6o7uI4bQQGPok-tjJLfz1DSTC6KEJkwQnpK8OgBO3Px1fw4wrWqFqppaGDLhRQL_FBaVtrNlHwrZwR2A0A=w700-h500-n'},
+        {name:'김희상',role:'IT·블록체인',img:'https://lh3.googleusercontent.com/GaiuTvRoih4z_QUccZTOcDKhj4WljcmMHfr08ky55S56dOIx0bu8cSjfm2lP64UAkEA6MOYjxnuRjCF_U7F6-WHemqCbxD1EBq2Ya9ewsx3LVbKiW2dc=w700-h500-n'},
+        {name:'박미진',role:'서비스·고객만족',img:'https://lh3.googleusercontent.com/KbolDxXgfZoa-GXJ-Jyo26mSr33irXHbuIJt2bo2MEjAEf0wyazpcaaksmb2fPz-FPws6HIqiR5-FFB7HhAXnEkFcmY0NAdXQkivfE_HYKljGKvn8SGGUg=w700-h500-n'},
+        {name:'방병권',role:'HR 데이터분석·채용',img:'https://lh3.googleusercontent.com/kUPH7xuj-hEyuKmvWgMU0VWS6h9VOxLztXzoHqjC9iJ5KXidhwwrXjtjCWj4ByT0cL8OvlQFs9TNhzPUCOtTSEXFknm6yzyi1my-oYnuu0cM9pAbOiWXoA=w700-h500-n'},
+        {name:'박일용',role:'운동처방·웰니스',img:'https://lh3.googleusercontent.com/O1hqaf-9__LHNqjJFlQBazF5iDXM66I4MFMDARyUbsuQAIEsHTWq8fzLYYtxk-VL2H55N0h1OvUhiRHLFuK2BoZZFxDzN-b4kH-HYIpSeiL9KC_oHaFwSQ=w700-h500-n'},
         {name:'신혜림',role:'화장품산업교육·시니어심리',img:'https://lh3.googleusercontent.com/rW5AiVtIWboLgyYOZdOt9QCBy3URXycyWIxhynKiAv3_wlnd35PahxZ4HgUv6H35ONVnUjAliZTiz9zI0LBXEKTrMCqX6Ws6-BLMP3tZ_bI=w700-h500-n'},
-        {name:'안세영',role:'비즈니스전략·지속가능경영',img:'./assets/coaches/coach_10.webp'},
-        {name:'안희수',role:'강점코칭·예술인문학',img:'./assets/coaches/coach_11.webp'},
-        {name:'왕소빈',role:'HR 기반 직무·취업전략',img:'./assets/coaches/coach_12.webp'},
-        {name:'우소연',role:'스피치·이미지메이킹',img:'./assets/coaches/coach_13.webp'},
-        {name:'유예림',role:'중국어교육·문화언어학',img:'./assets/coaches/coach_14.webp'},
+        {name:'안세영',role:'비즈니스전략·지속가능경영',img:'https://lh3.googleusercontent.com/RG77Xn73SmiPpPpt8PdaH6SYPfVo7MxnFH0xcxy-qqfQHSo1JBLATt6W1iLUIYp03jNgCvQCDDcMJgUYuC717Oe6EVsvTzBsoO-fghAu1tYxJMj9YXgXlxo=w700-h500-n'},
+        {name:'안희수',role:'강점코칭·예술인문학',img:'https://lh3.googleusercontent.com/FEamjVx_oOA9cKf1svADR9m0iK4tuTdF6JkxixcqDhEkmDFNuplZFF9L9TVRvD1EaViwUAokc3Q3QCoHdzFUG8uPt_hrXiGyWlAu5oo3YPIpnzQSjQDHjQ=w700-h500-n'},
+        {name:'왕소빈',role:'HR 기반 직무·취업전략',img:'https://lh3.googleusercontent.com/uhqlfytnq6N0EUF6XihauiPG5jqVW0kJy_V0N6o6p9dG1G0v7hYo2jKaIiW4EkcS_dPzsxPtlBBBdc_lks64wlGJ1qMNdJKciSKgdzye9F0StceIpac8=w700-h500-n'},
+        {name:'우소연',role:'스피치·이미지메이킹',img:'https://lh3.googleusercontent.com/xHiJz1H4d6Aa4UlL1EzK1vVOBIgj9LMO1ZblT4ui6KRbWU-VFNrH6M94luuzOYaSEQlk7u4N1EBQ9uCwTqVMEqdFxBh_Waaa1avCqvQ3co4Vy3HS2GSWqQ=w700-h500-n'},
+        {name:'유예림',role:'중국어교육·문화언어학',img:'https://lh3.googleusercontent.com/3GTOpLFUt3AyBc-fMPTHZgRUbYkmxAStk0uq8yUMIeX_ZBQMZ42F0ZheWtqY7YOzf1-yqVviIBCLwQdNU2DCTlKoUX8OlWxK6Sr7JzML3ubAP0nppXNlrIg=w700-h500-n'},
         {name:'유장현',role:'조직개발·리더십컨설팅',img:'https://lh3.googleusercontent.com/0XzLqDswe1J-UxsAVo6UC7wc1kYZOg0rOF0nQ9XDRPB9j_Uctdm6Io5ybe8uepv3Mmm_CJHoWlHUxT9VM8pv7BpO3JwlPTlb9fSlTDGbsifFi2PvQ=w700-h500-n'},
-        {name:'윤태일',role:'취업전략·실전코칭',img:'./assets/coaches/coach_16.webp'},
-        {name:'이유나',role:'진로상담·디지털인문학',img:'./assets/coaches/coach_17.webp'},
-        {name:'이은선',role:'조직문화·커뮤니케이션',img:'./assets/coaches/coach_18.webp'},
-        {name:'이주노',role:'UX·데이터 시각화',img:'./assets/coaches/coach_19.webp'},
-        {name:'이현주',role:'예술인문학 코칭',img:'./assets/coaches/coach_20.webp'},
-        {name:'정다운',role:'진로설계·커리어전략',img:'./assets/coaches/coach_21.webp'},
-        {name:'정종우',role:'산업안전·조직관리',img:'./assets/coaches/coach_22.webp'},
-        {name:'정지혜',role:'관광·외식 운영 및 진로지도',img:'./assets/coaches/coach_23.webp'},
-        {name:'전성은',role:'리더십·커뮤니케이션',img:'./assets/coaches/coach_24.webp'},
-        {name:'전예슬',role:'수학·MBA·디자인·사회과학',img:'./assets/coaches/coach_25.webp'},
-        {name:'최지혜',role:'취업·커리어 컨설팅',img:'./assets/coaches/coach_26.webp'},
-        {name:'최해령',role:'마인드셋·자기관리',img:'./assets/coaches/coach_27.webp'},
-        {name:'Steve Kim',role:'보딩스쿨·미국유학',img:'./assets/coaches/coach_28.webp'},
-        {name:'LEAH',role:'교육학·대학원 코칭',img:'./assets/coaches/coach_29.webp'},
+        {name:'윤태일',role:'취업전략·실전코칭',img:'https://lh3.googleusercontent.com/TUrZdIqxvVWm3anPZd8Kr1-DljtKrdHdcOhqCuBXk90uL7070kW1QFRZn9t49wrtcF41N9pVCFLnPESNY0hdKtWV7WTwaa1-YN5NSDd3PMTTquziEq4kEw=w700-h500-n'},
+        {name:'이유나',role:'진로상담·디지털인문학',img:'https://lh3.googleusercontent.com/rAh-e-cUSG6-nu3xwJOaKiT9TW-Vl-58pmeq2pV4TznLeoFKVqjQnfCiiVMcCqb3aIQfpEcrWID5WFXcv42YUZqRIAjWzasjWi48G9eQwghR7vi33oO3Ow=w700-h500-n'},
+        {name:'이은선',role:'조직문화·커뮤니케이션',img:'https://lh3.googleusercontent.com/IhK4Y3pP5fBrcR03RIBWqblZTSk8IXzNRTUPKpP-oSWL69jcO8RU-mNbANas_nJ4ol23svQK97X2pM9uf9gZo879l-9E6gGumjIeDSFow1BAPlcRWnHz=w700-h500-n'},
+        {name:'이주노',role:'UX·데이터 시각화',img:'https://lh3.googleusercontent.com/Yp7JT2lDASFWyvcP6Q5RBzSBA8Ouo63INzBujRIMqnR945OCAFrbeQDlqhQ-IaredINjphgSnKQEA7U5Z9kF_ZCkUJNtXCgsB0li77jUD0lc6YaHh__sHR0=w700-h500-n'},
+        {name:'이현주',role:'예술인문학 코칭',img:'https://lh3.googleusercontent.com/feJcLVytJ80ZwnB8n_vvZZZRHhg8eWvOtrl3gTv3CvvYu1xl47aAHfT8Is-hbagLHsJOVBHWt_ifIUTjZCEgaLaQJP93LxSAiKOpqaoQGLTqZDPu1uT-=w700-h500-n'},
+        {name:'정다운',role:'진로설계·커리어전략',img:'https://lh3.googleusercontent.com/Vcuh8fRjctm_2un-AkPJ6etLZs-N5yPI5cHYX1XCcQvjZhcp_UdSuUzwukdbbkvucpWgkNnM8UTGa_PvkUyDzhioqO03pLzs3g4jaatNfTqwAZut5aUJ5Q=w700-h500-n'},
+        {name:'정종우',role:'산업안전·조직관리',img:'https://lh3.googleusercontent.com/ueavdVwOhGIx9tMf-EgMQcp-OFqfKhl8PMle0T4mmK_-lBE5ogzrpSs6OGKEPAEI-DIlwFDJk3nGoysHSAd2JCo089F2PsSlllFFGK8Dl144f-GgJTCK1g=w700-h500-n'},
+        {name:'정지혜',role:'관광·외식 운영 및 진로지도',img:'https://lh3.googleusercontent.com/i8PckXoOnb7PDgcx87rcgC3Aiupv_UlFXfRaJX8x_JQowkpvRciyrRGxcZfTdVYyBqkIpNaYkNxiwQa7ClbvoiMlXEUWhMzZCrwbn6kH3HoQ_BBUbueRmw=w700-h500-n'},
+        {name:'전성은',role:'리더십·커뮤니케이션',img:'https://lh3.googleusercontent.com/YVMPxwEl0n8l6KIFJa1iXyY_qcXhPAG1FPJ_DYINvQMpoloIKsGqK8Z4wclYoSqUijeJNxQ8sytwWaWQkXKR8Xy9TesIFMCjCN3rmuRwmsuwCzP9Jm8kVw=w700-h500-n'},
+        {name:'전예슬',role:'수학·MBA·디자인·사회과학',img:'https://lh3.googleusercontent.com/g3H9tiXoyD12Nb5alfBhRUEC97ATy5DvcsSUJmNTfqzbXk26jEkflhoHiLqqjBLVUNeZHtRcGcTmWQGy_pn9vaGR5PoamXUfmdzFpQR5h7BsJpgSELVwHw=w700-h500-n'},
+        {name:'최지혜',role:'취업·커리어 컨설팅',img:'https://lh3.googleusercontent.com/udcpuZUKfrDEeUbINKJBt0--RUa7o23RBu0OpRbw7mJZk8_wxMOS6-TDePcj85FYClsozECmviMGg0L7IwotApRkKu8CZM5_IYt_zZMIwnzZ9BmF5lV_vQ=w700-h500-n'},
+        {name:'최해령',role:'마인드셋·자기관리',img:'https://lh3.googleusercontent.com/BRFI7TruetZa3qjbscZFBvCYg89tpknM0GsJkJTyv1rND8dC4qRhPUl2wW0pICZUxkyGUjxiPUOX3nohmbvK1U1LIOi2fzwrVhlWR9n5_LA35GA05ogQ1Q=w700-h500-n'},
+        {name:'Steve Kim',role:'보딩스쿨·미국유학',img:'https://lh3.googleusercontent.com/9YsItYlUYxru5y-ysPNbPN__K37tbSXUCE61FHhc0IarBZOd6rUzthtZR_H3fq71qYO5EnlsyWtZV6mzZD0rc_UvLimITAd9mHykRZNpjMdfLIOhAU5kFg=w700-h500-n'},
+        {name:'LEAH',role:'교육학·대학원 코칭',img:'https://lh3.googleusercontent.com/IVJ4agiA_qkOJ4cfkMSQudw8i_3HGe77cgBAym4sxtlaIALD6w6wIB_liyOp8s7Nj9vocMkyVO4cqAcTI7chfcAYaEj47nYfJbFUmoMlEyqAyRZxCVl_Fg=w700-h500-n'},
       ];
       var PER=10;
       var cPage=0;
