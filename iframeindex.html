@@ -101,21 +101,34 @@ img { display: block; max-width: 100%; }
 .hero-hub {
   position: relative; overflow: clip;
   padding: 100px 0 80px; text-align: center;
-  background: #fff;
-}
-.hero-hub::before {
-  content: "";
-  position: absolute; top: -180px; left: 50%; transform: translateX(-50%);
-  width: 1100px; height: 700px;
-  background: radial-gradient(ellipse at 50% 20%,
-    rgba(74,104,255,0.09) 0%, rgba(127,146,255,0.04) 45%, transparent 70%);
-  pointer-events: none;
+  background: #06081a;
 }
 .hero-hub::after {
   content: "";
   position: absolute; bottom: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  background: linear-gradient(90deg, transparent, rgba(74,104,255,0.4), transparent);
+}
+/* particle canvas */
+#particleCanvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+/* 텍스트를 canvas 위로 */
+.hero-hub .wrap { position: relative; z-index: 1; }
+/* 다크 배경 위 텍스트 색상 조정 */
+.hero-hub .hero-kicker          { color: var(--brand-2); }
+.hero-hub h1 .em                { color: var(--brand-2); }
+.hero-hub h1 .hero-text-rotator { color: #ffffff; }
+.hero-hub .hero-sub             { color: rgba(255,255,255,0.55); }
+.hero-hub .btn-ghost {
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+}
+.hero-hub .btn-ghost:hover {
+  border-color: var(--brand-2);
+  color: var(--brand-2);
 }
 .hero-kicker {
   display: inline-flex; align-items: center; gap: 6px;
@@ -127,7 +140,7 @@ img { display: block; max-width: 100%; }
 .hero-hub h1 {
   font-size: clamp(32px, 5vw, 64px);
   font-weight: 900; letter-spacing: -0.055em; line-height: 1.14;
-  margin-bottom: 20px; color: var(--text);
+  margin-bottom: 20px; color: #ffffff;
   word-break: keep-all;
 }
 .em { position: relative; display: inline; color: var(--brand); }
@@ -801,7 +814,7 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 <header class="hub-header">
   <div class="hub-header__inner">
     <a class="hub-logo" href="/">
-      <img src="./assets/biglinker-logo.png" alt="빅링커 로고">
+      <img src="./assets/biglinker-logo.webp" alt="빅링커 로고">
       <!-- <span class="hub-logo__text">BigLinker</span> -->
     </a>
     <a class="hub-header__cta" href="https://transfer.gobiglinker.com/#cta">무료 상담 신청</a>
@@ -812,6 +825,7 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 
 <!-- ══ §1 HERO ══ -->
 <section class="hero-hub">
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="hero-kicker load-1">BigLinker · 리드코칭 전문 플랫폼</div>
     <h1 class="load-2"><span class="em">리드코칭<svg viewBox="0 0 120 14" fill="none" preserveAspectRatio="none"><path d="M2 10 C25 3, 65 13, 98 7 C110 4, 118 10, 119 8" stroke="rgba(74,104,255,0.55)" stroke-width="2.8" stroke-linecap="round" fill="none"/><path d="M4 13 C28 8, 68 14, 101 10 C112 7, 118 12, 119 10" stroke="rgba(127,146,255,0.3)" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg></span>으로<br><span class="hero-text-rotator" id="heroRotator">합격을 설계합니다</span></h1>
@@ -1352,7 +1366,7 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 
 <!-- 모바일 플로팅 CTA -->
 <a class="mobile-floating-cta" href="https://transfer.gobiglinker.com/#cta" aria-label="무료 상담 신청">
-  <img src="./assets/biglinker-logo.png" alt="빅링커">
+  <img src="./assets/biglinker-logo.webp" alt="빅링커">
   <div>
     <strong>무료 상담 신청</strong>
     <span>빅링커 1:1 코칭 시작하기</span>
@@ -1453,6 +1467,116 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
   }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
 
   cards.forEach(c => io.observe(c));
+})();
+
+// ── Particle Network ──────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const BRAND   = [74, 104, 255];
+  const BRAND2  = [127, 146, 255];
+  const COUNT   = 68;
+  const MAX_DIST = 140;
+  const SPEED    = 0.38;
+
+  let W, H, particles = [];
+  let mouse = { x: -9999, y: -9999 };
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = rect.width;
+    H = canvas.height = rect.height;
+  }
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  function mkParticle() {
+    const c = Math.random() < 0.5 ? BRAND : BRAND2;
+    return {
+      x: rand(0, W), y: rand(0, H),
+      vx: rand(-SPEED, SPEED), vy: rand(-SPEED, SPEED),
+      r: rand(1.5, 3.2),
+      color: `rgba(${c[0]},${c[1]},${c[2]},`
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: COUNT }, mkParticle);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // draw connections
+    for (let i = 0; i < particles.length; i++) {
+      const a = particles[i];
+      // mouse connection
+      const mdx = a.x - mouse.x, mdy = a.y - mouse.y;
+      const md  = Math.sqrt(mdx*mdx + mdy*mdy);
+      if (md < MAX_DIST * 1.4) {
+        const op = (1 - md / (MAX_DIST * 1.4)) * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = `rgba(127,146,255,${op})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+      for (let j = i + 1; j < particles.length; j++) {
+        const b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < MAX_DIST) {
+          const op = (1 - dist / MAX_DIST) * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${BRAND[0]},${BRAND[1]},${BRAND[2]},${op})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // draw dots
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + '0.75)';
+      ctx.fill();
+      // glow
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + '0.10)';
+      ctx.fill();
+    });
+  }
+
+  function update() {
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+      if (p.y < -10) p.y = H + 10;
+      if (p.y > H + 10) p.y = -10;
+    });
+  }
+
+  function loop() { update(); draw(); requestAnimationFrame(loop); }
+
+  window.addEventListener('resize', () => { resize(); });
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave', () => {
+    mouse.x = -9999; mouse.y = -9999;
+  });
+
+  init();
+  loop();
 })();
 
 // Mobile floating CTA — show after hero scrolls out
