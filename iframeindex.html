@@ -677,6 +677,112 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 .hrt-char--in  { animation: hrtCharIn  0.55s var(--d,0ms) cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
 .hrt-sub--out  { animation: hrtSubOut 0.28s ease-in forwards; }
 .hrt-sub--in   { animation: hrtSubIn  0.42s 0.14s ease-out forwards; opacity: 0; }
+
+/* ══ Cases Carousel (Hub) ══ */
+.cases-tabs {
+  display: flex; align-items: center;
+  background: var(--bg-3); border-radius: 999px;
+  border: 1.5px solid var(--line); padding: 4px;
+  width: fit-content; margin: 0 auto 40px;
+}
+.cases-tab {
+  padding: 10px 32px; border-radius: 999px; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; background: transparent;
+  color: var(--muted); transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+.cases-tab.is-active { background: #fff; color: var(--text); box-shadow: 0 2px 10px rgba(0,0,0,0.10); }
+.cases-carousel-wrap { position: relative; margin-bottom: 20px; }
+.cases-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--line); background: #fff;
+  color: var(--muted); cursor: pointer; font-size: 20px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.18s, color 0.18s, box-shadow 0.18s;
+  z-index: 2; box-shadow: var(--shadow-sm);
+}
+.cases-nav--prev { left: -52px; }
+.cases-nav--next { right: -52px; }
+.cases-nav:hover:not(:disabled) { border-color: var(--brand); color: var(--brand); box-shadow: 0 2px 12px rgba(74,104,255,0.18); }
+.cases-nav:disabled { opacity: 0.28; cursor: not-allowed; }
+.cases-overflow { overflow: hidden; width: 100%; }
+.cases-track { display: flex; transition: transform 0.42s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+.cases-slide { flex: 0 0 100%; min-width: 0; }
+.cases-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.carousel-case-card {
+  display: flex; align-items: center; gap: 12px;
+  background: #fff; border: 1.5px solid var(--line);
+  border-radius: var(--r-lg); padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.22s;
+  min-width: 0;
+}
+.carousel-case-card:hover { border-color: var(--brand-mid); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.carousel-case-logo {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+  border: 1.5px solid var(--line); background: #fff;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.carousel-case-logo img { width: 36px; height: 36px; object-fit: contain; }
+.carousel-case-logo.placeholder {
+  background: linear-gradient(135deg, var(--brand), #7c6ff7);
+  border: none; font-size: 12px; font-weight: 800; color: #fff;
+}
+.carousel-case-info { flex: 1; min-width: 0; }
+.carousel-case-tag { display: inline-block; margin-bottom: 3px; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 999px; }
+.carousel-case-name { display: block; font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.carousel-case-dept { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cases-dots { display: flex; justify-content: center; gap: 6px; margin-top: 20px; margin-bottom: 56px; }
+.cases-dot { width: 8px; height: 8px; border-radius: 4px; background: var(--line-2); cursor: pointer; border: none; transition: background 0.25s, width 0.25s; }
+.cases-dot.is-active { background: var(--brand); width: 22px; }
+
+/* ══ Coaches Carousel Override (photo-based, transfer version) ══ */
+.coaches-track { display: flex; transition: transform 0.42s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+.coaches-slide { flex: 0 0 100%; min-width: 0; }
+.coaches-section { background: var(--bg-2); }
+.coaches-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.coach-card { background: none; border: none; box-shadow: none; padding: 0; }
+.coach-photo {
+  width: 100%; aspect-ratio: 7/5; border-radius: var(--r-xl); overflow: hidden;
+  background: var(--bg-3); box-shadow: var(--shadow-sm);
+  position: relative; height: auto;
+  font-size: inherit; font-weight: inherit; color: inherit;
+  display: block; flex-shrink: unset;
+}
+.coach-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: grayscale(0.3); display: block;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease;
+}
+.coach-card:hover .coach-photo img { transform: scale(1.06); filter: grayscale(0); }
+.coach-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 50%);
+  border-radius: inherit; transition: opacity 0.3s;
+}
+.coach-card:hover .coach-photo::after { opacity: 0.5; }
+.coach-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.coach-role { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.coaches-more a {
+  border: 1.5px solid var(--brand-mid); padding: 8px 20px; border-radius: 999px;
+  background: var(--brand-soft); color: var(--brand); font-weight: 700;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.coaches-more a:hover { background: var(--brand); border-color: var(--brand); color: #fff; transform: translateY(-1px); }
+
+@media (max-width: 900px) {
+  .cases-grid { grid-template-columns: repeat(2, 1fr); }
+  .cases-nav--prev { left: -18px; }
+  .cases-nav--next { right: -18px; }
+  .coaches-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 580px) {
+  .cases-grid { grid-template-columns: 1fr; }
+  .cases-nav { display: none; }
+  .coaches-grid { grid-template-columns: repeat(2, 1fr); }
+}
   </style>
 </head>
 <body>
@@ -930,6 +1036,20 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
       <h2>리드코칭 합격 사례</h2>
       <p>대입부터 취업까지, 리드코칭을 선택한 실제 결과입니다.</p>
     </div>
+
+    <div class="cases-tabs reveal">
+      <button class="cases-tab is-active" data-cases="univ">대학 합격</button>
+      <button class="cases-tab" data-cases="job">기업 취업</button>
+    </div>
+    <div class="cases-carousel-wrap reveal">
+      <button class="cases-nav cases-nav--prev" id="casesPrev" aria-label="이전">‹</button>
+      <div class="cases-overflow">
+        <div class="cases-track" id="casesTrack"></div>
+      </div>
+      <button class="cases-nav cases-nav--next" id="casesNext" aria-label="다음">›</button>
+    </div>
+    <div class="cases-dots" id="casesDots"></div>
+
   </div>
 
   <div class="marquee-rows">
@@ -1178,42 +1298,19 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 <section class="coaches-section" id="coaches">
   <div class="wrap">
     <div class="sec-head reveal">
-      <p class="sec-eyebrow">LEAD COACHES</p>
-      <h2>리드코치 소개</h2>
-      <p>각 분야 전문가들이 직접 1:1로 코칭합니다.</p>
+      <p class="sec-eyebrow">OUR COACHES</p>
+      <h2>검증된 전문 코칭팀</h2>
+      <p>각 분야 전문가들이 1:1로 함께합니다.</p>
     </div>
-    <div class="coaches-grid">
-
-      <div class="coach-card reveal reveal-d1">
-        <div class="coach-photo">김</div>
-        <strong class="coach-name">김○○ 코치</strong>
-        <span class="coach-field">대입·편입 전략</span>
-        <p class="coach-bio">전국 단위 대입 컨설팅 12년. SKY 합격생 300+ 배출. 학생부 기반 전형 전략 전문.</p>
+    <div class="coaches-carousel-wrap reveal" style="position:relative;">
+      <button class="cases-nav cases-nav--prev" id="coachPrev" aria-label="이전">‹</button>
+      <div class="cases-overflow">
+        <div class="coaches-track" id="coachTrack"></div>
       </div>
-
-      <div class="coach-card reveal reveal-d2">
-        <div class="coach-photo" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">이</div>
-        <strong class="coach-name">이○○ 코치</strong>
-        <span class="coach-field" style="background:#f5f3ff;color:#7c3aed;">논문·대학원</span>
-        <p class="coach-bio">박사 학위 보유. 논문 주제 선정에서 심사 통과까지 전 과정 지도. 연구계획서 합격률 91%.</p>
-      </div>
-
-      <div class="coach-card reveal reveal-d3">
-        <div class="coach-photo" style="background: linear-gradient(135deg, #16a34a, #4ade80);">박</div>
-        <strong class="coach-name">박○○ 코치</strong>
-        <span class="coach-field" style="background:#f0fdf4;color:#16a34a;">취업·면접</span>
-        <p class="coach-bio">의료·공공·대기업 취업 전문. 병원 취업 합격률 88%. 실전 모의면접 중심 코칭.</p>
-      </div>
-
-      <div class="coach-card reveal reveal-d4">
-        <div class="coach-photo" style="background: linear-gradient(135deg, #ca8a04, #fbbf24);">최</div>
-        <strong class="coach-name">최○○ 코치</strong>
-        <span class="coach-field" style="background:#fef9ec;color:#ca8a04;">기업교육</span>
-        <p class="coach-bio">대기업 HRD 출신. AI 활용·리더십·면접관 교육 설계 전문. 연간 교육 인원 3,000+.</p>
-      </div>
-
+      <button class="cases-nav cases-nav--next" id="coachNext" aria-label="다음">›</button>
     </div>
-    <div class="coaches-more">
+    <div class="cases-dots" id="coachDots"></div>
+    <div class="coaches-more" style="text-align:center;padding-top:12px;">
       <a href="https://gobiglinker.com/컨설턴트-및-협력사" target="_blank" rel="noopener">전체 코칭팀 보기 →</a>
     </div>
   </div>
@@ -1242,50 +1339,6 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 
 </main>
 
-<!-- ══ FOOTER ══ -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-logo">BigLinker</div>
-        <p class="footer-brand-desc">입시·대학원·취업·기업교육 코칭 전문.<br>지원자의 스토리를 합격의 언어로 설계합니다.</p>
-      </div>
-      <div class="footer-nav-grid">
-        <div class="footer-nav-group">
-          <h4>서비스</h4>
-          <a href="https://transfer.gobiglinker.com/">대학·편입 코칭</a>
-          <a href="https://graduate.gobiglinker.com/">대학원·논문 코칭</a>
-          <a href="https://job.gobiglinker.com/">취업 코칭</a>
-          <a href="https://biz.gobiglinker.com/">기업교육</a>
-        </div>
-        <div class="footer-nav-group">
-          <h4>콘텐츠</h4>
-          <a href="#">블로그</a>
-          <a href="#">리얼 TIP</a>
-          <a href="#">합격 사례</a>
-          <a href="#">가이드북</a>
-        </div>
-        <div class="footer-nav-group">
-          <h4>회사</h4>
-          <a href="#">소개</a>
-          <a href="https://gobiglinker.com/컨설턴트-및-협력사">코치 소개</a>
-          <a href="https://transfer.gobiglinker.com/#cta">상담 신청</a>
-          <a href="#">FAQ</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-legal">
-        © 2026 BigLinker. All rights reserved.<br>
-        사업자등록번호 000-00-00000 · 통신판매업 제0000-서울-0000호
-      </div>
-      <div class="footer-policy-links">
-        <a href="#">이용약관</a>
-        <a href="#">개인정보처리방침</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
 <!-- 모바일 플로팅 CTA -->
 <a class="mobile-floating-cta" href="https://transfer.gobiglinker.com/#cta" aria-label="무료 상담 신청">
@@ -1484,6 +1537,219 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
     doTransition(fx, nextIdx);
     step++;
   }, HOLD_MS);
+})();
+</script>
+
+
+<script>
+/* ── Cases Carousel (hub page) ── */
+(function(){
+  var UNIV_CASES=[
+    {logo:'서울대학교',dept:'경영학과',name:'김○○',tag:'수시 종합전형',year:'2025'},
+    {logo:'연세대학교',dept:'신문방송학과',name:'이○○',tag:'편입 최종합격',year:'2025'},
+    {logo:'고려대학교',dept:'심리학부',name:'박○○',tag:'자기소개서 코칭',year:'2025'},
+    {logo:'성균관대학교',dept:'경제학과',name:'정○○',tag:'면접 코칭',year:'2025'},
+    {logo:'한양대학교',dept:'디자인학부',name:'오○○',tag:'포트폴리오 코칭',year:'2025'},
+    {logo:'이화여자대학교',dept:'국어국문학과',name:'강○○',tag:'EC 전략',year:'2025'},
+    {logo:'서강대학교',dept:'컴퓨터공학과',name:'최○○',tag:'수시 종합전형',year:'2025'},
+    {logo:'중앙대학교',dept:'사회학과',name:'노○○',tag:'자기소개서 코칭',year:'2025'},
+    {logo:'경희대학교',dept:'호텔경영학과',name:'유○○',tag:'편입 최종합격',year:'2025'},
+    {logo:'건국대학교',dept:'생명공학과',name:'홍○○',tag:'수시 종합전형',year:'2025'},
+    {logo:'동국대학교',dept:'경찰행정학과',name:'임○○',tag:'면접 코칭',year:'2025'},
+    {logo:'숙명여자대학교',dept:'통계학과',name:'윤○○',tag:'수시 종합전형',year:'2025'},
+  ];
+  var JOB_CASES=[
+    {logo:'삼성전자',dept:'SW개발팀',name:'김○○',tag:'대기업 최종합격',year:'2025'},
+    {logo:'LG전자',dept:'마케팅본부',name:'이○○',tag:'자소서·면접 코칭',year:'2025'},
+    {logo:'카카오',dept:'Product 기획',name:'박○○',tag:'IT업계 취업',year:'2025'},
+    {logo:'현대자동차',dept:'연구개발팀',name:'정○○',tag:'대기업 최종합격',year:'2025'},
+    {logo:'네이버',dept:'Data Analytics',name:'최○○',tag:'IT업계 취업',year:'2025'},
+    {logo:'SK하이닉스',dept:'반도체 공정',name:'오○○',tag:'대기업 최종합격',year:'2025'},
+    {logo:'롯데그룹',dept:'유통전략팀',name:'강○○',tag:'자소서·면접 코칭',year:'2025'},
+    {logo:'CJ그룹',dept:'콘텐츠사업부',name:'유○○',tag:'대기업 최종합격',year:'2025'},
+    {logo:'포스코',dept:'기술연구소',name:'홍○○',tag:'대기업 최종합격',year:'2025'},
+    {logo:'KT',dept:'디지털혁신팀',name:'임○○',tag:'IT업계 취업',year:'2025'},
+    {logo:'한국투자증권',dept:'IB본부',name:'노○○',tag:'금융권 최종합격',year:'2025'},
+    {logo:'아모레퍼시픽',dept:'브랜드마케팅',name:'윤○○',tag:'대기업 최종합격',year:'2025'},
+  ];
+
+  var PER=12;
+  var currentTab='univ';
+  var cPage=0;
+  var track=document.getElementById('casesTrack');
+  var dots=document.getElementById('casesDots');
+  var prev=document.getElementById('casesPrev');
+  var next=document.getElementById('casesNext');
+  var tabs=document.querySelectorAll('.cases-tab');
+  if(!track) return;
+
+  function getData(){ return currentTab==='univ'?UNIV_CASES:JOB_CASES; }
+
+  function buildCard(c){
+    var initials=c.logo.slice(0,1);
+    return '<div class="carousel-case-card">'
+      +'<div class="carousel-case-logo placeholder">'+initials+'</div>'
+      +'<div class="carousel-case-info">'
+      +'<span class="carousel-case-tag">'+c.tag+'</span>'
+      +'<strong class="carousel-case-name">'+c.logo+'</strong>'
+      +'<span class="carousel-case-dept">'+c.dept+'</span>'
+      +'<span class="carousel-case-meta">'+c.name+' · '+c.year+'</span>'
+      +'</div></div>';
+  }
+
+  function render(){
+    var data=getData();
+    var totalPages=Math.ceil(data.length/PER);
+    var html='';
+    for(var p=0;p<totalPages;p++){
+      var slice=data.slice(p*PER,(p+1)*PER);
+      html+='<div class="cases-slide"><div class="cases-grid">';
+      slice.forEach(function(c){ html+=buildCard(c); });
+      html+='</div></div>';
+    }
+    track.innerHTML=html;
+    var dotsHtml='';
+    for(var i=0;i<totalPages;i++){
+      dotsHtml+='<button class="cases-dot'+(i===cPage?' is-active':'')+'" data-page="'+i+'"></button>';
+    }
+    dots.innerHTML=dotsHtml;
+    dots.querySelectorAll('.cases-dot').forEach(function(d){
+      d.addEventListener('click',function(){ goTo(+this.dataset.page); });
+    });
+    goTo(cPage,true);
+  }
+
+  function goTo(page,silent){
+    var data=getData();
+    var totalPages=Math.ceil(data.length/PER);
+    cPage=((page%totalPages)+totalPages)%totalPages;
+    track.style.transform='translateX(-'+cPage*100+'%)';
+    dots.querySelectorAll('.cases-dot').forEach(function(d,i){
+      d.classList.toggle('is-active',i===cPage);
+    });
+  }
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      tabs.forEach(function(t){ t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      currentTab=tab.dataset.cases;
+      cPage=0;
+      render();
+    });
+  });
+
+  prev.addEventListener('click',function(){ goTo(cPage-1); });
+  next.addEventListener('click',function(){ goTo(cPage+1); });
+
+  /* touch */
+  var touchX=0;
+  var overflow=track.parentElement;
+  overflow.addEventListener('touchstart',function(e){ touchX=e.touches[0].clientX; },{passive:true});
+  overflow.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>48){ dx<0?goTo(cPage+1):goTo(cPage-1); }
+  },{passive:true});
+
+  render();
+})();
+
+/* ── Coaches Carousel (hub page) ── */
+(function(){
+  var COACHES=[
+    {name:'김귀연',role:'유아교육·아동발달',img:'https://lh3.googleusercontent.com/Nx7NadjgZWYazPCV_hi8rsHwUzEtZbxGJuaUPE6flE23e8TwUc__uY59TzqtdhfhO-b1Krqn30FasALf-Vi_DSe302fuND_dti_SDy7REoJtMZ5d1dCO-A=w700-h500-n'},
+    {name:'김용순',role:'국제정치·북한연구',img:'https://lh3.googleusercontent.com/9kAI86TFMU-nYZ_JUsTEpotO6wtD8voFXJbsJ5FjCr6AWqdyJrzLtjaBJOm4mwzMt-WAJkBpM_w3D3Zfrg0FGPwM0Jdr0lFwOxuVwgPz9zHzfgg7WoFylKE=w700-h500-n'},
+    {name:'김재환',role:'조직문화·리더십',img:'https://lh3.googleusercontent.com/MjuUZ0sJudzIrCXMDeM7CkhIqwpDtBuhyxcp9C1sUcCVoeAZefo_NyiI1PuACxJJVWX2ZYvhp3EoFPrcHqtn50s5WFcr6QvZrv8LJc5NMZPqiG7DKUfBsw=w700-h500-n'},
+    {name:'김태영',role:'진로상담·조직코칭',img:'https://lh3.googleusercontent.com/eyNFVsbjudttG1bOZhO6hg84cYm09yr-Ta6d6o7uI4bQQGPok-tjJLfz1DSTC6KEJkwQnpK8OgBO3Px1fw4wrWqFqppaGDLhRQL_FBaVtrNlHwrZwR2A0A=w700-h500-n'},
+    {name:'김희상',role:'IT·블록체인',img:'https://lh3.googleusercontent.com/GaiuTvRoih4z_QUccZTOcDKhj4WljcmMHfr08ky55S56dOIx0bu8cSjfm2lP64UAkEA6MOYjxnuRjCF_U7F6-WHemqCbxD1EBq2Ya9ewsx3LVbKiW2dc=w700-h500-n'},
+    {name:'박미진',role:'서비스·고객만족',img:'https://lh3.googleusercontent.com/KbolDxXgfZoa-GXJ-Jyo26mSr33irXHbuIJt2bo2MEjAEf0wyazpcaaksmb2fPz-FPws6HIqiR5-FFB7HhAXnEkFcmY0NAdXQkivfE_HYKljGKvn8SGGUg=w700-h500-n'},
+    {name:'방병권',role:'HR 데이터분석·채용',img:'https://lh3.googleusercontent.com/kUPH7xuj-hEyuKmvWgMU0VWS6h9VOxLztXzoHqjC9iJ5KXidhwwrXjtjCWj4ByT0cL8OvlQFs9TNhzPUCOtTSEXFknm6yzyi1my-oYnuu0cM9pAbOiWXoA=w700-h500-n'},
+    {name:'박일용',role:'운동처방·웰니스',img:'https://lh3.googleusercontent.com/O1hqaf-9__LHNqjJFlQBazF5iDXM66I4MFMDARyUbsuQAIEsHTWq8fzLYYtxk-VL2H55N0h1OvUhiRHLFuK2BoZZFxDzN-b4kH-HYIpSeiL9KC_oHaFwSQ=w700-h500-n'},
+    {name:'신혜림',role:'화장품산업교육·시니어심리',img:'https://lh3.googleusercontent.com/rW5AiVtIWboLgyYOZdOt9QCBy3URXycyWIxhynKiAv3_wlnd35PahxZ4HgUv6H35ONVnUjAliZTiz9zI0LBXEKTrMCqX6Ws6-BLMP3tZ_bI=w700-h500-n'},
+    {name:'안세영',role:'비즈니스전략·지속가능경영',img:'https://lh3.googleusercontent.com/RG77Xn73SmiPpPpt8PdaH6SYPfVo7MxnFH0xcxy-qqfQHSo1JBLATt6W1iLUIYp03jNgCvQCDDcMJgUYuC717Oe6EVsvTzBsoO-fghAu1tYxJMj9YXgXlxo=w700-h500-n'},
+    {name:'안희수',role:'강점코칭·예술인문학',img:'https://lh3.googleusercontent.com/FEamjVx_oOA9cKf1svADR9m0iK4tuTdF6JkxixcqDhEkmDFNuplZFF9L9TVRvD1EaViwUAokc3Q3QCoHdzFUG8uPt_hrXiGyWlAu5oo3YPIpnzQSjQDHjQ=w700-h500-n'},
+    {name:'왕소빈',role:'HR 기반 직무·취업전략',img:'https://lh3.googleusercontent.com/uhqlfytnq6N0EUF6XihauiPG5jqVW0kJy_V0N6o6p9dG1G0v7hYo2jKaIiW4EkcS_dPzsxPtlBBBdc_lks64wlGJ1qMNdJKciSKgdzye9F0StceIpac8=w700-h500-n'},
+    {name:'우소연',role:'스피치·이미지메이킹',img:'https://lh3.googleusercontent.com/xHiJz1H4d6Aa4UlL1EzK1vVOBIgj9LMO1ZblT4ui6KRbWU-VFNrH6M94luuzOYaSEQlk7u4N1EBQ9uCwTqVMEqdFxBh_Waaa1avCqvQ3co4Vy3HS2GSWqQ=w700-h500-n'},
+    {name:'유예림',role:'중국어교육·문화언어학',img:'https://lh3.googleusercontent.com/3GTOpLFUt3AyBc-fMPTHZgRUbYkmxAStk0uq8yUMIeX_ZBQMZ42F0ZheWtqY7YOzf1-yqVviIBCLwQdNU2DCTlKoUX8OlWxK6Sr7JzML3ubAP0nppXNlrIg=w700-h500-n'},
+    {name:'유장현',role:'조직개발·리더십컨설팅',img:'https://lh3.googleusercontent.com/0XzLqDswe1J-UxsAVo6UC7wc1kYZOg0rOF0nQ9XDRPB9j_Uctdm6Io5ybe8uepv3Mmm_CJHoWlHUxT9VM8pv7BpO3JwlPTlb9fSlTDGbsifFi2PvQ=w700-h500-n'},
+    {name:'윤태일',role:'취업전략·실전코칭',img:'https://lh3.googleusercontent.com/TUrZdIqxvVWm3anPZd8Kr1-DljtKrdHdcOhqCuBXk90uL7070kW1QFRZn9t49wrtcF41N9pVCFLnPESNY0hdKtWV7WTwaa1-YN5NSDd3PMTTquziEq4kEw=w700-h500-n'},
+    {name:'이유나',role:'진로상담·디지털인문학',img:'https://lh3.googleusercontent.com/rAh-e-cUSG6-nu3xwJOaKiT9TW-Vl-58pmeq2pV4TznLeoFKVqjQnfCiiVMcCqb3aIQfpEcrWID5WFXcv42YUZqRIAjWzasjWi48G9eQwghR7vi33oO3Ow=w700-h500-n'},
+    {name:'이은선',role:'조직문화·커뮤니케이션',img:'https://lh3.googleusercontent.com/IhK4Y3pP5fBrcR03RIBWqblZTSk8IXzNRTUPKpP-oSWL69jcO8RU-mNbANas_nJ4ol23svQK97X2pM9uf9gZo879l-9E6gGumjIeDSFow1BAPlcRWnHz=w700-h500-n'},
+    {name:'이주노',role:'UX·데이터 시각화',img:'https://lh3.googleusercontent.com/Yp7JT2lDASFWyvcP6Q5RBzSBA8Ouo63INzBujRIMqnR945OCAFrbeQDlqhQ-IaredINjphgSnKQEA7U5Z9kF_ZCkUJNtXCgsB0li77jUD0lc6YaHh__sHR0=w700-h500-n'},
+    {name:'이현주',role:'예술인문학 코칭',img:'https://lh3.googleusercontent.com/feJcLVytJ80ZwnB8n_vvZZZRHhg8eWvOtrl3gTv3CvvYu1xl47aAHfT8Is-hbagLHsJOVBHWt_ifIUTjZCEgaLaQJP93LxSAiKOpqaoQGLTqZDPu1uT-=w700-h500-n'},
+    {name:'정다운',role:'진로설계·커리어전략',img:'https://lh3.googleusercontent.com/Vcuh8fRjctm_2un-AkPJ6etLZs-N5yPI5cHYX1XCcQvjZhcp_UdSuUzwukdbbkvucpWgkNnM8UTGa_PvkUyDzhioqO03pLzs3g4jaatNfTqwAZut5aUJ5Q=w700-h500-n'},
+    {name:'정종우',role:'산업안전·조직관리',img:'https://lh3.googleusercontent.com/ueavdVwOhGIx9tMf-EgMQcp-OFqfKhl8PMle0T4mmK_-lBE5ogzrpSs6OGKEPAEI-DIlwFDJk3nGoysHSAd2JCo089F2PsSlllFFGK8Dl144f-GgJTCK1g=w700-h500-n'},
+    {name:'정지혜',role:'관광·외식 운영 및 진로지도',img:'https://lh3.googleusercontent.com/i8PckXoOnb7PDgcx87rcgC3Aiupv_UlFXfRaJX8x_JQowkpvRciyrRGxcZfTdVYyBqkIpNaYkNxiwQa7ClbvoiMlXEUWhMzZCrwbn6kH3HoQ_BBUbueRmw=w700-h500-n'},
+    {name:'전성은',role:'리더십·커뮤니케이션',img:'https://lh3.googleusercontent.com/YVMPxwEl0n8l6KIFJa1iXyY_qcXhPAG1FPJ_DYINvQMpoloIKsGqK8Z4wclYoSqUijeJNxQ8sytwWaWQkXKR8Xy9TesIFMCjCN3rmuRwmsuwCzP9Jm8kVw=w700-h500-n'},
+    {name:'전예슬',role:'수학·MBA·디자인·사회과학',img:'https://lh3.googleusercontent.com/g3H9tiXoyD12Nb5alfBhRUEC97ATy5DvcsSUJmNTfqzbXk26jEkflhoHiLqqjBLVUNeZHtRcGcTmWQGy_pn9vaGR5PoamXUfmdzFpQR5h7BsJpgSELVwHw=w700-h500-n'},
+    {name:'최지혜',role:'취업·커리어 컨설팅',img:'https://lh3.googleusercontent.com/udcpuZUKfrDEeUbINKJBt0--RUa7o23RBu0OpRbw7mJZk8_wxMOS6-TDePcj85FYClsozECmviMGg0L7IwotApRkKu8CZM5_IYt_zZMIwnzZ9BmF5lV_vQ=w700-h500-n'},
+    {name:'최해령',role:'마인드셋·자기관리',img:'https://lh3.googleusercontent.com/BRFI7TruetZa3qjbscZFBvCYg89tpknM0GsJkJTyv1rND8dC4qRhPUl2wW0pICZUxkyGUjxiPUOX3nohmbvK1U1LIOi2fzwrVhlWR9n5_LA35GA05ogQ1Q=w700-h500-n'},
+    {name:'Steve Kim',role:'보딩스쿨·미국유학',img:'https://lh3.googleusercontent.com/9YsItYlUYxru5y-ysPNbPN__K37tbSXUCE61FHhc0IarBZOd6rUzthtZR_H3fq71qYO5EnlsyWtZV6mzZD0rc_UvLimITAd9mHykRZNpjMdfLIOhAU5kFg=w700-h500-n'},
+    {name:'LEAH',role:'교육학·대학원 코칭',img:'https://lh3.googleusercontent.com/IVJ4agiA_qkOJ4cfkMSQudw8i_3HGe77cgBAym4sxtlaIALD6w6wIB_liyOp8s7Nj9vocMkyVO4cqAcTI7chfcAYaEj47nYfJbFUmoMlEyqAyRZxCVl_Fg=w700-h500-n'},
+  ];
+
+  var PER=10;
+  var cPage=0;
+  var cTrack=document.getElementById('coachTrack');
+  var cDots=document.getElementById('coachDots');
+  var cPrev=document.getElementById('coachPrev');
+  var cNext=document.getElementById('coachNext');
+  if(!cTrack) return;
+  var totalPages=Math.ceil(COACHES.length/PER);
+
+  function coachRender(){
+    var html='';
+    for(var p=0;p<totalPages;p++){
+      var slice=COACHES.slice(p*PER,(p+1)*PER);
+      html+='<div class="coaches-slide"><div class="coaches-grid">';
+      slice.forEach(function(c){
+        html+='<div class="coach-card">'
+          +'<div class="coach-photo"><img src="'+c.img+'" alt="'+c.name+' 코치" loading="lazy"></div>'
+          +'<p class="coach-name">'+c.name+'</p>'
+          +'<p class="coach-role">'+c.role+'</p>'
+          +'</div>';
+      });
+      html+='</div></div>';
+    }
+    cTrack.innerHTML=html;
+    cTrack.style.transform='translateX(0)';
+    var dotsHtml='';
+    for(var i=0;i<totalPages;i++){
+      dotsHtml+='<button class="cases-dot'+(i===0?' is-active':'')+'" data-page="'+i+'" aria-label="코치 '+(i+1)+'페이지"></button>';
+    }
+    cDots.innerHTML=dotsHtml;
+    cDots.querySelectorAll('.cases-dot').forEach(function(d){
+      d.addEventListener('click',function(){ coachGoTo(+this.dataset.page); coachStartAuto(); });
+    });
+  }
+
+  function coachGoTo(page){
+    cPage=((page%totalPages)+totalPages)%totalPages;
+    cTrack.style.transform='translateX(-'+cPage*100+'%)';
+    cDots.querySelectorAll('.cases-dot').forEach(function(d,i){
+      d.classList.toggle('is-active',i===cPage);
+    });
+  }
+
+  var coachTimer;
+  function coachStartAuto(){
+    clearInterval(coachTimer);
+    coachTimer=setInterval(function(){ coachGoTo(cPage+1); },2000);
+  }
+
+  cPrev.addEventListener('click',function(){ coachGoTo(cPage-1); coachStartAuto(); });
+  cNext.addEventListener('click',function(){ coachGoTo(cPage+1); coachStartAuto(); });
+
+  var touchX=0;
+  var overflow=cTrack.parentElement;
+  overflow.addEventListener('touchstart',function(e){ touchX=e.touches[0].clientX; },{passive:true});
+  overflow.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>48){ dx<0?coachGoTo(cPage+1):coachGoTo(cPage-1); coachStartAuto(); }
+  },{passive:true});
+
+  coachRender();
+  coachStartAuto();
 })();
 </script>
 

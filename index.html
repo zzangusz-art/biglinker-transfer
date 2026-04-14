@@ -904,6 +904,41 @@
       .sticky-category-shell .category-utility { display: none !important; }
     }
 
+    /* ── Marquee rows (합격 사례 무한 스크롤) ── */
+    @keyframes mq-left  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes mq-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .marquee-rows { display: flex; flex-direction: column; gap: 20px; overflow: hidden; padding: 8px 0; }
+    .marquee-row  { overflow: hidden; }
+    .marquee-track {
+      display: flex; gap: 16px; width: max-content;
+      animation: mq-left 36s linear infinite;
+    }
+    .marquee-row:nth-child(even) .marquee-track { animation-name: mq-right; }
+    .marquee-rows .case-card {
+      flex-direction: column; width: 260px; min-width: unset;
+      padding: 20px; border-radius: 14px;
+      background: #fff; border: 1px solid #eaecf0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      flex-shrink: 0;
+    }
+    .marquee-rows .case-tag  { background: var(--brand-soft, #eef2ff); color: var(--brand, #4361ee); }
+    .marquee-rows .case-tag--grad { background: #f5f3ff; color: #7c3aed; }
+    .case-result { display: block; font-size: 15px; font-weight: 700; color: #111; margin: 8px 0 6px; }
+    .case-desc   { font-size: 13px; color: #555; line-height: 1.6; margin: 0 0 12px; }
+    .case-meta   { display: flex; align-items: center; gap: 10px; }
+    .case-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--brand-soft, #eef2ff); color: var(--brand, #4361ee);
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .case-meta strong { font-size: 13px; display: block; }
+    .case-meta span   { font-size: 11px; color: #888; }
+    @media (max-width: 760px) {
+      .marquee-rows .case-card { width: 220px; padding: 16px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1275,49 +1310,176 @@
       </div>
     </section>
 
-    <!-- ══ §8 REVIEWS ══ -->
+    <!-- ══ §8 CASES MARQUEE ══ -->
     <section class="sec sec--alt" id="reviews">
       <div class="wrap">
         <div class="sec-head reveal">
-          <p class="sec-eyebrow">REVIEW</p>
-          <h2>실제 코칭 후기</h2>
-          <p>대입·자소서·면접·논문·EC·디자인 모든 서비스의 경험담입니다.</p>
+          <p class="sec-eyebrow">CASES</p>
+          <h2>리드코칭 합격 사례</h2>
+          <p>대학·편입·대학원까지, 실제 코칭으로 결과를 만든 케이스입니다.</p>
         </div>
-        <div class="reviews-grid">
-          <div class="review-card reveal reveal-d1">
-            <div class="rc-stars">★★★★★</div>
-            <p class="rc-quote">학생부 분석이 이렇게 섬세할 줄 몰랐어요. 세특 방향이 잡히니까 3학년 1학기가 완전히 달라졌습니다. 덕분에 목표했던 대학에 합격했습니다.</p>
-            <div class="rc-meta">
-              <span class="rc-avatar">김</span>
-              <div>
-                <strong class="rc-name">김○○ 학생</strong>
-                <span class="rc-desc">연세대 수시 합격 · 대입코칭</span>
-              </div>
+      </div>
+
+      <div class="marquee-rows">
+
+        <!-- 1행: 왼쪽 → -->
+        <div class="marquee-row">
+          <div class="marquee-track" style="animation-duration:38s;">
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">연세대 수시 종합전형 합격</strong>
+              <p class="case-desc">세특 방향이 없던 상태에서 전공 연계 활동으로 스토리를 재구성. 3학년 1학기가 완전히 달라졌습니다.</p>
+              <div class="case-meta"><div class="case-avatar">김</div><div><strong>김○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
             </div>
-          </div>
-          <div class="review-card review-card--featured reveal reveal-d2">
-            <div class="rc-stars">★★★★★</div>
-            <p class="rc-quote">자기소개서 1번이 계속 막혔는데, 코치님이 스토리 구조를 잡아주시니 자연스럽게 글이 나왔습니다. 대학원 합격 후기를 꼭 전하고 싶었어요.</p>
-            <div class="rc-meta">
-              <span class="rc-avatar">이</span>
-              <div>
-                <strong class="rc-name">이○○ 학생</strong>
-                <span class="rc-desc">고려대 대학원 합격 · 페이퍼코칭</span>
-              </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">고려대 대학원 최종 합격</strong>
+              <p class="case-desc">자기소개서 1번이 계속 막혔는데 코치님이 스토리 구조를 잡아주시니 자연스럽게 글이 나왔습니다.</p>
+              <div class="case-meta"><div class="case-avatar">이</div><div><strong>이○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
             </div>
-          </div>
-          <div class="review-card reveal reveal-d3">
-            <div class="rc-stars">★★★★★</div>
-            <p class="rc-quote">논문 주제 선정에서 반 년을 헤맸는데 첫 상담 후 일주일 만에 확정했습니다. 심사도 무난히 통과했고, 지도 교수님도 놀라워하셨어요.</p>
-            <div class="rc-meta">
-              <span class="rc-avatar">박</span>
-              <div>
-                <strong class="rc-name">박○○ 학생</strong>
-                <span class="rc-desc">석사 논문 심사 통과 · 논문코칭</span>
-              </div>
+            <div class="case-card case-card--featured">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">서울대 수시 합격</strong>
+              <p class="case-desc">학생부 분석이 섬세해서 방향이 잡히자마자 자소서 완성도가 달라졌습니다. 목표 대학에 합격했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">박</div><div><strong>박○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">석사 논문 심사 통과</strong>
+              <p class="case-desc">논문 주제 선정에서 반 년을 헤맸는데 첫 상담 후 일주일 만에 확정. 지도 교수님도 놀라워하셨어요.</p>
+              <div class="case-meta"><div class="case-avatar">최</div><div><strong>최○○ 씨</strong><span>논문코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">성균관대 편입 최종 합격</strong>
+              <p class="case-desc">편입 전략 수립부터 면접 준비까지 전 과정을 함께했습니다. 합격 통보를 받았을 때 눈물이 났어요.</p>
+              <div class="case-meta"><div class="case-avatar">정</div><div><strong>정○○ 학생</strong><span>편입코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">박사과정 연구계획서 합격</strong>
+              <p class="case-desc">3번 탈락 후 연구 방향과 문제 설정을 전면 재구성. 4번째 지원에서 최종 합격했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">서</div><div><strong>서○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
+            </div>
+            <!-- 루프 복제 -->
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">연세대 수시 종합전형 합격</strong>
+              <p class="case-desc">세특 방향이 없던 상태에서 전공 연계 활동으로 스토리를 재구성. 3학년 1학기가 완전히 달라졌습니다.</p>
+              <div class="case-meta"><div class="case-avatar">김</div><div><strong>김○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">고려대 대학원 최종 합격</strong>
+              <p class="case-desc">자기소개서 1번이 계속 막혔는데 코치님이 스토리 구조를 잡아주시니 자연스럽게 글이 나왔습니다.</p>
+              <div class="case-meta"><div class="case-avatar">이</div><div><strong>이○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card case-card--featured">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">서울대 수시 합격</strong>
+              <p class="case-desc">학생부 분석이 섬세해서 방향이 잡히자마자 자소서 완성도가 달라졌습니다. 목표 대학에 합격했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">박</div><div><strong>박○○ 학생</strong><span>대입코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">석사 논문 심사 통과</strong>
+              <p class="case-desc">논문 주제 선정에서 반 년을 헤맸는데 첫 상담 후 일주일 만에 확정. 지도 교수님도 놀라워하셨어요.</p>
+              <div class="case-meta"><div class="case-avatar">최</div><div><strong>최○○ 씨</strong><span>논문코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">성균관대 편입 최종 합격</strong>
+              <p class="case-desc">편입 전략 수립부터 면접 준비까지 전 과정을 함께했습니다. 합격 통보를 받았을 때 눈물이 났어요.</p>
+              <div class="case-meta"><div class="case-avatar">정</div><div><strong>정○○ 학생</strong><span>편입코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">박사과정 연구계획서 합격</strong>
+              <p class="case-desc">3번 탈락 후 연구 방향과 문제 설정을 전면 재구성. 4번째 지원에서 최종 합격했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">서</div><div><strong>서○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
             </div>
           </div>
         </div>
+
+        <!-- 2행: 오른쪽 ← -->
+        <div class="marquee-row">
+          <div class="marquee-track" style="animation-duration:42s;">
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">한양대 EC 전략 합격</strong>
+              <p class="case-desc">비교과가 분산돼 있던 스펙을 하나의 스토리로 연결. 자소서 경쟁력이 확연히 달라졌습니다.</p>
+              <div class="case-meta"><div class="case-avatar">강</div><div><strong>강○○ 학생</strong><span>EC코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card case-card--featured">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">서울대 대학원 최종 합격</strong>
+              <p class="case-desc">학업계획서를 4번 고쳤지만 코치님과 방향 잡은 후 5번째에 합격. 면접도 무난히 통과했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">조</div><div><strong>조○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">이화여대 수시 최종 합격</strong>
+              <p class="case-desc">면접 예상 질문 구성과 답변 구조화 작업이 실전에서 그대로 나왔습니다. 첫 지원에 합격했어요.</p>
+              <div class="case-meta"><div class="case-avatar">윤</div><div><strong>윤○○ 학생</strong><span>면접코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">연구재단 과제 선정</strong>
+              <p class="case-desc">연구 주제 설정부터 제안서 논리 구조 전반을 코칭받았습니다. 첫 도전에서 선정돼 너무 기뻤습니다.</p>
+              <div class="case-meta"><div class="case-avatar">오</div><div><strong>오○○ 연구원</strong><span>연구계획서 코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">중앙대 자기소개서 합격</strong>
+              <p class="case-desc">매번 분량 초과와 내용 산만 문제를 반복했지만 3회 코칭 후 완성도 높은 자소서를 완성했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">노</div><div><strong>노○○ 학생</strong><span>자기소개서코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">한양대 디자인 대학원 합격</strong>
+              <p class="case-desc">포트폴리오 방향성이 없던 상태에서 전공 연계 스토리로 재구성해 최종 합격했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">류</div><div><strong>류○○ 씨</strong><span>포트폴리오 코칭 · 2025</span></div></div>
+            </div>
+            <!-- 루프 복제 -->
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">한양대 EC 전략 합격</strong>
+              <p class="case-desc">비교과가 분산돼 있던 스펙을 하나의 스토리로 연결. 자소서 경쟁력이 확연히 달라졌습니다.</p>
+              <div class="case-meta"><div class="case-avatar">강</div><div><strong>강○○ 학생</strong><span>EC코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card case-card--featured">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">서울대 대학원 최종 합격</strong>
+              <p class="case-desc">학업계획서를 4번 고쳤지만 코치님과 방향 잡은 후 5번째에 합격. 면접도 무난히 통과했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">조</div><div><strong>조○○ 씨</strong><span>페이퍼코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">이화여대 수시 최종 합격</strong>
+              <p class="case-desc">면접 예상 질문 구성과 답변 구조화 작업이 실전에서 그대로 나왔습니다. 첫 지원에 합격했어요.</p>
+              <div class="case-meta"><div class="case-avatar">윤</div><div><strong>윤○○ 학생</strong><span>면접코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">연구재단 과제 선정</strong>
+              <p class="case-desc">연구 주제 설정부터 제안서 논리 구조 전반을 코칭받았습니다. 첫 도전에서 선정돼 너무 기뻤습니다.</p>
+              <div class="case-meta"><div class="case-avatar">오</div><div><strong>오○○ 연구원</strong><span>연구계획서 코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag">대학·편입 코칭</span>
+              <strong class="case-result">중앙대 자기소개서 합격</strong>
+              <p class="case-desc">매번 분량 초과와 내용 산만 문제를 반복했지만 3회 코칭 후 완성도 높은 자소서를 완성했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">노</div><div><strong>노○○ 학생</strong><span>자기소개서코칭 · 2025</span></div></div>
+            </div>
+            <div class="case-card">
+              <span class="case-tag case-tag--grad">대학원·논문</span>
+              <strong class="case-result">한양대 디자인 대학원 합격</strong>
+              <p class="case-desc">포트폴리오 방향성이 없던 상태에서 전공 연계 스토리로 재구성해 최종 합격했습니다.</p>
+              <div class="case-meta"><div class="case-avatar">류</div><div><strong>류○○ 씨</strong><span>포트폴리오 코칭 · 2025</span></div></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
