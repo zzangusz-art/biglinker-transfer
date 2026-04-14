@@ -700,32 +700,6 @@ ACTIVE_TAB:
     @media (max-width: 760px) {
       .wrap, .inner { padding: 0 16px; }
 
-      /* 헤더: 프로모 + 우측 액션 숨기고 로고 중앙 */
-      .header-promo, .header-actions { display: none; }
-      .main-header-wrap {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        min-height: auto; padding: 10px 0;
-      }
-      .brand { justify-self: center; }
-
-      /* 카테고리 탭: 단일 가로 스크롤 줄 */
-      .category-row {
-        display: flex; align-items: center;
-        gap: 0; overflow-x: auto; scrollbar-width: none;
-        padding: 0; min-height: 48px;
-        -webkit-overflow-scrolling: touch;
-      }
-      .category-row::-webkit-scrollbar { display: none; }
-      .category-balance { display: none; }
-      .category-tabs { flex: 0 0 auto; gap: 0; overflow: visible; white-space: nowrap; }
-      .category-tab { font-size: 12px; padding: 0 11px; min-height: 48px; }
-      .category-utility {
-        flex: 0 0 auto; width: auto; justify-content: flex-start;
-        gap: 6px; padding: 0 8px 0 4px;
-      }
-      .utility-link { font-size: 11px; padding: 0 9px; }
-
       /* 히어로 */
       .hero-main { padding: 56px 0 44px; }
       .hero-main h1 { font-size: clamp(26px, 7.5vw, 40px); }
