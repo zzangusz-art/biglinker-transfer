@@ -7,6 +7,7 @@ SITE_VARS = {
     "FAMILY_ACTIVE_GRADUATE": "",
     "FAMILY_ACTIVE_JOB":      "",
     "FAMILY_ACTIVE_BIZ":      "",
+    "BRAND_COPY": "대입·편입·면접·논술 코칭 전문 플랫폼",
 }
 
 # 서비스별 category tabs HTML (active_tab 변수는 각 .page.html META에서 읽어옴)
