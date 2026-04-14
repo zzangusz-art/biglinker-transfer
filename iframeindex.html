@@ -139,6 +139,7 @@ img { display: block; max-width: 100%; }
 .hero-sub {
   font-size: 16px; color: var(--muted); line-height: 1.85;
   margin-bottom: 36px; word-break: keep-all;
+  min-height: calc(1.85em * 2);
 }
 .hero-actions {
   display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;
@@ -698,7 +699,7 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
   <div class="wrap">
     <div class="hero-kicker load-1">BigLinker · 리드코칭 전문 플랫폼</div>
     <h1 class="load-2"><span class="em">리드코칭<svg viewBox="0 0 120 14" fill="none" preserveAspectRatio="none"><path d="M2 10 C25 3, 65 13, 98 7 C110 4, 118 10, 119 8" stroke="rgba(74,104,255,0.55)" stroke-width="2.8" stroke-linecap="round" fill="none"/><path d="M4 13 C28 8, 68 14, 101 10 C112 7, 118 12, 119 10" stroke="rgba(127,146,255,0.3)" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg></span>으로<br><span class="hero-text-rotator" id="heroRotator">합격을 설계합니다</span></h1>
-    <p class="hero-sub load-3" id="heroSub">수시·편입·자소서·면접까지, 전담 코치가 1:1로 함께 만들어갑니다.</p>
+    <p class="hero-sub load-3" id="heroSub">수시·편입·자소서·면접까지,<br>전담 코치가 1:1로 함께 만들어갑니다.</p>
     <div class="hero-actions load-4">
       <a class="btn-primary" href="#services">리드코칭 살펴보기 →</a>
       <a class="btn-ghost" href="https://transfer.gobiglinker.com/#cta">무료 상담</a>
@@ -1411,10 +1412,10 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
 // Hero text rotator — 4가지 전환 효과 순환
 (function(){
   const TEXTS = [
-    { h1: '합격을 설계합니다',     sub: '수시·편입·자소서·면접까지, 전담 코치가 1:1로 함께 만들어갑니다.' },
-    { h1: '논문을 완성합니다',     sub: '연구 방향부터 최종 심사까지, 논문 전 과정을 리드코칭으로 이끕니다.' },
-    { h1: '커리어를 만들어갑니다', sub: '자소서·면접·입사까지, 원하는 커리어를 1:1 리드코칭으로 이뤄냅니다.' },
-    { h1: '조직을 성장시킵니다',   sub: '기업 맞춤 교육 설계부터 현업 적용까지, 조직의 역량을 이끕니다.' },
+    { h1: '합격을 설계합니다',     sub: '수시·편입·자소서·면접까지,<br>전담 코치가 1:1로 함께 만들어갑니다.' },
+    { h1: '논문을 완성합니다',     sub: '연구 방향부터 최종 심사까지,<br>논문 전 과정을 리드코칭으로 이끕니다.' },
+    { h1: '커리어를 만들어갑니다', sub: '자소서·면접·입사까지,<br>원하는 커리어를 1:1 리드코칭으로 이뤄냅니다.' },
+    { h1: '조직을 성장시킵니다',   sub: '기업 맞춤 교육 설계부터 현업 적용까지,<br>조직의 역량을 이끕니다.' },
   ];
   const FX       = ['slide-up', 'slide-left', 'scatter', 'scale-fade'];
   const EXIT_MS  = 420;
@@ -1467,7 +1468,7 @@ ul.domain-menu.domain-menu--wide li:nth-last-child(-n+2) { border-bottom: none; 
       }
 
       subEl.classList.remove('hrt-sub--out');
-      subEl.textContent = next.sub;
+      subEl.innerHTML = next.sub;
       void subEl.offsetWidth;
       subEl.classList.add('hrt-sub--in');
       setTimeout(() => subEl.classList.remove('hrt-sub--in'), ENTER_MS + 160);
