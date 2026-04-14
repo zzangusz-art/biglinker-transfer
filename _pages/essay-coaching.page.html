@@ -1,1750 +1,621 @@
 <!-- META
-TITLE: BigLinker 논술리드코칭
-HEADER_PROMO: 2026 합격전략 가이드 오픈
+TITLE: 대입 논술 전문 코칭 — 빅링커 논술리드코칭
+HEADER_PROMO: 2026 대입 합격 전략 가이드 오픈
 ACTIVE_TAB: essay-coaching
 -->
 
 <!-- PAGE_CSS -->
 <style>
-    /* ══════════════════════════════════════════
-       DESIGN TOKENS
-    ══════════════════════════════════════════ */
     :root {
-      --header-bg: #f6f7fb;
-      --header-surface: #ffffff;
-      --header-line: #e5e8ef;
-      --header-line-strong: #d7dbe5;
-      --header-text: #17191f;
-      --header-muted: #6e7687;
-      --bg: #0b0e13;
-      --bg-soft: #121722;
-      --bg-dark: #090c11;
-      --panel: #f5f6fb;
-      --panel-line: rgba(255,255,255,0.08);
-      --text: #f6f7fb;
-      --muted: rgba(255,255,255,0.66);
-      --muted-dark: #5d6473;
-      --brand: #4a68ff;
-      --brand-2: #7f92ff;
-      --brand-soft: #eef0ff;
-      --white: #fff;
-      --max: 1320px;
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 18px;
-      --radius-sm: 12px;
-      --radius-xs: 8px;
-      --shadow: 0 24px 60px rgba(0,0,0,0.28);
-      --shadow-card: 0 18px 36px rgba(36,46,78,0.08);
-      --shadow-float: 0 16px 40px rgba(0,0,0,0.22);
-      --toast-bg: rgba(22,26,38,0.96);
-      --toast-border: rgba(255,255,255,0.12);
-      --toast-border-brand: rgba(74,104,255,0.3);
-      --toast-border-success: rgba(52,211,153,0.22);
-      --urgency-border: rgba(74,104,255,0.2);
+      --header-bg: #f6f7fb; --header-surface: #ffffff; --header-line: #e5e8ef;
+      --header-line-strong: #d7dbe5; --header-text: #17191f; --header-muted: #6e7687;
+      --bg: #0b0e13; --bg-soft: #121722; --bg-dark: #090c11; --panel: #f5f6fb;
+      --text: #f6f7fb; --muted: rgba(255,255,255,0.66); --muted-dark: #5d6473;
+      --brand: #4a68ff; --brand-2: #7f92ff; --brand-soft: #eef0ff;
+      --max: 1320px; --radius-xl: 28px; --radius-lg: 22px; --radius-md: 18px;
+      --radius-sm: 12px; --radius-xs: 8px;
+      --shadow: 0 24px 60px rgba(0,0,0,0.28); --shadow-card: 0 4px 20px rgba(36,46,78,0.09);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: "Pretendard", "Noto Sans KR", sans-serif;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(66,104,255,0.12), transparent 18%),
+    body { font-family: "Noto Sans KR", "Pretendard", sans-serif;
+      background: radial-gradient(circle at 50% 0%, rgba(66,104,255,0.12), transparent 18%),
         linear-gradient(180deg, #090b0f 0%, #0b0e13 32%, #0d1015 100%);
-      color: var(--text);
-    }
+      color: var(--text); }
     a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
 
-    /* ══════════════════════════════════════════
-       LAYOUT HELPERS
-    ══════════════════════════════════════════ */
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-    .inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    .util-divider {
-      width: 1px; height: 16px;
-      background: #dde0ea;
-      display: inline-block;
-      margin: 0 4px;
-    }
-
-    /* ══════════════════════════════════════════
-       EM (TEXT EMPHASIS)
-    ══════════════════════════════════════════ */
-    .em { position: relative; display: inline; }
-    .em svg {
-      position: absolute; left: -2px; right: -2px; bottom: -12px;
-      width: calc(100% + 4px); height: 12px;
-      pointer-events: none; overflow: visible;
-    }
-
-    /* ══════════════════════════════════════════
-       SECTION EYEBROW
-    ══════════════════════════════════════════ */
-    .section-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      /* 다크 bg 기본값 */
-      color: rgba(255,255,255,0.36);
-      margin-bottom: 18px;
-    }
-    .section-eyebrow::before {
-      content: "";
-      width: 28px; height: 2px;
-      background: currentColor;
-      flex-shrink: 0;
-    }
+    /* ── SECTION BASE ── */
+    .section-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.36); margin-bottom: 18px; }
+    .section-eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; flex-shrink: 0; }
     .section-eyebrow.center { justify-content: center; }
     .section-eyebrow.center::before { display: none; }
+    .section-light .section-eyebrow, .section-panel .section-eyebrow { color: var(--brand); }
+    .section-light { background: #fff; padding: 100px 0; }
+    .section-panel { background: var(--panel); padding: 100px 0; }
+    .section-dark { padding: 110px 0; }
+    .sec-h2 { font-size: clamp(22px,2.8vw,36px); font-weight: 700; letter-spacing: -0.045em; line-height: 1.3; }
 
-    /* 라이트 배경 섹션에서 eyebrow 대비 확보 */
-    .section-light .section-eyebrow,
-    .section-panel .section-eyebrow {
-      color: var(--brand);
-    }
-
-    /* ══════════════════════════════════════════
-       HERO (다크 배경 — body 그라데이션 상속)
-    ══════════════════════════════════════════ */
-    .hero {
-      padding: 80px 0 60px;
-      text-align: center;
-    }
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 30px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(127,146,255,0.3);
-      background: rgba(74,104,255,0.1);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--brand-2);
-      margin-bottom: 28px;
-    }
-    .hero h1 {
-      max-width: 740px;
-      margin: 0 auto 20px;
-      font-size: clamp(28px, 4.1vw, 52px);
-      line-height: 1.2;
-      letter-spacing: -0.05em;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .hero p {
-      max-width: 600px;
-      margin: 0 auto 36px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 28px;
-      border-radius: 13px;
-      font-size: 15px;
-      font-weight: 700;
-      background: var(--brand);
-      color: #fff;
-      box-shadow: 0 10px 28px rgba(74,104,255,0.28);
-      transition: transform 0.2s ease;
-    }
+    /* ── HERO ── */
+    .hero { padding: 90px 0 70px; text-align: center; }
+    .hero-kicker { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(127,146,255,0.3); background: rgba(74,104,255,0.1); font-size: 12px; font-weight: 700; color: var(--brand-2); margin-bottom: 28px; }
+    .hero h1 { max-width: 800px; margin: 0 auto 20px; font-size: clamp(30px,4.6vw,62px); line-height: 1.12; letter-spacing: -0.05em; font-weight: 700; }
+    .hero h1 em { color: var(--brand-2); font-style: normal; }
+    .hero p { max-width: 560px; margin: 0 auto 36px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 28px; border-radius: 13px; font-size: 15px; font-weight: 700; background: var(--brand); color: #fff; box-shadow: 0 10px 28px rgba(74,104,255,0.28); transition: transform 0.2s; }
     .btn-primary:hover { transform: translateY(-2px); }
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 24px;
-      border-radius: 13px;
-      font-size: 15px;
-      font-weight: 700;
-      border: 1.5px solid rgba(255,255,255,0.22);
-      color: var(--text);
-      background: rgba(255,255,255,0.06);
-      transition: transform 0.2s ease;
-    }
-    .btn-secondary:hover { transform: translateY(-2px); }
-    .hero-diff-cards {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .hero-diff-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      padding: 20px 24px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05);
-      min-width: 140px;
-      text-align: center;
-    }
-    .hero-diff-card .diff-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: rgba(74,104,255,0.15);
-      border: 1px solid rgba(74,104,255,0.3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--brand-2);
-    }
-    .hero-diff-card .diff-icon svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .hero-diff-card strong {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .hero-diff-card p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-    }
+    .btn-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 24px; border-radius: 13px; font-size: 15px; font-weight: 700; border: 1.5px solid rgba(255,255,255,0.22); color: var(--text); background: rgba(255,255,255,0.06); transition: transform 0.2s; }
+    .hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+    .hero-stat .s-num { font-size: 34px; font-weight: 900; color: var(--brand-2); letter-spacing: -0.04em; line-height: 1; }
+    .hero-stat .s-label { font-size: 12px; color: var(--muted); margin-top: 5px; }
 
-    /* ══════════════════════════════════════════
-       SECTION — LIGHT BG
-    ══════════════════════════════════════════ */
-    .section-light {
-      background: #fff;
-      padding: 100px 0;
-    }
-    .section-panel {
-      background: var(--panel);
-      padding: 100px 0;
-    }
+    /* ── PAIN ── */
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pain-card { padding: 28px 22px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.04); }
+    .pain-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .pain-card h3 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .pain-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; }
+    .pain-quote { margin-top: 12px; padding: 10px 14px; border-radius: 8px; background: rgba(255,255,255,0.04); border-left: 2px solid var(--brand-2); font-size: 12px; color: rgba(255,255,255,0.5); font-style: italic; line-height: 1.6; }
 
-    /* ══════════════════════════════════════════
-       SECTION — DARK BG
-    ══════════════════════════════════════════ */
-    .section-dark {
-      padding: 120px 0;
-      /* 다크 섹션에서 라이트 전용 변수 재정의 → 인라인 color:var(--header-*) 자동 대비 확보 */
-      --header-text: var(--text);
-      --header-muted: var(--muted);
-      --brand-soft: rgba(74,104,255,0.12);
-    }
-    /* 다크 섹션 안의 흰색 카드 — 변수 복구 (흰 bg 위 어두운 텍스트) */
-    .section-dark .eval-card,
-    .section-dark .mini-card,
-    .section-dark .phase-step {
-      --header-text: #17191f;
-      --header-muted: #6e7687;
-      --brand-soft: #eef0ff;
-    }
+    /* ── TYPE GRID ── */
+    .type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .type-card { padding: 28px 24px; border-radius: var(--radius-md); border: 1px solid #e7ebf3; background: #fff; box-shadow: var(--shadow-card); }
+    .type-tag { display: inline-flex; align-items: center; min-height: 24px; padding: 0 12px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); font-size: 11px; font-weight: 800; margin-bottom: 12px; }
+    .type-card h3 { font-size: 15px; font-weight: 700; color: var(--header-text); margin-bottom: 8px; }
+    .type-card p { font-size: 13px; color: var(--header-muted); line-height: 1.7; margin: 0 0 14px; }
+    .type-tips { list-style: none; display: grid; gap: 5px; }
+    .type-tips li { font-size: 12px; color: var(--brand); font-weight: 700; display: flex; align-items: flex-start; gap: 6px; }
+    .type-tips li::before { content: "✓"; flex-shrink: 0; }
 
-    /* ══════════════════════════════════════════
-       SHOWCASE (2-col layout)
-    ══════════════════════════════════════════ */
-    .showcase {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .showcase.reverse { grid-template-columns: 1.05fr 0.95fr; }
-    .copy-block h2 {
-      margin: 0 0 20px;
-      font-size: clamp(24px, 3vw, 40px);
-      line-height: 1.24;
-      letter-spacing: -0.045em;
-      font-weight: 400;
-      color: var(--header-text);
-    }
-    .copy-block p {
-      color: var(--header-muted);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-    .copy-block.dark h2 { color: var(--text); }
-    .copy-block.dark p { color: var(--muted); }
+    /* ── WHY ── */
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .why-card { padding: 30px 26px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.04); }
+    .why-card .w-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .why-card h3 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .why-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; }
+    .why-card .w-point { display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; font-size: 12.5px; color: var(--brand-2); font-weight: 600; }
 
-    /* ══════════════════════════════════════════
-       CHECKLIST
-    ══════════════════════════════════════════ */
-    .checklist { display: grid; gap: 10px; margin-top: 24px; }
-    .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--header-muted);
-    }
-    .check-ic {
-      flex-shrink: 0;
-      width: 20px; height: 20px;
-      border-radius: 999px;
-      background: var(--brand-soft);
-      color: var(--brand);
-      font-size: 11px;
-      font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 2px;
-    }
+    /* ── DOMAIN ── */
+    .domain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .domain-card { padding: 24px 22px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.04); }
+    .domain-card .d-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .domain-card .d-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .domain-card h3 { font-size: 14px; font-weight: 700; color: var(--text); }
+    .domain-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .domain-tag { display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); font-size: 11.5px; color: var(--muted); }
 
-    /* ══════════════════════════════════════════
-       COMPETENCY WHEEL (역량 원형 다이어그램)
-    ══════════════════════════════════════════ */
-    .competency-wheel-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 560px;
-      aspect-ratio: 1;
-    }
-    .competency-wheel-svg {
-      width: 100%;
-      height: 100%;
-    }
+    /* ── PROCESS ── */
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .process-grid::before { content: ""; position: absolute; top: 40px; left: 12.5%; right: 12.5%; height: 2px; background: rgba(74,104,255,0.25); z-index: 0; }
+    .process-item { position: relative; z-index: 1; text-align: center; padding: 0 10px; }
+    .proc-circle { width: 80px; height: 80px; border-radius: 999px; background: var(--bg-soft); border: 2px solid rgba(74,104,255,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; margin: 0 auto 18px; }
+    .proc-circle.active { background: var(--brand); border-color: var(--brand); }
+    .proc-step { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: var(--brand-2); }
+    .proc-circle.active .proc-step { color: rgba(255,255,255,0.8); }
+    .proc-num { font-size: 20px; font-weight: 900; color: var(--text); line-height: 1; }
+    .process-item h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .process-item ul { list-style: none; display: grid; gap: 5px; }
+    .process-item ul li { font-size: 12px; color: var(--muted); display: flex; align-items: flex-start; gap: 5px; }
+    .process-item ul li::before { content: "·"; color: var(--brand-2); flex-shrink: 0; }
 
-    /* ══════════════════════════════════════════
-       EVAL GRID (4방향 + 중앙 원)
-    ══════════════════════════════════════════ */
-    .eval-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      grid-template-rows: 1fr auto 1fr;
-      gap: 24px;
-      align-items: center;
-      justify-items: center;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .eval-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-      padding: 24px 20px;
-      border-radius: var(--radius-md);
-      border: 1px solid #e7ebf3;
-      background: #fff;
-      box-shadow: var(--shadow-card);
-      width: 100%;
-      max-width: 240px;
-    }
-    .eval-card .eval-icon {
-      font-size: 32px;
-      line-height: 1;
-    }
-    .eval-card strong {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--header-text);
-    }
-    .eval-card p {
-      font-size: 13px;
-      color: var(--header-muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-    .eval-center {
-      grid-column: 2;
-      grid-row: 2;
-      width: 140px;
-      height: 140px;
-      border-radius: 999px;
-      border: 2px dashed var(--brand);
-      background: var(--brand-soft);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-    .eval-center strong {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--brand);
-    }
-    .eval-center span {
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(74,104,255,0.6);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .eval-center-note {
-      grid-column: 2;
-      grid-row: 3;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--brand);
-      background: var(--brand-soft);
-      padding: 8px 18px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
+    /* ── CURRICULUM ── */
+    .curriculum-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .curri-card { padding: 22px 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
+    .curri-card.highlight { border-color: rgba(74,104,255,0.5); background: rgba(74,104,255,0.08); }
+    .curri-week { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; color: var(--brand-2); margin-bottom: 8px; }
+    .curri-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .curri-list { list-style: none; display: grid; gap: 5px; }
+    .curri-list li { font-size: 12px; color: var(--muted); display: flex; align-items: flex-start; gap: 6px; }
+    .curri-list li::before { content: "–"; color: var(--brand-2); flex-shrink: 0; }
 
-    /* ══════════════════════════════════════════
-       SECTION HEAD (centered)
-    ══════════════════════════════════════════ */
-    .section-head {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 56px;
-    }
-    .section-head h2 {
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 700;
-      line-height: 1.24;
-      letter-spacing: -0.045em;
-      color: var(--header-text);
-      margin-bottom: 14px;
-    }
-    .section-head p {
-      font-size: 15px;
-      color: var(--header-muted);
-      line-height: 1.8;
-    }
-    .section-head.dark h2 { color: var(--text); }
-    .section-head.dark p { color: var(--muted); }
-    .section-head.dark .section-eyebrow { color: var(--brand-2); }
+    /* ── COMPARE TABLE ── */
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table th, .compare-table td { padding: 14px 18px; font-size: 13px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .compare-table th { font-size: 12px; font-weight: 800; letter-spacing: 0.04em; color: var(--muted); background: rgba(255,255,255,0.03); padding: 12px 18px; }
+    .compare-table td:first-child { text-align: left; color: var(--muted); }
+    .compare-table .col-us { color: var(--brand-2); font-weight: 700; }
+    .compare-table .col-them { color: rgba(255,255,255,0.3); }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
 
-    /* ══════════════════════════════════════════
-       ANSWER CATEGORY (GOOD / BAD 답변 카테고리)
-    ══════════════════════════════════════════ */
-    .answer-cat-label {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand);
-      margin-bottom: 14px;
-    }
-    .answer-cat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-    .answer-card {
-      border-radius: var(--radius-sm);
-      border: 1px solid #e7ebf3;
-      background: #fff;
-      padding: 20px;
-      box-shadow: var(--shadow-card);
-    }
-    .answer-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-    }
-    .answer-badge.good {
-      background: #edfaf3;
-      color: #15803d;
-    }
-    .answer-badge.bad {
-      background: #fef2f2;
-      color: #b91c1c;
-    }
-    .answer-card blockquote {
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--header-text);
-      border-left: 3px solid #e7ebf3;
-      padding-left: 14px;
-      margin: 0 0 14px;
-      font-style: normal;
-    }
-    .answer-card blockquote.good-quote { border-color: #34d399; }
-    .answer-card blockquote.bad-quote { border-color: #f87171; }
-    .answer-tip {
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 8px;
-      line-height: 1.6;
-    }
-    .answer-tip.good { background: #edfaf3; color: #15803d; }
-    .answer-tip.bad { background: #fef2f2; color: #b91c1c; }
-    .answer-strategy-bar {
-      background: var(--bg-soft);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-sm);
-      padding: 18px 22px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-    .answer-strategy-bar .strategy-label {
-      flex-shrink: 0;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brand-2);
-      padding-top: 3px;
-    }
-    .answer-strategy-bar p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.75;
-      margin: 0;
-    }
+    /* ── CASES ── */
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .case-card { padding: 28px 22px; border-radius: var(--radius-md); border: 1px solid #e7ebf3; background: #fff; box-shadow: var(--shadow-card); }
+    .case-badge { display: inline-flex; align-items: center; min-height: 24px; padding: 0 12px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); font-size: 11px; font-weight: 800; margin-bottom: 14px; }
+    .case-card p { font-size: 13px; color: var(--header-muted); line-height: 1.8; margin: 0 0 14px; }
+    .c-result { font-size: 13px; font-weight: 700; color: var(--brand); padding-top: 12px; border-top: 1px solid #edf0f7; }
 
-    /* ══════════════════════════════════════════
-       PRINCIPLES + CHECKLIST 섹션
-    ══════════════════════════════════════════ */
-    .principles-layout {
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 32px;
-      align-items: start;
-    }
-    .principles-inner { flex: 1; }
-    .principles-label {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brand);
-      margin-bottom: 16px;
-    }
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-    .principle-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-      padding: 22px 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid #e7ebf3;
-      background: #fff;
-      box-shadow: var(--shadow-card);
-    }
-    .principle-icon { font-size: 32px; line-height: 1; }
-    .principle-card strong {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--header-text);
-    }
-    .principle-divider {
-      width: 32px; height: 1.5px;
-      background: #dde1ef;
-      margin: 0 auto;
-    }
-    .principle-card p {
-      font-size: 12px;
-      color: var(--header-muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-    .checklist-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 24px;
-    }
-    .check2-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 13px;
-      line-height: 1.65;
-      color: var(--header-muted);
-    }
-    .check2-icon {
-      flex-shrink: 0;
-      width: 18px; height: 18px;
-      border-radius: 4px;
-      background: var(--brand-soft);
-      color: var(--brand);
-      font-size: 10px;
-      font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 2px;
-    }
-    .checklist-bar {
-      margin-top: 16px;
-      padding: 12px 18px;
-      background: var(--brand-soft);
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--brand);
-      text-align: center;
-    }
-    .principles-side-card {
-      padding: 24px 18px;
-      border-radius: var(--radius-md);
-      background: var(--bg-soft);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text);
-      text-align: center;
-    }
-    .principles-side-card .side-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--muted);
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-    .side-dot {
-      width: 5px; height: 5px;
-      border-radius: 999px;
-      background: var(--brand-2);
-      margin: 0 auto 12px;
-    }
-    .principles-side-card .side-item {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
+    /* ── REVIEW MARQUEE ── */
+    .review-band { padding: 100px 0 0; overflow: hidden; }
+    .review-band-head { text-align: center; margin-bottom: 48px; }
+    .review-band-head h2 { font-size: clamp(22px,2.8vw,34px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 10px; }
+    .review-band-head p { font-size: 14px; color: var(--muted); }
+    .review-marquee-wrap { display: flex; flex-direction: column; gap: 18px; padding-bottom: 100px; }
+    .review-marquee-row { display: flex; gap: 16px; width: max-content; }
+    .review-marquee-row:nth-child(odd)  { animation: rmq-ltr 38s linear infinite; }
+    .review-marquee-row:nth-child(even) { animation: rmq-rtl 42s linear infinite; }
+    @keyframes rmq-ltr { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    @keyframes rmq-rtl { 0%{transform:translateX(-50%)} 100%{transform:translateX(0)} }
+    .review-mini { flex-shrink: 0; width: 300px; padding: 20px 18px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.04); }
+    .review-mini.accent-blue { background: rgba(74,104,255,0.07); border-color: rgba(74,104,255,0.18); }
+    .review-mini.accent-purple { background: rgba(139,92,246,0.07); border-color: rgba(139,92,246,0.18); }
+    .star-row { font-size: 13px; color: #facc15; margin-bottom: 10px; letter-spacing: 1px; }
+    .review-mini p { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin: 0 0 14px; }
+    .review-mini-meta { display: flex; align-items: center; gap: 10px; }
+    .review-mini-avatar { width: 32px; height: 32px; border-radius: 999px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .review-mini-info { display: flex; flex-direction: column; gap: 2px; }
+    .review-mini-info strong { font-size: 12px; color: var(--text); }
+    .review-mini-info span { font-size: 11px; color: var(--muted); }
 
-    /* ══════════════════════════════════════════
-       PHASE TIMELINE (코칭 프로세스)
-    ══════════════════════════════════════════ */
-    .phase-section-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 56px;
-    }
-    .phase-section-head .head-left { flex: 1; }
-    .phase-section-head .head-left h2 {
-      font-size: clamp(24px, 3vw, 38px);
-      font-weight: 700;
-      line-height: 1.24;
-      letter-spacing: -0.045em;
-      color: var(--header-text);
-      margin-bottom: 10px;
-    }
-    .phase-section-head .head-left p {
-      font-size: 14px;
-      color: var(--header-muted);
-      line-height: 1.8;
-    }
-    .phase-section-head .head-right {
-      font-size: 56px;
-      opacity: 0.15;
-      flex-shrink: 0;
-      padding-top: 4px;
-    }
+    /* ── FAQ ── */
+    .faq-band { padding: 100px 0; }
+    .faq-title { font-size: clamp(20px,2.4vw,30px); font-weight: 700; letter-spacing: -0.04em; text-align: center; margin-bottom: 40px; line-height: 1.4; }
+    .faq-band details { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .faq-band summary { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; list-style: none; gap: 16px; }
+    .faq-band summary::-webkit-details-marker { display: none; }
+    .faq-band details[open] summary { color: var(--brand-2); }
+    .faq-arrow { flex-shrink: 0; font-size: 16px; color: var(--muted); transition: transform 0.2s; }
+    .faq-band details[open] .faq-arrow { transform: rotate(180deg); color: var(--brand-2); }
+    .faq-band details p { padding: 0 0 20px; font-size: 13.5px; color: var(--muted); line-height: 1.8; }
 
-    .phase-label {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brand);
-      margin-bottom: 16px;
-    }
-    .phase-step-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 36px;
-    }
-    .phase-step {
-      background: #fff;
-      border: 1px solid #e7ebf3;
-      border-radius: var(--radius-sm);
-      padding: 18px 20px;
-      box-shadow: var(--shadow-card);
-      position: relative;
-    }
-    .phase-step .step-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand);
-      background: var(--brand-soft);
-      padding: 3px 8px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-    }
-    .phase-step strong {
-      display: block;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--header-text);
-      margin-bottom: 6px;
-    }
-    .phase-step p {
-      font-size: 13px;
-      color: var(--header-muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-    .phase-step-connector {
-      position: absolute;
-      top: 50%;
-      right: -10px;
-      width: 20px;
-      height: 1.5px;
-      background: #c8cde0;
-      z-index: 1;
-    }
-    .phase-step:last-child .phase-step-connector { display: none; }
+    /* ── CTA ── */
+    .cta-band { padding: 100px 0; text-align: center; background: linear-gradient(160deg, #0f1422 0%, #111827 100%); border-top: 1px solid rgba(74,104,255,0.15); }
+    .cta-band h2 { font-size: clamp(22px,3vw,38px); font-weight: 700; letter-spacing: -0.045em; line-height: 1.3; margin-bottom: 18px; }
+    .cta-band p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-cta { display: inline-flex; align-items: center; min-height: 54px; padding: 0 32px; border-radius: 13px; font-size: 15px; font-weight: 700; background: var(--brand); color: #fff; box-shadow: 0 10px 28px rgba(74,104,255,0.28); transition: transform 0.2s; }
+    .btn-cta:hover { transform: translateY(-2px); }
+    .btn-cta-outline { display: inline-flex; align-items: center; min-height: 54px; padding: 0 28px; border-radius: 13px; font-size: 15px; font-weight: 700; border: 1.5px solid rgba(255,255,255,0.22); color: var(--text); background: transparent; transition: transform 0.2s; }
 
-    .phase-sessions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    /* session-card: 라이트 섹션 안의 다크 카드 — 배경을 명시적 다크로 고정 */
-    .session-card {
-      border-radius: var(--radius-sm);
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: var(--bg-soft);   /* #121722 — 화이트 섹션 위에서도 대비 확보 */
-    }
-    .session-card.highlighted {
-      background: var(--brand);
-      border-color: transparent;
-    }
-    .session-card.highlighted strong { color: #fff; }
-    .session-card.highlighted .session-focus { color: rgba(255,255,255,0.75); }
-    .session-card.highlighted ul { color: rgba(255,255,255,0.85); }
-    .session-card strong {
-      display: block;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);       /* #f6f7fb — 다크 bg 위 밝은 텍스트 */
-      margin-bottom: 14px;
-      line-height: 1.4;
-    }
-    .session-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 16px;
-      display: grid;
-      gap: 6px;
-    }
-    .session-card li {
-      font-size: 13px;
-      color: var(--muted);      /* rgba(255,255,255,0.66) — 다크 bg 위 */
-      line-height: 1.6;
-      padding-left: 12px;
-      position: relative;
-    }
-    .session-card li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--brand-2);
-    }
-    .session-card.highlighted li::before { color: rgba(255,255,255,0.6); }
-    .session-focus {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      color: var(--brand-2);
-    }
-    /* phase-info-bar: 동일하게 다크 배경 명시 */
-    .phase-info-bar {
-      margin-top: 20px;
-      padding: 14px 20px;
-      background: var(--bg-soft);   /* 명시적 다크 bg */
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .phase-info-bar .info-label {
-      flex-shrink: 0;
-      font-weight: 800;
-      color: var(--brand-2);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding-top: 3px;
-    }
-    .phase-info-bar .info-dot {
-      flex-shrink: 0;
-      width: 6px; height: 6px;
-      border-radius: 999px;
-      background: var(--brand);
-      margin-top: 7px;
-    }
+    /* ── PANEL SECTION LIGHT-BG OVERRIDES ── */
+    .section-panel .sec-h2 { color: var(--header-text); }
+    .section-panel .domain-card { background: #fff; border-color: #e7ebf3; box-shadow: var(--shadow-card); }
+    .section-panel .domain-card h3 { color: var(--header-text); }
+    .section-panel .domain-card p { color: var(--header-muted) !important; }
+    .section-panel .domain-tag { border-color: #dde2ff; background: var(--brand-soft); color: var(--brand); }
+    .section-panel .curri-card { background: #fff; border-color: #e7ebf3; box-shadow: var(--shadow-card); }
+    .section-panel .curri-card.highlight { background: rgba(74,104,255,0.07); border-color: rgba(74,104,255,0.35); box-shadow: none; }
+    .section-panel .curri-week { color: var(--brand); }
+    .section-panel .curri-card h4 { color: var(--header-text); }
+    .section-panel .curri-list li { color: var(--header-muted); }
+    .section-panel .curri-list li::before { color: var(--brand); }
 
-    /* ══════════════════════════════════════════
-       REVIEW MARQUEE (면접 코칭 후기)
-    ══════════════════════════════════════════ */
-    .review-band {
-      padding: 110px 0 130px;
-      background: #0b0e13;
+    @media(max-width:768px) {
+      .pain-grid, .why-grid, .domain-grid, .cases-grid { grid-template-columns: 1fr; }
+      .type-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
+      .process-grid::before { display: none; }
+      .curriculum-grid { grid-template-columns: repeat(2,1fr); }
     }
-    .review-band-head {
-      text-align: center;
-      margin-bottom: 46px;
-    }
-    .review-band-head h2 {
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 700;
-      line-height: 1.24;
-      letter-spacing: -0.045em;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .review-band-head p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-    /* 무한 마퀴 — 3행 */
-    .review-marquee-wrap {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      margin-left: -50vw;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 8px 0 4px;
-    }
-    .review-marquee-row {
-      display: flex;
-      gap: 14px;
-      width: max-content;
-    }
-    .review-marquee-row:nth-child(1) { animation: rmq-ltr 38s linear infinite; }
-    .review-marquee-row:nth-child(2) { animation: rmq-rtl 55s linear infinite; }
-    .review-marquee-row:nth-child(3) { animation: rmq-ltr 46s linear infinite; }
-    @keyframes rmq-ltr {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    @keyframes rmq-rtl {
-      0%   { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
-    }
-    .review-mini {
-      flex-shrink: 0;
-      padding: 20px 22px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid rgba(255,255,255,0.09);
-      display: flex;
-      flex-direction: column;
-    }
-    .review-mini:nth-child(4n+1) { width: 280px; }
-    .review-mini:nth-child(4n+2) { width: 340px; }
-    .review-mini:nth-child(4n+3) { width: 260px; }
-    .review-mini:nth-child(4n+4) { width: 320px; }
-    .review-mini.accent-blue {
-      background: rgba(74,104,255,0.10);
-      border-color: rgba(74,104,255,0.25);
-    }
-    .review-mini.accent-purple {
-      background: rgba(167,139,250,0.10);
-      border-color: rgba(167,139,250,0.22);
-    }
-    .review-mini p {
-      margin: 8px 0 auto;
-      font-size: 13.5px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.7;
-      flex: 1;
-    }
-    .review-mini-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-    .review-mini-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #4a68ff, #a78bfa);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      color: #fff;
-    }
-    .review-mini.accent-blue .review-mini-avatar  { background: linear-gradient(135deg, #2563eb, #4a68ff); }
-    .review-mini.accent-purple .review-mini-avatar { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
-    .review-mini-info strong {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
-    }
-    .review-mini-info span {
-      font-size: 10px;
-      color: #7f92ff;
-      font-weight: 600;
-    }
-    .star-row { color: #f59e0b; font-size: 16px; margin-bottom: 8px; }
-    .star-row.sm { font-size: 13px; margin-bottom: 8px; }
-
-    /* ══════════════════════════════════════════
-       FAQ
-    ══════════════════════════════════════════ */
-    .faq-band {
-      padding: 100px 0;
-      background: var(--bg-soft);
-    }
-    .faq-wrap {
-      max-width: 780px;
-    }
-    .faq-title {
-      font-size: clamp(22px, 2.5vw, 34px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.3;
-      color: var(--text);
-      margin-bottom: 40px;
-      text-align: center;
-    }
-    details {
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 0;
-      cursor: pointer;
-      list-style: none;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    summary::-webkit-details-marker { display: none; }
-    .faq-arrow {
-      font-size: 18px;
-      color: var(--brand-2);
-      transition: transform 0.2s;
-      flex-shrink: 0;
-    }
-    details[open] .faq-arrow { transform: rotate(180deg); }
-    details p {
-      padding: 0 0 22px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    /* ══════════════════════════════════════════
-       CTA BAND
-    ══════════════════════════════════════════ */
-    .cta-band {
-      padding: 120px 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(74,104,255,0.24), transparent 70%);
-    }
-    .cta-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .cta-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(127,146,255,0.4);
-      background: rgba(127,146,255,0.1);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--brand-2);
-      margin-bottom: 20px;
-    }
-    .cta-inner h2 {
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 500;
-      line-height: 1.3;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .cta-inner p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 36px;
-    }
-    .cta-trust {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      font-size: 13px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.5);
-    }
-
-    /* ══════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════ */
-    .site-footer {
-      background: var(--bg-dark);
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 60px;
-      padding: 60px 0 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-logo {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--brand-2);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-    .footer-brand-desc {
-      font-size: 13px;
-      color: var(--muted-dark);
-      line-height: 1.75;
-      margin: 0 0 16px;
-    }
-    .footer-sns { display: flex; gap: 8px; }
-    .footer-sns-btn {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted-dark);
-      font-size: 13px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .footer-nav-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .footer-nav-group h4 {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 14px;
-    }
-    .footer-nav-group a {
-      display: block;
-      font-size: 13px;
-      color: var(--muted-dark);
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    .footer-nav-group a:hover { color: var(--brand-2); }
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-      gap: 16px;
-    }
-    .footer-legal {
-      font-size: 12px;
-      color: var(--muted-dark);
-      line-height: 1.7;
-    }
-    .footer-policy-links {
-      display: flex;
-      gap: 16px;
-    }
-    .footer-policy-links a {
-      font-size: 12px;
-      color: var(--muted-dark);
-      font-weight: 600;
-    }
-    .footer-policy-links a:hover { color: var(--brand-2); }
-
-    /* ══════════════════════════════════════════
-       MOBILE CTA — style.css에서 통합 관리
-    ══════════════════════════════════════════ */
-    .mobile-floating-cta { position: fixed; z-index: 900; }
-
-    .mini-card-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media (max-width: 760px) {
-      /* ── 레이아웃 ── */
-      .wrap, .inner { padding: 0 16px; }
-
-      /* ── 헤더 (self-introduction.html 동일) ── */
-      .main-header-wrap,
-      .category-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-      .header-promo,
-      .header-actions {
-        display: none;
-      }
-      .brand { justify-self: center; }
-      .category-balance { display: none; }
-      .category-tabs,
-      .category-utility { justify-content: flex-start; }
-      .category-utility {
-        width: auto;
-        overflow-x: auto;
-        scrollbar-width: none;
-        white-space: nowrap;
-        padding-bottom: 8px;
-      }
-      .category-utility::-webkit-scrollbar { display: none; }
-
-      /* ── 콘텐츠 ── */
-      .showcase { grid-template-columns: 1fr; gap: 32px; }
-      .mini-card-grid { grid-template-columns: 1fr; }
-      .showcase.reverse { grid-template-columns: 1fr; }
-      .showcase.reverse > *:first-child { order: 2; }
-      .eval-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 16px; }
-      .eval-center { display: none; }
-      .answer-cat-grid { grid-template-columns: 1fr; }
-      .principles-grid { grid-template-columns: 1fr; }
-      .principles-layout { grid-template-columns: 1fr; }
-      .phase-step-row { grid-template-columns: 1fr; }
-      .phase-sessions { grid-template-columns: 1fr; }
-      /* review-marquee는 가로 스크롤 구조라 모바일 별도 처리 불필요 */
-      .footer-top { grid-template-columns: 1fr; gap: 32px; }
-      .footer-nav-grid { grid-template-columns: 1fr 1fr; }
 </style>
 <!-- /PAGE_CSS -->
 
-<!-- MOBILE_CTA -->
-  <a class="mobile-floating-cta" href="#cta">
-    <img src="./assets/biglinker-logo.webp" alt="빅링커 로고">
-    <div>
-      <strong>상담 신청</strong>
-      <span>면접 코칭 바로 연결</span>
-    </div>
-  </a>
-<!-- /MOBILE_CTA -->
-
 <!-- MAIN -->
 
-  <main>
-
-    <!-- ══ HERO ══ -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-kicker">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#4a68ff" stroke-width="1.4"/><path d="M4.5 7l2 2 3-3" stroke="#4a68ff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          ⓢ 빅링커 1:1 맞춤형 코칭 프로그램
-        </div>
-        <h1>논술 합격을<br><em>리드</em>합니다</h1>
-        <p>대학별 논술 유형 분석부터 실전 첨삭까지, 빅링커 전문 코치와 함께 논술 합격을 완성합니다.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#cta">무료 상담 신청하기 →</a>
-          <a class="btn-secondary" href="#process">코칭 과정 보기</a>
-        </div>
-        <div class="hero-diff-cards">
-          <div class="hero-diff-card">
-            <div class="diff-icon">
-              <svg viewBox="0 0 18 18" fill="none">
-                <path d="M9 2C5.13 2 2 5.13 2 9s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7z" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <strong>자신감 향상</strong>
-            <p>지원자의 잠재력을 깨워<br>당당한 면접 태도 완성</p>
-          </div>
-          <div class="hero-diff-card">
-            <div class="diff-icon">
-              <svg viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M9 2v2M9 14v2M2 9h2M14 9h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <strong>1:1 맞춤형 전략</strong>
-            <p>개인의 강점을 극대화하는<br>정밀 분석 및 코칭</p>
-          </div>
-          <div class="hero-diff-card">
-            <div class="diff-icon">
-              <svg viewBox="0 0 18 18" fill="none">
-                <path d="M4 14V6l5-4 5 4v8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                <rect x="7" y="9" width="4" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/>
-                <path d="M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <strong>대학원 특화 코칭</strong>
-            <p>연구 역량과 학문적 태도를<br>효과적으로 어필하는 노하우</p>
-          </div>
-        </div>
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-kicker"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7f92ff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 13.5-13.5z"/></svg> 논술리드코칭</div>
+      <h1>논술전형,<br><em>구조로 승부</em>합니다</h1>
+      <p>대학별 출제 패턴 분석부터 실전 모의논술까지,<br>논술전형 합격을 설계하는 1:1 집중 코칭</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#cta">무료 상담 신청</a>
+        <a class="btn-secondary" href="#process">코칭 과정 보기</a>
       </div>
-    </section>
-
-    <!-- ══ Urgency Banner ══ -->
-    <div class="urgency-band">
-      <div class="urgency-band__inner wrap">
-        <span class="urgency-band__icon">⚡</span>
-        <span class="urgency-band__text"><strong id="urgency-spots">이번 달 잔여 4자리</strong> · <span class="urgency-month">5월 신청 마감 임박</span></span>
-        <a class="urgency-band__cta" href="#cta">지금 신청하기</a>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="s-num">91%</div><div class="s-label">논술 통과율</div></div>
+        <div class="hero-stat"><div class="s-num">80+</div><div class="s-label">대학별 기출 분석</div></div>
+        <div class="hero-stat"><div class="s-num">실전</div><div class="s-label">모의논술 채점</div></div>
+        <div class="hero-stat"><div class="s-num">4.9★</div><div class="s-label">수강생 만족도</div></div>
       </div>
     </div>
+  </section>
 
-    <!-- ══ 면접이란 (2-col + Competency Wheel) ══ -->
-    <section class="section-dark" id="overview">
-      <div class="wrap">
-        <div class="section-head" style="text-align:left; max-width:none; margin-bottom:48px;">
-          <div class="section-eyebrow">WHY INTERVIEW MATTERS</div>
-          <h2 class="copy-block" style="font-size:clamp(24px,3vw,40px); font-weight:700; letter-spacing:-0.045em; line-height:1.24; color:var(--header-text); margin-bottom:14px;">대학원 면접,<br>단순한 지식 평가가 아닙니다</h2>
-          <p style="color:var(--header-muted); font-size:15px; line-height:1.8; max-width:560px;">지원자의 연구 역량과 학문적 태도를 심층적으로 검증하는 과정입니다.</p>
-        </div>
-
-        <div class="showcase">
-          <!-- 좌: 특징 설명 -->
-          <div>
-            <div style="background:var(--brand-soft); border:1px solid rgba(74,104,255,0.18); border-radius:var(--radius-md); padding:28px 30px; margin-bottom:20px;">
-              <h3 style="font-size:18px; font-weight:700; color:var(--header-text); margin-bottom:14px;">대학원 면접의 특징</h3>
-              <p style="font-size:14px; color:var(--header-muted); line-height:1.8; margin-bottom:18px;">
-                단순 암기 지식을 묻는 자리가 아니라,<br>
-                지원자가 가진 '연구자로서의 자질'을<br>
-                다각도에서 확인하는 시간입니다.
-              </p>
-              <div style="font-size:13px; color:var(--brand); font-weight:700; font-style:italic; text-align:center; padding: 10px 0; border-top: 1px solid rgba(74,104,255,0.15);">
-                *"지식의 양보다, 지식을 다루는 태도에 집중"*
-              </div>
-            </div>
-
-            <div>
-              <div class="answer-cat-label" style="color:var(--brand); margin-bottom:12px;">면접 질문 분석: 자주 등장하는 4대 유형</div>
-              <div class="mini-card-grid">
-                <div class="mini-card" style="background:#fff; border:1px solid #e7ebf3; border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow-card);">
-                  <div style="font-size:11px; font-weight:800; color:var(--brand); margin-bottom:6px;">01</div>
-                  <strong style="font-size:14px; font-weight:700; color:var(--header-text); display:block; margin-bottom:6px;">자기소개 및 지원 동기</strong>
-                  <p style="font-size:12px; color:var(--header-muted); line-height:1.65; margin:0;">지원자의 경험과<br>진학 동기의 연결고리 확인</p>
-                </div>
-                <div class="mini-card" style="background:#fff; border:1px solid #e7ebf3; border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow-card);">
-                  <div style="font-size:11px; font-weight:800; color:var(--brand); margin-bottom:6px;">02</div>
-                  <strong style="font-size:14px; font-weight:700; color:var(--header-text); display:block; margin-bottom:6px;">연구 관심 분야</strong>
-                  <p style="font-size:12px; color:var(--header-muted); line-height:1.65; margin:0;">학문적 관심의 깊이와 전문성 탐색</p>
-                </div>
-                <div class="mini-card" style="background:#fff; border:1px solid #e7ebf3; border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow-card);">
-                  <div style="font-size:11px; font-weight:800; color:var(--brand); margin-bottom:6px;">03</div>
-                  <strong style="font-size:14px; font-weight:700; color:var(--header-text); display:block; margin-bottom:6px;">학업 및 연구 계획</strong>
-                  <p style="font-size:12px; color:var(--header-muted); line-height:1.65; margin:0;">입학 후<br>연구 실행 가능성 및 구체성 평가</p>
-                </div>
-                <div class="mini-card" style="background:#fff; border:1px solid #e7ebf3; border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow-card);">
-                  <div style="font-size:11px; font-weight:800; color:var(--brand); margin-bottom:6px;">04</div>
-                  <strong style="font-size:14px; font-weight:700; color:var(--header-text); display:block; margin-bottom:6px;">전공 관련 심화 질문</strong>
-                  <p style="font-size:12px; color:var(--header-muted); line-height:1.65; margin:0;">기초 지식을 토대로 한<br>논리적 사고력 측정</p>
-                </div>
-              </div>
-            </div>
+  <!-- ══ PAIN ══ -->
+  <section class="section-dark">
+    <div class="wrap">
+      <div class="section-eyebrow">PROBLEM</div>
+      <h2 class="sec-h2" style="margin-bottom:36px;">논술 준비하면서<br>이런 어려움이 있으신가요?</h2>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:rgba(249,115,22,0.12);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
+          <h3>논리 구조를 못 잡겠어요</h3>
+          <p>무엇을 써야 하는지는 알겠는데 글이 산만하고 논거가 뒤엉켜 채점관이 읽기 어려운 답안이 나옵니다.</p>
+          <div class="pain-quote">"쓸 내용은 있는데 글이 두서없이 나와요."</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon" style="background:rgba(59,130,246,0.12);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#3b82f6" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>시간 안에 못 끝내요</h3>
+          <p>연습할 때는 잘 쓰다가 실전에서 시간 압박이 오면 후반부를 흐지부지 마무리하거나 결론을 못 씁니다.</p>
+          <div class="pain-quote">"시험장에서 항상 시간이 모자라요."</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon" style="background:rgba(168,85,247,0.12);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>대학별 차이를 모르겠어요</h3>
+          <p>인문 논술, 자연 논술, 통합 논술이 각각 다른데 어떤 대학에서 무엇을 요구하는지 파악이 안 됩니다.</p>
+          <div class="pain-quote">"대학마다 형식이 달라서 어떻게 준비해야 할지 몰라요."</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <!-- 우: Competency Wheel -->
-          <div>
-            <div class="answer-cat-label" style="color:var(--brand); margin-bottom:16px;">심층 평가 요소: 면접관이 확인하는 핵심 역량</div>
-            <div style="background:var(--bg-soft); border-radius:var(--radius-lg); padding:32px 24px; border: 1px solid rgba(255,255,255,0.06);">
-              <!-- Competency Wheel via SVG -->
-              <svg viewBox="0 0 520 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
-                <!-- Connector line -->
-                <line x1="60" y1="60" x2="460" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <!-- ══ TYPE ══ -->
+  <section class="section-panel">
+    <div class="wrap">
+      <div class="section-eyebrow">COACHING TYPE</div>
+      <h2 class="sec-h2" style="color:var(--header-text);margin-bottom:10px;">어떤 논술이든<br>유형별로 완성합니다</h2>
+      <p style="color:var(--header-muted);font-size:14px;margin-bottom:36px;">지원 대학의 논술 유형에 맞는 맞춤 전략을 수립합니다</p>
+      <div class="type-grid">
+        <div class="type-card">
+          <div class="type-tag">인문 논술</div>
+          <h3>제시문 분석 + 비판적 사고 훈련</h3>
+          <p>연세대·성균관대·한양대 등 인문 논술 전형. 제시문 핵심 논지 파악, 비교·비판·대안 제시 구조를 체계적으로 훈련합니다.</p>
+          <ul class="type-tips">
+            <li>제시문 독해 속도 향상 훈련</li>
+            <li>논점 구조화 및 단락 설계</li>
+            <li>대학별 기출 패턴 분석</li>
+          </ul>
+        </div>
+        <div class="type-card">
+          <div class="type-tag">자연 논술 (수리·과학)</div>
+          <h3>수리 추론 + 과학 통합 서술 훈련</h3>
+          <p>이공계 자연 논술 전형. 수학적 추론 서술, 과학 실험 분석, 그래프 해석 등 이과형 논술 특화 훈련을 제공합니다.</p>
+          <ul class="type-tips">
+            <li>수리 논술 서술 구조 훈련</li>
+            <li>그래프·도표 분석 서술법</li>
+            <li>과학 개념 연계 서술 실습</li>
+          </ul>
+        </div>
+        <div class="type-card">
+          <div class="type-tag">통합 논술</div>
+          <h3>인문·사회·과학 융합 사고 훈련</h3>
+          <p>경희대·중앙대 등 통합 논술 전형. 여러 제시문을 통합해 일관된 논지를 전개하는 훈련에 집중합니다.</p>
+          <ul class="type-tips">
+            <li>복수 제시문 통합 전략</li>
+            <li>융합 논지 구성 연습</li>
+            <li>고득점 답안 구조 분석</li>
+          </ul>
+        </div>
+        <div class="type-card">
+          <div class="type-tag">논술 + 수능 최저 병행</div>
+          <h3>논술과 수능 최저를 동시에 잡는 전략</h3>
+          <p>논술전형의 함정은 수능 최저. 논술 실력을 키우면서 수능 최저 충족 전략을 병행 설계합니다.</p>
+          <ul class="type-tips">
+            <li>수능 최저 등급 역산 전략</li>
+            <li>논술·수능 일정 병행 관리</li>
+            <li>최저 충족 확률 극대화 조율</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                <!-- Node 1 -->
-                <circle cx="60" cy="60" r="50" fill="rgba(74,104,255,0.08)" stroke="rgba(74,104,255,0.25)" stroke-width="1.5"/>
-                <text x="60" y="52" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">논리적</text>
-                <text x="60" y="66" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">사고력</text>
-                <text x="60" y="80" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Pretendard,sans-serif">Logical Thinking</text>
+  <!-- ══ WHY ══ -->
+  <section class="section-dark">
+    <div class="wrap">
+      <div class="section-eyebrow">WHY BIGLINKER</div>
+      <h2 class="sec-h2" style="margin-bottom:36px;">빅링커 논술 코칭이<br>다른 이유</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="w-icon" style="background:rgba(100,116,139,0.15);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6M9 8h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>대학별 출제 경향 DB</h3>
+          <p>80개 이상 대학의 논술 기출문제를 분석한 출제 경향 DB 보유. 지원 대학 맞춤 예상 출제 포인트를 미리 준비합니다.</p>
+          <div class="w-point">→ 연도별 출제 경향 분석 제공</div>
+        </div>
+        <div class="why-card">
+          <div class="w-icon" style="background:rgba(239,68,68,0.12);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>실전 답안 채점 피드백</h3>
+          <p>모의논술 답안을 대학 채점 기준으로 직접 채점합니다. 감점 요소, 논리 허점, 표현 문제를 문장 단위로 짚어드립니다.</p>
+          <div class="w-point">→ 채점 기준 기반 구체적 피드백</div>
+        </div>
+        <div class="why-card">
+          <div class="w-icon" style="background:rgba(249,115,22,0.12);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>구조화 글쓰기 훈련</h3>
+          <p>논술 고득점의 핵심은 논리 구조. 서론→본론→결론의 뼈대를 빠르게 잡고 채점관이 읽기 쉬운 답안을 작성하는 훈련에 집중합니다.</p>
+          <div class="w-point">→ 논술 구조 설계 템플릿 제공</div>
+        </div>
+        <div class="why-card">
+          <div class="w-icon" style="background:rgba(34,197,94,0.12);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>시간 관리 + 실전 훈련</h3>
+          <p>실제 시험 시간과 동일한 조건에서 반복 훈련합니다. 답안 구성 속도를 높이고 시간 분배 전략을 체화합니다.</p>
+          <div class="w-point">→ 실전 타이머 모의논술 매주 제공</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                <!-- Node 2 -->
-                <circle cx="165" cy="60" r="50" fill="rgba(74,104,255,0.08)" stroke="rgba(74,104,255,0.25)" stroke-width="1.5"/>
-                <text x="165" y="52" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">문제 해결</text>
-                <text x="165" y="66" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">능력</text>
-                <text x="165" y="80" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Pretendard,sans-serif">Problem Solving</text>
-
-                <!-- Node 3 (highlighted) -->
-                <circle cx="260" cy="60" r="55" fill="rgba(74,104,255,0.15)" stroke="#4a68ff" stroke-width="2"/>
-                <text x="260" y="51" text-anchor="middle" fill="#f6f7fb" font-size="12" font-weight="800" font-family="Pretendard,sans-serif">연구자적</text>
-                <text x="260" y="67" text-anchor="middle" fill="#f6f7fb" font-size="12" font-weight="800" font-family="Pretendard,sans-serif">잠재력</text>
-                <text x="260" y="83" text-anchor="middle" fill="var(--brand-2)" font-size="9" font-family="Pretendard,sans-serif">Researcher Potential</text>
-
-                <!-- Node 4 -->
-                <circle cx="355" cy="60" r="50" fill="rgba(74,104,255,0.08)" stroke="rgba(74,104,255,0.25)" stroke-width="1.5"/>
-                <text x="355" y="52" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">학문적</text>
-                <text x="355" y="66" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">태도</text>
-                <text x="355" y="80" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Pretendard,sans-serif">Academic Integrity</text>
-
-                <!-- Node 5 -->
-                <circle cx="460" cy="60" r="50" fill="rgba(74,104,255,0.08)" stroke="rgba(74,104,255,0.25)" stroke-width="1.5"/>
-                <text x="460" y="52" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">의사소통</text>
-                <text x="460" y="66" text-anchor="middle" fill="#f6f7fb" font-size="11" font-weight="700" font-family="Pretendard,sans-serif">능력</text>
-                <text x="460" y="80" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Pretendard,sans-serif">Communication</text>
-              </svg>
+  <!-- ══ DOMAIN (대학 유형) ══ -->
+  <section class="section-dark">
+    <div class="wrap">
+      <div class="section-eyebrow">TARGET</div>
+      <h2 class="sec-h2" style="margin-bottom:10px;">어느 대학·계열을<br>목표로 하시나요?</h2>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:36px;">목표 대학의 논술 유형에 맞는 전략을 설계합니다</p>
+      <div class="domain-grid">
+        <div class="domain-card">
+          <div class="d-head">
+            <div class="d-icon" style="background:rgba(74,104,255,0.12);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 3L2 9l10 6 10-6-10-6zM2 17l10 6 10-6M2 13l10 6 10-6" stroke="#4a68ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
+            <h3>상위권 인문계열</h3>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.7;">연세대·성균관대·한양대 인문 논술 전형 특화. 제시문 비교·비판 구조와 고득점 서술 전략을 집중 훈련합니다.</p>
+          <div class="domain-tags">
+            <span class="domain-tag">연세대</span>
+            <span class="domain-tag">성균관대</span>
+            <span class="domain-tag">한양대</span>
+            <span class="domain-tag">이화여대</span>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="d-head">
+            <div class="d-icon" style="background:rgba(239,68,68,0.12);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>이공계 자연 논술</h3>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.7;">연세대·성균관대 수리·과학 논술 전형. 수학적 서술과 과학 실험 분석을 체계적으로 훈련합니다.</p>
+          <div class="domain-tags">
+            <span class="domain-tag">연세대 이공</span>
+            <span class="domain-tag">성균관대</span>
+            <span class="domain-tag">한양대 이공</span>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="d-head">
+            <div class="d-icon" style="background:rgba(34,197,94,0.12);">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>중위권 통합 논술</h3>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.7;">경희대·중앙대·건국대 등 통합 논술 전형. 인문·사회·과학 융합형 답안 작성 능력을 키웁니다.</p>
+          <div class="domain-tags">
+            <span class="domain-tag">경희대</span>
+            <span class="domain-tag">중앙대</span>
+            <span class="domain-tag">건국대</span>
+            <span class="domain-tag">숙명여대</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ══ 평가 기준 (Radial Eval Grid) ══ -->
-    <section class="section-dark" id="criteria">
-      <div class="wrap">
-        <div style="display:flex; align-items:flex-start; gap:40px; margin-bottom:48px;">
-          <div style="flex:1;">
-            <div style="width:4px; height:100%; background:var(--brand); position:absolute; display:none;"></div>
-            <div style="border-left:4px solid var(--brand); padding-left:20px;">
-              <h2 style="font-size:clamp(24px,3vw,38px); font-weight:700; letter-spacing:-0.045em; line-height:1.24; color:var(--header-text); margin-bottom:10px;">대학원 면접: 무엇을 평가하는가?</h2>
-              <p style="font-size:14px; color:var(--header-muted); line-height:1.75; margin:0;">지원자의 잠재력과 연구 역량을 확인하는 4가지 핵심 기준</p>
-            </div>
+  <!-- ══ PROCESS ══ -->
+  <section class="section-dark" id="process">
+    <div class="wrap">
+      <div class="section-eyebrow">PROCESS</div>
+      <h2 class="sec-h2" style="margin-bottom:10px;">4단계로 완성하는<br>논술 합격 코칭</h2>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:48px;">진단 → 구조 → 훈련 → 실전, 단 한 단계도 빠짐없이</p>
+      <div class="process-grid">
+        <div class="process-item">
+          <div class="proc-circle">
+            <span class="proc-step">STEP</span>
+            <span class="proc-num">01</span>
           </div>
-          <div style="font-size:56px; opacity:0.1; flex-shrink:0; color:var(--brand-2);">◉</div>
+          <h3>유형 진단</h3>
+          <ul>
+            <li>지원 대학 논술 유형 분석</li>
+            <li>현재 답안 수준 진단</li>
+            <li>취약 포인트 파악</li>
+          </ul>
         </div>
-
-        <!-- Radial Eval Grid -->
-        <div class="eval-grid">
-          <!-- Top-left -->
-          <div class="eval-card reveal-item">
-            <div class="eval-icon">◈</div>
-            <strong>연구 적합성</strong>
-            <p>연구 관심사가 학과 및 연구실의 방향성과 얼마나 부합하는가</p>
+        <div class="process-item">
+          <div class="proc-circle active">
+            <span class="proc-step">STEP</span>
+            <span class="proc-num">02</span>
           </div>
-          <!-- Top-center (empty) -->
-          <div></div>
-          <!-- Top-right -->
-          <div class="eval-card reveal-item">
-            <div class="eval-icon">◉</div>
-            <strong>논리적 사고력</strong>
-            <p>질문에 대해 체계적으로 분석하고 명확하게 생각을 설명할 수 있는가</p>
-          </div>
-          <!-- Mid-left (empty) -->
-          <div></div>
-          <!-- Center circle -->
-          <div class="eval-center">
-            <strong>종합 평가</strong>
-            <span>EVALUATION</span>
-          </div>
-          <!-- Mid-right (empty) -->
-          <div></div>
-          <!-- Bottom-left -->
-          <div class="eval-card reveal-item">
-            <div class="eval-icon">≡</div>
-            <strong>학문적 태도</strong>
-            <p>연구에 대한 진지한 열정과 끈기, 그리고 깊이 있는 학문적 호기심</p>
-          </div>
-          <!-- Bottom-center note -->
-          <div class="eval-center-note">'연구자로서의 가능성'을 평가합니다</div>
-          <!-- Bottom-right -->
-          <div class="eval-card reveal-item">
-            <div class="eval-icon">▬</div>
-            <strong>전공 이해도</strong>
-            <p>전공 분야의 기초 개념 이해와 최신 학문 동향에 대한 파악 수준</p>
-          </div>
+          <h3>구조 설계</h3>
+          <ul>
+            <li>논술 답안 구조 훈련</li>
+            <li>논지 전개 패턴 체화</li>
+            <li>단락 설계 실습</li>
+          </ul>
         </div>
-      </div>
-    </section>
-
-    <!-- ══ GOOD / BAD 답변 예시 ══ -->
-    <section class="section-light" id="examples">
-      <div class="wrap">
-        <div class="section-head" style="text-align:left; max-width:none; margin-bottom:40px;">
-          <div class="section-eyebrow">ANSWER STRATEGY</div>
-          <h2 style="font-size:clamp(22px,2.5vw,36px); font-weight:700; letter-spacing:-0.04em; line-height:1.28; color:var(--header-text); margin-bottom:10px;">합격을 부르는 답변 전략:<br>자기소개 &amp; 지원 동기</h2>
-        </div>
-
-        <!-- Category 01 -->
-        <div style="margin-bottom:36px;">
-          <div class="answer-cat-label">CATEGORY 01: 자기소개 (Self-Introduction)</div>
-          <div class="answer-cat-grid">
-            <div class="answer-card">
-              <div class="answer-badge good">GOOD</div>
-              <blockquote class="good-quote">"OO대학교 언어학과를 졸업한 OOO입니다. 학부 과정에서 인지언어학에 관심을 갖게 되어 관련 연구 프로젝트에 참여했으며, 특히 언어 습득 과정의 인지적 메커니즘 연구를 진행했습니다. 이 과정에서 형성된 관심사를 깊이 탐구하고자 본 대학원에 지원하게 되었습니다."</blockquote>
-              <div class="answer-tip good">TIP: 전공 경험 중심의 30초~1분 내외 간결한 강점 제시</div>
-            </div>
-            <div class="answer-card">
-              <div class="answer-badge bad">BAD</div>
-              <blockquote class="bad-quote">"안녕하세요, 서울에서 태어나 자란 OOO입니다. 가족은 부모님과 동생이 있고, 취미는 영화 보기와 여행입니다. 학부에서는 그냥 무난하게 공부했고, 뭔가 더 배우고 싶어서 대학원에 오게 되었습니다."</blockquote>
-              <div class="answer-tip bad">CHECK: 개인적 배경 치중 및 연구 관심사 결여</div>
-            </div>
+        <div class="process-item">
+          <div class="proc-circle">
+            <span class="proc-step">STEP</span>
+            <span class="proc-num">03</span>
           </div>
+          <h3>반복 훈련</h3>
+          <ul>
+            <li>기출 기반 모의논술</li>
+            <li>채점 기준 피드백</li>
+            <li>오답 보완 재훈련</li>
+          </ul>
         </div>
-
-        <!-- Category 02 -->
-        <div style="margin-bottom:36px;">
-          <div class="answer-cat-label">CATEGORY 02: 지원 동기 (Motivation)</div>
-          <div class="answer-cat-grid">
-            <div class="answer-card">
-              <div class="answer-badge good">GOOD</div>
-              <blockquote class="good-quote">"언어 습득 과정의 신경학적 기반 연구를 심층적으로 진행하기 위해 본 대학원의 전문적인 방법론이 필요하다고 판단했습니다. 이 전문성을 바탕으로 궁극적으로 한국어와 외국어 습득의 인지적 메커니즘을 밝히는 연구자가 되고 싶어 지원하게 되었습니다."</blockquote>
-              <div class="answer-tip good">TIP: 진학의 필요성과 구체적 학문적 목표 제시</div>
-            </div>
-            <div class="answer-card">
-              <div class="answer-badge bad">BAD</div>
-              <blockquote class="bad-quote">"이 학교가 명문대라고 알려져 있어서 지원했습니다. 다른 곳보다 취업이 잘 된다고 해서요. 그리고 선배들이 이 과가 좋다고 추천해줘서 지원하게 됐습니다."</blockquote>
-              <div class="answer-tip bad">CHECK: 학과 이해 부족 및 외부적 요인 치중</div>
-            </div>
+        <div class="process-item">
+          <div class="proc-circle">
+            <span class="proc-step">STEP</span>
+            <span class="proc-num">04</span>
           </div>
-        </div>
-
-        <!-- Strategy bar -->
-        <div class="answer-strategy-bar">
-          <div class="strategy-label">STRATEGY<br>ANALYSIS</div>
-          <div style="width:3px; height:36px; background:var(--brand); border-radius:2px; flex-shrink:0;"></div>
-          <p>좋은 답변은 지원자의 구체적인 경험을 기반으로 지원 동기와 직무 적합성을 논리적으로 연결하는 답변입니다.<br>지원자가 대학원 진학의 필요성과 목표를 명확하게 제시하고, 잠재적인 발전 가능성을 제시해야 심사자가 지원자의 역량을 파악하기 용이합니다.</p>
+          <h3>실전 완성</h3>
+          <ul>
+            <li>타이머 실전 모의논술</li>
+            <li>시간 분배 전략 확립</li>
+            <li>최종 답안 완성도 점검</li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ══ 핵심 원칙 + 체크리스트 ══ -->
-    <section class="section-panel" id="principles">
-      <div class="wrap">
-        <div class="section-head" style="text-align:left; max-width:none; margin-bottom:40px;">
-          <h2 style="font-size:clamp(22px,2.5vw,36px); font-weight:700; letter-spacing:-0.04em; color:var(--header-text); margin-bottom:10px;">면접 답변 핵심 원칙 및 준비 체크리스트</h2>
+  <!-- ══ CURRICULUM ══ -->
+  <section class="section-panel">
+    <div class="wrap">
+      <div class="section-eyebrow">CURRICULUM</div>
+      <h2 class="sec-h2" style="margin-bottom:36px;">5주 논술 완성 커리큘럼</h2>
+      <div class="curriculum-grid">
+        <div class="curri-card">
+          <div class="curri-week">WEEK 1</div>
+          <h4>진단 · 유형 분석</h4>
+          <ul class="curri-list">
+            <li>현재 답안 수준 진단</li>
+            <li>지원 대학 출제 경향 분석</li>
+            <li>논술 유형 분류 및 전략 수립</li>
+            <li>기출 답안 구조 분석</li>
+          </ul>
         </div>
-
-        <div class="principles-layout">
-          <div class="principles-inner">
-            <div class="principles-label">PART 01. 면접 답변의 3대 핵심 원칙</div>
-            <div class="principles-grid">
-              <div class="principle-card reveal-item">
-                <div class="principle-icon">▷</div>
-                <strong>핵심 내용 우선 전달</strong>
-                <div class="principle-divider"></div>
-                <p>질문의 의도를 명확히 파악하여 결론부터 간결하게 답변 시작</p>
-              </div>
-              <div class="principle-card reveal-item">
-                <div class="principle-icon">◆</div>
-                <strong>구체적 경험 중심</strong>
-                <div class="principle-divider"></div>
-                <p>추상적인 설명 대신 실질적인 사례를 통해 역량을 증명</p>
-              </div>
-              <div class="principle-card reveal-item">
-                <div class="principle-icon">◎</div>
-                <strong>연구 관심 분야 연결</strong>
-                <div class="principle-divider"></div>
-                <p>모든 답변을 지원 학과의 방향성 및 자신의 연구 목표와 결부</p>
-              </div>
-            </div>
-
-            <div class="principles-label">PART 02. 면접 성공을 위한 준비 체크리스트</div>
-            <div style="background:#fff; border:1px solid #e7ebf3; border-radius:var(--radius-sm); padding:24px; box-shadow:var(--shadow-card);">
-              <div class="checklist-2col">
-                <div class="check2-item">
-                  <div class="check2-icon">✓</div>
-                  <div>
-                    <div style="font-weight:700; color:var(--header-text); font-size:13px;">30초 자기소개</div>
-                    <div>강점과 연구 목표를 간결하게 전달</div>
-                  </div>
-                </div>
-                <div class="check2-item">
-                  <div class="check2-icon">✓</div>
-                  <div>
-                    <div style="font-weight:700; color:var(--header-text); font-size:13px;">연구 관심 분야 설명</div>
-                    <div>최신 연구 동향 숙지 및 구체적 계획</div>
-                  </div>
-                </div>
-                <div class="check2-item">
-                  <div class="check2-icon">✓</div>
-                  <div>
-                    <div style="font-weight:700; color:var(--header-text); font-size:13px;">지원 동기 명확화</div>
-                    <div>진정성과 학문적 열정을 논리적으로 정리</div>
-                  </div>
-                </div>
-                <div class="check2-item">
-                  <div class="check2-icon">✓</div>
-                  <div>
-                    <div style="font-weight:700; color:var(--header-text); font-size:13px;">전공 기본 개념 복습</div>
-                    <div>학문적 기초와 전공 지식 수준 점검</div>
-                  </div>
-                </div>
-                <div class="check2-item">
-                  <div class="check2-icon">✓</div>
-                  <div>
-                    <div style="font-weight:700; color:var(--header-text); font-size:13px;">예상 질문 답변 연습</div>
-                    <div>실전 감각 익히기 및 돌발 질문 대비</div>
-                  </div>
-                </div>
-              </div>
-              <div class="checklist-bar">체계적인 답변 구조화가 면접관에게 신뢰를 줍니다</div>
-            </div>
-          </div>
-
-          <!-- 우측 사이드카드 -->
-          <div class="principles-side-card">
-            <div class="side-title">성공적인<br>면접의 핵심</div>
-            <div class="side-dot"></div>
-            <div class="side-item">논리적 사고</div>
-            <div class="side-dot"></div>
-            <div class="side-item">연구 적합성</div>
-            <div class="side-dot"></div>
-            <div class="side-item">학문적 태도</div>
-          </div>
+        <div class="curri-card highlight">
+          <div class="curri-week">WEEK 2–3</div>
+          <h4>구조 훈련 · 반복 실습</h4>
+          <ul class="curri-list">
+            <li>논술 답안 구조 집중 훈련</li>
+            <li>제시문 분석 → 논지 전개 반복</li>
+            <li>채점 기준 피드백 적용</li>
+            <li>약점 파트 집중 보완</li>
+          </ul>
+        </div>
+        <div class="curri-card">
+          <div class="curri-week">WEEK 4</div>
+          <h4>실전 모의논술</h4>
+          <ul class="curri-list">
+            <li>타이머 실전 모의논술 2회</li>
+            <li>시간 분배 전략 체화</li>
+            <li>고득점 답안 구조 완성</li>
+            <li>수능 최저 연계 점검</li>
+          </ul>
+        </div>
+        <div class="curri-card">
+          <div class="curri-week">WEEK 5</div>
+          <h4>최종 점검 · D-DAY</h4>
+          <ul class="curri-list">
+            <li>최종 실전 모의논술</li>
+            <li>취약 문항 마지막 보완</li>
+            <li>시험 당일 전략 정리</li>
+            <li>코치 실시간 대기 지원</li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ══ 코칭 프로세스 (Phase Timeline) ══ -->
-    <section class="section-dark" id="process">
-      <div class="wrap">
-        <div class="phase-section-head">
-          <div class="head-left">
-            <div class="section-eyebrow">COACHING PROCESS</div>
-            <h2>1:1 맞춤형 모의 면접 코칭 프로세스</h2>
-            <p>체계적인 단계별 분석과 실전 연습을 통해 합격 가능성을 극대화합니다.</p>
-          </div>
-          <div class="head-right">▷</div>
+  <!-- ══ COMPARE ══ -->
+  <section class="section-dark">
+    <div class="wrap" style="max-width:860px;">
+      <div class="section-eyebrow center" style="justify-content:center;margin-bottom:24px;">COMPARISON</div>
+      <h2 class="sec-h2" style="text-align:center;margin-bottom:36px;">빅링커 vs 일반 논술 학원</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">비교 항목</th>
+            <th>빅링커</th>
+            <th>일반 논술 학원</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>코칭 방식</td><td class="col-us">✓ 1:1 전담 코치</td><td class="col-them">✗ 그룹 수업 위주</td></tr>
+          <tr><td>채점 피드백</td><td class="col-us">✓ 채점 기준 기반 상세 첨삭</td><td class="col-them">△ 간략 코멘트</td></tr>
+          <tr><td>대학별 기출 DB</td><td class="col-us">✓ 80+ 대학 분석 보유</td><td class="col-them">△ 일부 대학만</td></tr>
+          <tr><td>수능 최저 병행 관리</td><td class="col-us">✓ 통합 전략 설계</td><td class="col-them">✗ 논술만 담당</td></tr>
+          <tr><td>실전 타이머 모의논술</td><td class="col-us">✓ 매주 제공</td><td class="col-them">△ 시즌에만</td></tr>
+          <tr><td>시험 당일 지원</td><td class="col-us">✓ 코치 실시간 대기</td><td class="col-them">✗ 미제공</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ TRUST ══ -->
+  <!-- PARTIAL: trust-proof.html -->
+
+  <!-- ══ CASES ══ -->
+  <section class="section-panel">
+    <div class="wrap">
+      <div class="section-eyebrow">SUCCESS CASE</div>
+      <h2 class="sec-h2" style="color:var(--header-text);margin-bottom:36px;">실제 합격 사례</h2>
+      <div class="cases-grid">
+        <div class="case-card">
+          <div class="case-badge">인문 논술 · 수능 최저 병행</div>
+          <p><strong style="color:var(--header-text);">Before.</strong> 논술 연습을 해봤지만 답안이 항상 나열식이고 논리적 흐름이 없었습니다. 수능 최저도 불안정한 상태였습니다.<br><br><strong style="color:var(--brand);">After.</strong> 논지 전개 구조를 익히고 4주간 집중 훈련 후 답안 완성도가 크게 향상. 수능 최저도 충족하며 논술전형 합격.</p>
+          <div class="c-result">→ 성균관대 인문 논술전형 합격</div>
         </div>
-
-        <!-- Phase 01 -->
-        <div style="margin-bottom:36px;">
-          <div class="phase-label">PHASE 01: 사전 준비 단계 (Preparation)</div>
-          <div class="phase-step-row">
-            <div class="phase-step">
-              <div class="phase-step-connector"></div>
-              <div class="step-badge">STEP 1</div>
-              <strong>매칭 및 일정 확정</strong>
-              <p>희망 학교/학과 체크 및 담당 전문가 배정</p>
-            </div>
-            <div class="phase-step">
-              <div class="phase-step-connector"></div>
-              <div class="step-badge">STEP 2</div>
-              <strong>상황 분석 및 자료 전달</strong>
-              <p>지원자 상황 분석 및 예상 질문 리스트 전달</p>
-            </div>
-            <div class="phase-step">
-              <div class="step-badge">STEP 3</div>
-              <strong>상담 및 코칭 시작</strong>
-              <p>담당 전문가와의 기초 상담 진행</p>
-            </div>
-          </div>
+        <div class="case-card">
+          <div class="case-badge">통합 논술 전형</div>
+          <p><strong style="color:var(--header-text);">Before.</strong> 여러 제시문을 통합해 하나의 논지로 엮는 것이 가장 어려웠고, 3시간 안에 완성된 답안을 쓰지 못했습니다.<br><br><strong style="color:var(--brand);">After.</strong> 복수 제시문 통합 전략을 체화하고, 타이머 실전 훈련 6회를 소화하며 시간 내 완성이 가능해졌습니다.</p>
+          <div class="c-result">→ 경희대·한국외대 논술전형 동시 합격</div>
         </div>
-
-        <!-- Phase 02 -->
-        <div>
-          <div class="phase-label">PHASE 02: 회차별 실전 코칭 (Intensive Coaching)</div>
-          <div class="phase-sessions">
-            <div class="session-card reveal-item">
-              <strong>1회차: 기초 및 전략 수립</strong>
-              <ul>
-                <li>면접의 중요성 이해 및 마인드셋</li>
-                <li>지원 대학 맞춤형 예상 질문 대응</li>
-                <li>자기소개 방법 및 핵심 강점 부각</li>
-              </ul>
-              <div class="session-focus">FOCUS: 기초 역량 분석 및 자소서 연계</div>
-            </div>
-            <div class="session-card highlighted">
-              <strong>2회차: 표현 및 심화 역량</strong>
-              <ul>
-                <li>면접 스피치 (발음/속도/시선) 교정</li>
-                <li>전공 심화 질문 및 시사 이슈 대비</li>
-                <li>자주 묻는 FAQ 완성도 제고</li>
-              </ul>
-              <div class="session-focus">FOCUS: 전달력 강화 및 전공 지식 점검</div>
-            </div>
-            <div class="session-card reveal-item">
-              <strong>3회차: 실전 완성 및 피드백</strong>
-              <ul>
-                <li>압박 면접 및 꼬리 질문 대응 훈련</li>
-                <li>최종 면접 이미지 및 태도 체크</li>
-                <li>녹화본 기반 종합 피드백 수립</li>
-              </ul>
-              <div class="session-focus">FOCUS: 위기 대응 능력 및 실전 감각</div>
-            </div>
-          </div>
-          <div class="phase-info-bar">
-            <div class="info-label">PROGRAM INFO</div>
-            <div class="info-dot"></div>
-            <p>전 회차 모의 면접 녹화 및 타임라인 기반 상세 피드백 제공 (회당 약 40분 진행)</p>
-          </div>
-          <div style="font-size:12px; color:rgba(255,100,100,0.7); font-weight:600; text-align:center; margin-top:12px;">
-            * 녹화본은 초상권 보호를 위해 제3자 공유를 엄격히 금지하며 위반 시 법적 조치가 따를 수 있습니다.
-          </div>
+        <div class="case-card">
+          <div class="case-badge">자연 논술 전형</div>
+          <p><strong style="color:var(--header-text);">Before.</strong> 수학은 풀 수 있지만 서술로 옮기는 것이 어려웠고, 과학 제시문 분석을 글로 표현하는 방법을 몰랐습니다.<br><br><strong style="color:var(--brand);">After.</strong> 수리 논술 서술 구조를 익히고 과학 실험 분석 서술 패턴을 반복 훈련해 자연 논술 완성도를 크게 높였습니다.</p>
+          <div class="c-result">→ 연세대 이공계 논술전형 합격</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ══ REVIEW MARQUEE ══ -->
-    <section class="review-band">
-      <div class="wrap">
-        <div class="review-band-head">
-          <div class="section-eyebrow center" style="justify-content:center; margin-bottom:12px;">REVIEW</div>
-          <h2>빅링커 면접 코칭 후기</h2>
-          <p>실제 합격생들이 경험한 체계적인 면접 대비의 힘</p>
-        </div>
+  <!-- ══ REVIEW MARQUEE ══ -->
+  <section class="review-band">
+    <div class="wrap">
+      <div class="review-band-head">
+        <div class="section-eyebrow center" style="justify-content:center;margin-bottom:12px;">REVIEW</div>
+        <h2>빅링커 논술 코칭 후기</h2>
+        <p>실제 합격자들이 남긴 진짜 후기</p>
       </div>
-
-      <!-- 무한 마퀴 3행 (full-width) -->
-      <div class="review-marquee-wrap">
-
-        <!-- 행 1 → 우→좌 -->
-        <div class="review-marquee-row">
-          <!-- SET A -->
-          <div class="review-mini accent-blue"><div class="star-row sm">★★★★☆</div><p>"모의 면접에서 준비했던 질문들이 실제 면접에 그대로 나와서 당황하지 않았습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">flo</div><div class="review-mini-info"><strong>flo*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"제가 준비한 내용이 맞는 방향인지 확인할 수 있어서 좋았습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">min</div><div class="review-mini-info"><strong>min*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★★☆</div><p>"명확한 답변 방향을 알려주셔서 전문성이 느껴졌어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">koe</div><div class="review-mini-info"><strong>koe****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-purple"><div class="star-row sm">★★★☆☆</div><p>"코칭 덕분에 압박 면접도 이겨낼 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">gri</div><div class="review-mini-info"><strong>gri****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"면접 때 긴장을 많이 하는 편인데 모의 면접을 통해 충분한 연습을 할 수 있었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">wav</div><div class="review-mini-info"><strong>wav***</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue"><div class="star-row sm">★★★☆☆</div><p>"면접 준비를 어디서부터 해야 할지 막막했는데 체계적으로 잡아줬습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">con</div><div class="review-mini-info"><strong>con****</strong><span>대학원 합격</span></div></div></div>
-          <!-- SET B (loop) -->
-          <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row sm">★★★★☆</div><p>"모의 면접에서 준비했던 질문들이 실제 면접에 그대로 나와서 당황하지 않았습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">flo</div><div class="review-mini-info"><strong>flo*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"제가 준비한 내용이 맞는 방향인지 확인할 수 있어서 좋았습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">min</div><div class="review-mini-info"><strong>min*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★★☆</div><p>"명확한 답변 방향을 알려주셔서 전문성이 느껴졌어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">koe</div><div class="review-mini-info"><strong>koe****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"코칭 덕분에 압박 면접도 이겨낼 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">gri</div><div class="review-mini-info"><strong>gri****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"면접 때 긴장을 많이 하는 편인데 모의 면접을 통해 충분한 연습을 할 수 있었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">wav</div><div class="review-mini-info"><strong>wav***</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"면접 준비를 어디서부터 해야 할지 막막했는데 체계적으로 잡아줬습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">con</div><div class="review-mini-info"><strong>con****</strong><span>대학원 합격</span></div></div></div>
-        </div>
-
-        <!-- 행 2 → 좌→우 (역방향) -->
-        <div class="review-marquee-row">
-          <!-- SET A -->
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"실제 면접 분위기를 미리 경험할 수 있었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">par</div><div class="review-mini-info"><strong>par*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-purple"><div class="star-row sm">★★★☆☆</div><p>"모의 면접을 실제처럼 진행해주셔서 면접 대비에 많은 도움이 되었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">lum</div><div class="review-mini-info"><strong>lum****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"면접에 대한 두려움이 줄어들고 자신감을 갖게 되었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">shi</div><div class="review-mini-info"><strong>shi****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue"><div class="star-row sm">★★★☆☆</div><p>"면접에 임하는 자신감을 높여준 코칭이었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">grb</div><div class="review-mini-info"><strong>grb****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"전체적인 면접 흐름을 이해할 수 있었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">Kan</div><div class="review-mini-info"><strong>Kan*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"혼자 준비했다면 몰랐을 부분들을 보완할 수 있었습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">wav</div><div class="review-mini-info"><strong>wav***</strong><span>대학원 합격</span></div></div></div>
-          <!-- SET B (loop) -->
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"실제 면접 분위기를 미리 경험할 수 있었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">par</div><div class="review-mini-info"><strong>par*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"모의 면접을 실제처럼 진행해주셔서 면접 대비에 많은 도움이 되었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">lum</div><div class="review-mini-info"><strong>lum****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"면접에 대한 두려움이 줄어들고 자신감을 갖게 되었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">shi</div><div class="review-mini-info"><strong>shi****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"면접에 임하는 자신감을 높여준 코칭이었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">grb</div><div class="review-mini-info"><strong>grb****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"전체적인 면접 흐름을 이해할 수 있었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">Kan</div><div class="review-mini-info"><strong>Kan*****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"혼자 준비했다면 몰랐을 부분들을 보완할 수 있었습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">wav</div><div class="review-mini-info"><strong>wav***</strong><span>대학원 합격</span></div></div></div>
-        </div>
-
-        <!-- 행 3 → 우→좌, 중간 속도 -->
-        <div class="review-marquee-row">
-          <!-- SET A -->
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"면접에서 긴장하지 않고 차분하게 답변할 수 있게 되었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">chj</div><div class="review-mini-info"><strong>chj****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue"><div class="star-row sm">★★★☆☆</div><p>"핵심 위주로 답변을 정리하는 연습이 되었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">yoo</div><div class="review-mini-info"><strong>yoo***</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"면접 준비의 방향을 잡지 못하고 있었는데, 구체적인 전략을 세워줘서 도움이 됐습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">한</div><div class="review-mini-info"><strong>han****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-purple"><div class="star-row sm">★★★★☆</div><p>"모의 면접 경험 덕분에 실전에서 훨씬 침착하게 대응할 수 있었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">오</div><div class="review-mini-info"><strong>oh****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini"><div class="star-row sm">★★★☆☆</div><p>"답변 구조를 잡아주는 방식이 인상적이었고, 실제 면접에도 그대로 활용할 수 있었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">이</div><div class="review-mini-info"><strong>lee****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue"><div class="star-row sm">★★★★☆</div><p>"지원 학교 면접 스타일에 맞춘 맞춤 준비가 가능해서 효율적이었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">김</div><div class="review-mini-info"><strong>kim****</strong><span>대학원 합격</span></div></div></div>
-          <!-- SET B (loop) -->
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"면접에서 긴장하지 않고 차분하게 답변할 수 있게 되었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">chj</div><div class="review-mini-info"><strong>chj****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"핵심 위주로 답변을 정리하는 연습이 되었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">yoo</div><div class="review-mini-info"><strong>yoo***</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"면접 준비의 방향을 잡지 못하고 있었는데, 구체적인 전략을 세워줘서 도움이 됐습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">한</div><div class="review-mini-info"><strong>han****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row sm">★★★★☆</div><p>"모의 면접 경험 덕분에 실전에서 훨씬 침착하게 대응할 수 있었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">오</div><div class="review-mini-info"><strong>oh****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini" aria-hidden="true"><div class="star-row sm">★★★☆☆</div><p>"답변 구조를 잡아주는 방식이 인상적이었고, 실제 면접에도 그대로 활용할 수 있었어요"</p><div class="review-mini-meta"><div class="review-mini-avatar">이</div><div class="review-mini-info"><strong>lee****</strong><span>대학원 합격</span></div></div></div>
-          <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row sm">★★★★☆</div><p>"지원 학교 면접 스타일에 맞춘 맞춤 준비가 가능해서 효율적이었습니다"</p><div class="review-mini-meta"><div class="review-mini-avatar">김</div><div class="review-mini-info"><strong>kim****</strong><span>대학원 합격</span></div></div></div>
-        </div>
-
+    </div>
+    <div class="review-marquee-wrap">
+      <div class="review-marquee-row">
+        <div class="review-mini accent-blue"><div class="star-row">★★★★★</div><p>"논술 모의고사 점수가 계속 낮아서 포기할 뻔했는데, 구조화 훈련을 시작하고 3주 만에 점수가 눈에 띄게 올랐어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">김</div><div class="review-mini-info"><strong>kim****</strong><span>성균관대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"대학별 출제 패턴을 미리 분석해주시니까 실제 시험에서 낯선 주제가 나와도 당황하지 않았어요. 준비한 느낌이 들었습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">이</div><div class="review-mini-info"><strong>lee****</strong><span>한양대 합격</span></div></div></div>
+        <div class="review-mini accent-purple"><div class="star-row">★★★★★</div><p>"논술 답안이 항상 나열식이었는데, 서론-본론-결론 뼈대를 잡는 법을 배우고 나서 채점관이 읽기 쉬운 글이 나오기 시작했어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">박</div><div class="review-mini-info"><strong>park****</strong><span>연세대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★☆</div><p>"수능 최저와 논술을 같이 준비하는 게 부담이었는데, 빅링커가 일정을 같이 설계해줘서 무너지지 않고 끝까지 했어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">최</div><div class="review-mini-info"><strong>choi****</strong><span>경희대 합격</span></div></div></div>
+        <div class="review-mini accent-blue"><div class="star-row">★★★★★</div><p>"시간이 항상 모자랐는데, 타이머 실전 훈련을 반복하면서 시간 배분이 몸에 익었어요. 시험장에서 처음으로 결론을 쓰고 나왔습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">정</div><div class="review-mini-info"><strong>jung****</strong><span>중앙대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"채점 기준에 맞춰 피드백을 주시니까 어디가 문제인지 바로 알 수 있었어요. 막연한 '더 잘 써'가 아니라 구체적이었습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">한</div><div class="review-mini-info"><strong>han****</strong><span>건국대 합격</span></div></div></div>
+        <!-- SET B -->
+        <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row">★★★★★</div><p>"구조화 훈련을 시작하고 3주 만에 점수가 눈에 띄게 올랐어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">김</div><div class="review-mini-info"><strong>kim****</strong><span>성균관대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"실제 시험에서 낯선 주제가 나와도 당황하지 않았어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">이</div><div class="review-mini-info"><strong>lee****</strong><span>한양대 합격</span></div></div></div>
+        <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row">★★★★★</div><p>"채점관이 읽기 쉬운 글이 나오기 시작했어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">박</div><div class="review-mini-info"><strong>park****</strong><span>연세대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★☆</div><p>"무너지지 않고 끝까지 했어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">최</div><div class="review-mini-info"><strong>choi****</strong><span>경희대 합격</span></div></div></div>
+        <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row">★★★★★</div><p>"시험장에서 처음으로 결론을 쓰고 나왔습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">정</div><div class="review-mini-info"><strong>jung****</strong><span>중앙대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"어디가 문제인지 바로 알 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">한</div><div class="review-mini-info"><strong>han****</strong><span>건국대 합격</span></div></div></div>
       </div>
-    </section>
-
-    <!-- ══ FAQ ══ -->
-    <section class="faq-band" id="faq">
-      <div class="wrap faq-wrap">
-        <div class="section-eyebrow center" style="color:rgba(255,255,255,0.3); justify-content:center; margin-bottom:8px;">FAQ</div>
-        <h2 class="faq-title">면접 코칭 시작 전<br>꼭 알아두세요</h2>
-        <details open>
-          <summary>
-            <span>Q. 면접 날짜가 얼마 남지 않았는데 코칭이 가능한가요?</span>
-            <span class="faq-arrow">▾</span>
-          </summary>
-          <p>가능합니다. 일정에 따라 1~2회 집중 코칭으로도 핵심 전략을 정리할 수 있습니다. 남은 기간을 고려해 최적의 커리큘럼을 제안해드립니다.</p>
-        </details>
-        <details>
-          <summary>
-            <span>Q. 대학원 면접 외에 학부 입시 면접도 코칭 받을 수 있나요?</span>
-            <span class="faq-arrow">▾</span>
-          </summary>
-          <p>가능합니다. 학생부종합전형, 특기자전형, 논술전형 면접 등 학부 입시 면접도 동일한 방식으로 진행합니다.</p>
-        </details>
-        <details>
-          <summary>
-            <span>Q. 모의 면접은 어떻게 진행되나요?</span>
-            <span class="faq-arrow">▾</span>
-          </summary>
-          <p>실제 면접 상황을 재현한 1:1 모의 면접으로 진행됩니다. 전 회차 녹화 후 타임라인 기반 상세 피드백이 제공되며, 회당 약 40분 내외로 운영됩니다.</p>
-        </details>
-        <details>
-          <summary>
-            <span>Q. 전공 심화 질문 대비도 도움받을 수 있나요?</span>
-            <span class="faq-arrow">▾</span>
-          </summary>
-          <p>네, 전공 기초 개념 복습부터 심화 질문 대응 전략까지 코칭 범위에 포함됩니다. 지원 학과와 교수 연구 분야를 분석해 예상 질문 리스트를 함께 준비합니다.</p>
-        </details>
-        <details>
-          <summary>
-            <span>Q. 지원 학교를 아직 확정하지 못했어도 괜찮나요?</span>
-            <span class="faq-arrow">▾</span>
-          </summary>
-          <p>괜찮습니다. 첫 상담에서 지원 방향과 학교·학과를 함께 설정하며, 그에 맞는 면접 전략을 수립해드립니다.</p>
-        </details>
+      <div class="review-marquee-row">
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"논술이 단순 암기가 아니라 훈련으로 성적이 오른다는 걸 처음 알았어요. 코치님 덕분에 논술을 전략적으로 바라볼 수 있게 됐습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">윤</div><div class="review-mini-info"><strong>yoon****</strong><span>이화여대 합격</span></div></div></div>
+        <div class="review-mini accent-blue"><div class="star-row">★★★★★</div><p>"수리 논술 서술을 어떻게 해야 할지 몰랐는데, 수학 풀이를 글로 풀어쓰는 방법을 가르쳐주시니까 자연스러워졌어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">오</div><div class="review-mini-info"><strong>oh****</strong><span>연세대 이공 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★☆</div><p>"경희대 논술 경향이 매년 어떻게 변하는지까지 분석해주셔서 믿음이 갔어요. 정말 준비된 코치님이라는 느낌이었습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">강</div><div class="review-mini-info"><strong>kang****</strong><span>경희대 합격</span></div></div></div>
+        <div class="review-mini accent-purple"><div class="star-row">★★★★★</div><p>"온라인으로 했는데도 답안 실시간 공유 + 화면 공유로 직접 피드백해주셔서 전혀 불편함이 없었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">서</div><div class="review-mini-info"><strong>seo****</strong><span>숙명여대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"3개 대학 논술을 한꺼번에 준비하면서 지쳐갔는데 코치님이 각 대학별로 우선순위를 잡아주셔서 효율적으로 할 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">류</div><div class="review-mini-info"><strong>ryu****</strong><span>중앙대 합격</span></div></div></div>
+        <div class="review-mini accent-blue"><div class="star-row">★★★★★</div><p>"내신이 낮아서 논술전형이 마지막 희망이었는데 빅링커 코칭 후 진짜 합격했어요. 논술만큼은 노력으로 역전이 된다는 걸 증명했습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">문</div><div class="review-mini-info"><strong>moon****</strong><span>한국외대 합격</span></div></div></div>
+        <!-- SET B -->
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"논술을 전략적으로 바라볼 수 있게 됐습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">윤</div><div class="review-mini-info"><strong>yoon****</strong><span>이화여대 합격</span></div></div></div>
+        <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row">★★★★★</div><p>"수리 논술 서술이 자연스러워졌어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">오</div><div class="review-mini-info"><strong>oh****</strong><span>연세대 이공 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★☆</div><p>"정말 준비된 코치님이라는 느낌이었습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">강</div><div class="review-mini-info"><strong>kang****</strong><span>경희대 합격</span></div></div></div>
+        <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row">★★★★★</div><p>"전혀 불편함이 없었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">서</div><div class="review-mini-info"><strong>seo****</strong><span>숙명여대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"효율적으로 할 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">류</div><div class="review-mini-info"><strong>ryu****</strong><span>중앙대 합격</span></div></div></div>
+        <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row">★★★★★</div><p>"논술만큼은 노력으로 역전이 된다는 걸 증명했습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">문</div><div class="review-mini-info"><strong>moon****</strong><span>한국외대 합격</span></div></div></div>
       </div>
-    </section>
-
-    <!-- ══ CTA ══ -->
-    <section class="cta-band" id="cta">
-      <div class="wrap">
-        <div class="cta-inner">
-          <div class="cta-badge">무료 초기 상담 제공</div>
-          <h2>면접, 이제<br><span class="em">자신감 있게<svg viewBox="0 0 160 16" fill="none" preserveAspectRatio="none"><path d="M2 12 C30 5, 80 15, 130 9 C148 5, 157 12, 158 10" stroke="#7f92ff" stroke-width="2.8" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M5 15 C35 10, 85 16, 135 12 C152 9, 157 14, 158 12" stroke="#4a68ff" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.4"/></svg></span> 준비하세요</h2>
-          <p>전략 수립부터 모의 면접, 실전 감각 훈련까지.<br>빅링커가 합격의 시작과 끝을 함께합니다.</p>
-          <div class="hero-actions" style="margin-top:0; margin-bottom:0;">
-            <a class="btn-primary" href="#">무료 상담 신청하기 →</a>
-            <a class="btn-secondary" href="#">카카오 채널 문의</a>
-          </div>
-          <div class="cta-trust">
-            <span>✓ 모의 면접 녹화 피드백</span>
-            <span>✓ 대학원·학부 모두 OK</span>
-            <span>✓ 1:1 맞춤형 전략 수립</span>
-          </div>
-        </div>
+      <div class="review-marquee-row">
+        <div class="review-mini accent-purple"><div class="star-row">★★★★★</div><p>"논술 준비를 어디서 해야 하는지도 몰랐는데 빅링커에서 처음부터 끝까지 다 잡아줬어요. 혼자였으면 절대 못 했을 거예요."</p><div class="review-mini-meta"><div class="review-mini-avatar">임</div><div class="review-mini-info"><strong>im****</strong><span>세종대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"기출 답안을 분석하면서 고득점 답안이 어떻게 다른지 눈으로 확인했어요. 내 답안과의 차이가 명확하게 보이니까 방향을 잡기 쉬웠습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">배</div><div class="review-mini-info"><strong>bae****</strong><span>아주대 합격</span></div></div></div>
+        <div class="review-mini accent-blue"><div class="star-row">★★★★☆</div><p>"1:1 코칭이라 내 답안의 약점을 정확하게 파악해줘서 좋았어요. 그룹 수업에서는 내 문제를 집어줄 수가 없잖아요."</p><div class="review-mini-meta"><div class="review-mini-avatar">신</div><div class="review-mini-info"><strong>shin****</strong><span>동국대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"5주 코칭이 끝날 때쯤 논술이 두렵지 않아졌어요. 어떤 주제가 나와도 구조를 잡을 수 있다는 자신감이 생겼습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">황</div><div class="review-mini-info"><strong>hwang****</strong><span>국민대 합격</span></div></div></div>
+        <div class="review-mini accent-purple"><div class="star-row">★★★★★</div><p>"고3 9월에 시작해서 늦었다고 했는데, 남은 시간 안에서 최선을 다할 수 있도록 전략을 짜주셔서 포기하지 않고 할 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">노</div><div class="review-mini-info"><strong>noh****</strong><span>홍익대 합격</span></div></div></div>
+        <div class="review-mini"><div class="star-row">★★★★★</div><p>"논술 점수가 발표됐을 때 코치님한테 제일 먼저 연락했어요. 정말 같이 만든 결과라서 더 기뻤습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">고</div><div class="review-mini-info"><strong>go****</strong><span>서울시립대 합격</span></div></div></div>
+        <!-- SET B -->
+        <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row">★★★★★</div><p>"혼자였으면 절대 못 했을 거예요."</p><div class="review-mini-meta"><div class="review-mini-avatar">임</div><div class="review-mini-info"><strong>im****</strong><span>세종대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"방향을 잡기 쉬웠습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">배</div><div class="review-mini-info"><strong>bae****</strong><span>아주대 합격</span></div></div></div>
+        <div class="review-mini accent-blue" aria-hidden="true"><div class="star-row">★★★★☆</div><p>"내 답안의 약점을 정확하게 파악해줘서 좋았어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">신</div><div class="review-mini-info"><strong>shin****</strong><span>동국대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"어떤 주제가 나와도 구조를 잡을 수 있다는 자신감이 생겼습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">황</div><div class="review-mini-info"><strong>hwang****</strong><span>국민대 합격</span></div></div></div>
+        <div class="review-mini accent-purple" aria-hidden="true"><div class="star-row">★★★★★</div><p>"포기하지 않고 할 수 있었어요."</p><div class="review-mini-meta"><div class="review-mini-avatar">노</div><div class="review-mini-info"><strong>noh****</strong><span>홍익대 합격</span></div></div></div>
+        <div class="review-mini" aria-hidden="true"><div class="star-row">★★★★★</div><p>"같이 만든 결과라서 더 기뻤습니다."</p><div class="review-mini-meta"><div class="review-mini-avatar">고</div><div class="review-mini-info"><strong>go****</strong><span>서울시립대 합격</span></div></div></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- PARTIAL: faq-essay.html -->
+
+  <!-- PARTIAL: cta-essay.html -->
+
 <!-- /MAIN -->
