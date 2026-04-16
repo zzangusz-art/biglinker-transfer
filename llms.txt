@@ -1,19 +1,47 @@
 # BigLinker 편입·대입 코칭
 
-> 대입·편입 입시 전문 코칭 플랫폼
+> 대입·편입 입시 전문 코칭 플랫폼 | 빅링커(BigLinker)
 
-빅링커(BigLinker) 편입·대입 코칭은 학생부·논술·면접·자기소개서·편입 전형을 1:1 맞춤 코칭으로 지원합니다.
+빅링커는 대입·편입·논술·면접·자기소개서·학생부 전 영역을 1:1 맞춤 코칭으로 지원하는 교육 코칭 전문 기관입니다.
+누적 코칭 완료 건수 2,800건 이상, 30명 이상의 전문 코치진이 SKY·의치한 등 상위권 대학 합격을 지원합니다.
 
-## 코칭 프로그램
-- [편입·대입 코칭 홈](https://transfer.gobiglinker.com/)
-- [대입토탈리드코칭](https://transfer.gobiglinker.com/total-admission-coaching.html)
-- [생기부리드코칭](https://transfer.gobiglinker.com/school-record-coaching.html)
-- [면접리드코칭](https://transfer.gobiglinker.com/interview-coaching.html)
-- [논술리드코칭](https://transfer.gobiglinker.com/essay-coaching.html)
-- [자기소개서 코칭](https://transfer.gobiglinker.com/self-introduction.html)
-- [디자인·실기 코칭](https://transfer.gobiglinker.com/design-coaching.html)
-- [편입영어 EC 코칭](https://transfer.gobiglinker.com/ec-coaching.html)
-- [편입 논술 코칭](https://transfer.gobiglinker.com/thesis-coaching.html)
+## 전문 코칭 프로그램
+
+- [대입 종합 코칭 (토탈리드코칭)](https://transfer.gobiglinker.com/total-admission-coaching.html): 수시·정시 전형 분석부터 서류·면접·논술까지 전 과정 1:1 전략 코칭
+- [학생부 코칭 (생기부리드코칭)](https://transfer.gobiglinker.com/school-record-coaching.html): 세부능력특기사항·창체활동 기록 전략 및 내신 관리 코칭
+- [면접 코칭 (면접리드코칭)](https://transfer.gobiglinker.com/interview-coaching.html): 대학별 기출 분석, 모의면접 반복 훈련, 개인 피드백
+- [논술 코칭 (논술리드코칭)](https://transfer.gobiglinker.com/essay-coaching.html): 인문·수리·과학 논술 유형별 전략 및 실전 첨삭
+- [자기소개서 코칭](https://transfer.gobiglinker.com/self-introduction.html): 강점 발굴 → 스토리 설계 → 반복 첨삭 → 최종 교정
+- [디자인·실기 포트폴리오 코칭](https://transfer.gobiglinker.com/design-coaching.html): 예체능·디자인 계열 포트폴리오 구성 전략 코칭
+- [편입 영어 EC 코칭](https://transfer.gobiglinker.com/ec-coaching.html): 편입 영어 시험 대비 및 EC 점수 향상 코칭
+- [편입 논술 코칭](https://transfer.gobiglinker.com/thesis-coaching.html): 편입 대학별 논술 유형 분석 및 실전 훈련
+- [대입 합격전략 가이드 (입시설명회)](https://transfer.gobiglinker.com/admissions.html): 2026 대입 전형 완전 분석 설명회
+
+## 주요 성과 및 전문성
+
+- 누적 코칭 완료: 2,800건 이상
+- 코치진: 30명 이상 (편입·대입·논술·면접·학생부 전문가)
+- 합격 트랙: SKY, 의치한, 서성한, 중경외시 등 상위권 대학
+- 제공 형태: 전면 온라인 1:1 (카카오톡·Zoom 기반), 당일 배정 가능
+
+## 자주 묻는 질문 (FAQ)
+
+Q: 편입 코칭은 어떤 분들에게 필요한가요?
+A: 현재 재학 중이거나 졸업 후 더 좋은 대학으로 편입을 목표로 하는 분들에게 필요합니다. 자기소개서·면접·논술 전략으로 합격률을 높일 수 있습니다.
+
+Q: 코칭 기간은 얼마나 걸리나요?
+A: 평균 3~6개월이며, 집중 단기 코칭(1~2개월)도 가능합니다.
+
+Q: 합격 보장이 되나요?
+A: 특정 대학의 합격 보장은 하지 않습니다. 다만 1:1 역량 진단 → 맞춤 전략 → 실전 훈련 과정으로 합격 가능성을 최대화합니다.
+
+## 관련 채널
+
+- 블로그: https://blog.gobiglinker.com/blog/transfer
+- 대학원 코칭: https://graduate.gobiglinker.com
+- 취업 코칭: https://job.gobiglinker.com
+- 기업교육: https://biz.gobiglinker.com
 
 ## 운영사
-- 빅링커(BigLinker) | https://gobiglinker.com
+
+빅링커(BigLinker) | https://gobiglinker.com | 문의: biglinkerkor@gmail.com
