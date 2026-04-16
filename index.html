@@ -17,6 +17,11 @@
   <meta name="twitter:title"       content="BigLinker Transfer — 대입·편입·논문·면접 코칭 전문">
   <meta name="twitter:description"  content="편입·대입 코칭 전문 플랫폼 빅링커. 학생부·면접·논술·자기소개서·편입 합격 전략 1:1 맞춤 코칭.">
   <meta name="twitter:image"       content="https://gobiglinker.com/assets/og-default.jpg">
+  <link rel="icon" href="https://storage.googleapis.com/cr-resource/image/34612167169c183d5c4be110f99e38b1/1466898/1466898-favicon.ico?_1719911524" type="image/x-icon">
+  <link rel="shortcut icon" href="https://storage.googleapis.com/cr-resource/image/34612167169c183d5c4be110f99e38b1/1466898/1466898-favicon.ico?_1719911524">
+  <link rel="apple-touch-icon" href="https://storage.googleapis.com/cr-resource/image/34612167169c183d5c4be110f99e38b1/1466898/1466898-favicon.ico?_1719911524">
+  <link rel="icon" type="image/x-icon" sizes="32x32" href="https://storage.googleapis.com/cr-resource/image/34612167169c183d5c4be110f99e38b1/1466898/1466898-favicon.ico?_1719911524">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="https://storage.googleapis.com/cr-resource/image/34612167169c183d5c4be110f99e38b1/1466898/1466898-favicon.ico?_1719911524">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -793,6 +798,23 @@
       .trust-item { flex: 0 0 44%; }
       /* footer */
       .footer-nav-grid { grid-template-columns: 1fr; }
+    }
+    /* ══════════════════════════════════════════
+       FAQ BAND
+    ══════════════════════════════════════════ */
+    .faq-band { padding: 80px 0 96px; background: #f8f9fc; }
+    .section-gap { margin-top: 0; }
+    .section-label { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+    .faq-band .section-title { font-size: clamp(22px,3vw,34px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.24; margin-bottom: 36px; }
+    .faq-list details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+    .faq-list summary { cursor: pointer; list-style: none; font-size: 16px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-icon { font-size: 18px; color: var(--brand); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-list details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-list details p { margin: 14px 0 4px; color: var(--muted); line-height: 1.8; font-size: 14px; }
+    @media (max-width: 760px) {
+      .faq-band { padding: 48px 0 56px; }
+    }
     /* ══════════════════════════════════════════
        HEADER — common (partials/header.css)
     ══════════════════════════════════════════ */
@@ -812,6 +834,7 @@
       backdrop-filter: blur(12px);
     }
     .family-bar { background: transparent; }
+    .family-bar--mobile { display: none; }
     .family-outer { display: flex; justify-content: center; padding: 8px 0; }
     .family-wrap {
       display: flex; align-items: center; justify-content: center;
@@ -821,6 +844,13 @@
       overflow-x: auto; scrollbar-width: none; white-space: nowrap;
     }
     .family-wrap::-webkit-scrollbar { display: none; }
+    .family-inline {
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; padding: 3px;
+      border: 1px solid var(--header-line-strong); border-radius: 14px;
+      background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+      white-space: nowrap;
+    }
     .family-link {
       flex: 0 0 auto; padding: 6px 14px; border-radius: 10px;
       font-size: 12px; font-weight: 700; color: var(--header-muted);
@@ -840,7 +870,7 @@
       background: var(--brand-soft);
       color: var(--brand); font-size: 12px; font-weight: 700; white-space: nowrap;
     }
-    .brand { display: flex; flex-direction: column; align-items: center; justify-self: center; text-align: center; gap: 4px; }
+    .brand { display: flex; flex-direction: column; align-items: center; justify-self: start; text-align: center; gap: 4px; }
     .brand-mark { width: 120px; height: 40px; object-fit: contain; }
     .brand-copy span { display: block; color: var(--header-muted); font-size: 11px; line-height: 1.4; }
     .header-actions { display: flex; align-items: center; justify-self: end; gap: 8px; }
@@ -887,6 +917,8 @@
       .inner { padding: 0 16px; }
       .main-header-wrap, .category-row { grid-template-columns: 1fr; gap: 10px; }
       .header-promo, .header-actions { display: none; }
+      .family-inline { display: none; }
+      .family-bar--mobile { display: block; }
       .brand { justify-self: center; }
       .category-balance { display: none; }
       .category-tabs, .category-utility { justify-content: flex-start; }
@@ -902,6 +934,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"HowTo","name":"대입·편입 합격 전략 수립 방법","step":[{"@type":"HowToStep","position":1,"text":"목표 대학·학과 선정 및 입시 전형 유형 분석"},{"@type":"HowToStep","position":2,"text":"학생부·논술·면접 전형 조합 설계"},{"@type":"HowToStep","position":3,"text":"일정별 준비 로드맵 수립"},{"@type":"HowToStep","position":4,"text":"1:1 코칭으로 취약 영역 집중 보완"}]}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"편입 코칭은 어떤 분들에게 필요한가요?","acceptedAnswer":{"@type":"Answer","text":"현재 재학 중이거나 졸업 후 더 좋은 대학으로 편입을 목표로 하는 분들에게 필요합니다. 학업 성적이 부족하더라도 자기소개서·면접·논술 등 비교과 전략으로 합격률을 높일 수 있으며, 목표 대학·전공 분석부터 서류·면접 준비까지 1:1 맞춤 코칭을 제공합니다."}},{"@type":"Question","name":"코칭 기간은 얼마나 걸리나요?","acceptedAnswer":{"@type":"Answer","text":"평균 코칭 기간은 3~6개월이며, 목표 대학의 전형 일정에 맞춰 집중 단기 코칭(1~2개월)도 가능합니다. 상담을 통해 현재 상황과 지원 일정을 분석한 후 최적의 코칭 플랜을 제안해 드립니다."}},{"@type":"Question","name":"자기소개서·면접 코칭은 어떻게 진행되나요?","acceptedAnswer":{"@type":"Answer","text":"지원자의 학업 이력·수상 경력·활동 내역을 바탕으로 강점을 발굴하고, 대학별 평가 기준에 맞는 자기소개서를 완성합니다. 면접은 기출 문제 분석 + 모의면접 반복 훈련 + 개인 피드백 방식으로 진행되어 실전 대비 효과가 높습니다."}},{"@type":"Question","name":"합격 보장이 되나요?","acceptedAnswer":{"@type":"Answer","text":"특정 대학의 합격을 보장하지는 않습니다. 다만, 빅링커 편입 코칭 수료생의 서울권 대학 합격률은 업계 평균보다 유의미하게 높습니다. 코칭 전 1:1 역량 진단 → 맞춤 전략 수립 → 실전 반복 훈련 과정으로 합격 가능성을 최대화합니다."}},{"@type":"Question","name":"비용은 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"코칭 유형(자기소개서·면접·종합 패키지 등)과 기간에 따라 다릅니다. 무료 초기 상담 후 개인 상황에 맞는 플랜과 비용을 안내해 드립니다. 상담 신청 버튼을 통해 먼저 연락주시면 빠르게 답변드립니다."}}]}
+  </script>
 </head>
 <body>
 
@@ -910,18 +945,24 @@
     <header class="main-header">
       <div class="inner">
         <div class="main-header-wrap">
-          <div class="header-promo">2026 합격전략 가이드 오픈</div>
           <a class="brand" href="./index.html">
             <img class="brand-mark" src="./assets/biglinker-logo.webp" alt="빅링커 로고">
             <div class="brand-copy"><span>대입·편입·면접·논술 코칭 전문 플랫폼</span></div>
           </a>
+          <div class="family-inline">
+            <a class="family-link is-active" href="https://transfer.gobiglinker.com/">대학&amp;편입</a>
+            <a class="family-link " href="https://graduate.gobiglinker.com/">대학원&amp;논문</a>
+            <a class="family-link " href="https://job.gobiglinker.com/">취업</a>
+            <a class="family-link " href="https://biz.gobiglinker.com/">기업교육</a>
+          </div>
           <div class="header-actions">
             <a class="cta-btn" href="#cta">상담 신청</a>
           </div>
         </div>
       </div>
     </header>
-    <div class="family-bar">
+    <!-- mobile-only family bar -->
+    <div class="family-bar family-bar--mobile">
       <div class="inner">
         <div class="family-outer">
           <div class="family-wrap">
@@ -1336,6 +1377,37 @@
             <span>✓ 2,800+ 코칭 완료</span>
             <span>✓ 당일 배정 가능</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ FAQ ══ -->
+    <section class="faq-band">
+      <div class="inner">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">편입·대입 코칭, 자주 묻는 질문</h2>
+        <div class="faq-list">
+          <details>
+            <summary>편입 코칭은 어떤 분들에게 필요한가요?<span class="faq-icon">+</span></summary>
+            <p>현재 재학 중이거나 졸업 후 더 좋은 대학으로 편입을 목표로 하는 분들에게 필요합니다. 학업 성적이 부족하더라도 자기소개서·면접·논술 등 비교과 전략으로 합격률을 높일 수 있으며, 목표 대학·전공 분석부터 서류·면접 준비까지 1:1 맞춤 코칭을 제공합니다.</p>
+          </details>
+          <details>
+            <summary>코칭 기간은 얼마나 걸리나요?<span class="faq-icon">+</span></summary>
+            <p>평균 코칭 기간은 3~6개월이며, 목표 대학의 전형 일정에 맞춰 집중 단기 코칭(1~2개월)도 가능합니다. 상담을 통해 현재 상황과 지원 일정을 분석한 후 최적의 코칭 플랜을 제안해 드립니다.</p>
+          </details>
+          <details>
+            <summary>자기소개서·면접 코칭은 어떻게 진행되나요?<span class="faq-icon">+</span></summary>
+            <p>지원자의 학업 이력·수상 경력·활동 내역을 바탕으로 강점을 발굴하고, 대학별 평가 기준에 맞는 자기소개서를 완성합니다. 면접은 기출 문제 분석 + 모의면접 반복 훈련 + 개인 피드백 방식으로 진행되어 실전 대비 효과가 높습니다.</p>
+          </details>
+          <details>
+            <summary>합격 보장이 되나요?<span class="faq-icon">+</span></summary>
+            <p>특정 대학의 합격을 보장하지는 않습니다. 다만, 빅링커 편입 코칭 수료생의 서울권 대학 합격률은 업계 평균보다 유의미하게 높습니다. 코칭 전 1:1 역량 진단 → 맞춤 전략 수립 → 실전 반복 훈련 과정으로 합격 가능성을 최대화합니다.</p>
+          </details>
+          <details>
+            <summary>비용은 어떻게 되나요?<span class="faq-icon">+</span></summary>
+            <p>코칭 유형(자기소개서·면접·종합 패키지 등)과 기간에 따라 다릅니다. 무료 초기 상담 후 개인 상황에 맞는 플랜과 비용을 안내해 드립니다. 상담 신청 버튼을 통해 먼저 연락주시면 빠르게 답변드립니다.</p>
+          </details>
         </div>
       </div>
     </section>
