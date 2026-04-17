@@ -14,6 +14,7 @@ SITE_VARS = {
 CATEGORY_TABS_ITEMS = [
     ("total-admission-coaching", "대입토탈리드코칭"),
     ("school-record-coaching",   "생기부리드코칭"),
+    ("transfer-lead-coaching",   "편입리드코칭"),
     ("interview-coaching",       "면접리드코칭"),
     ("essay-coaching",           "논술리드코칭"),
 ]
