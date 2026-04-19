@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+Disallow: /_pages/
+Disallow: /_partials/
+Disallow: /sources-dev/
+Disallow: /api/
+Disallow: /iframeindex.html
+
 Sitemap: https://transfer.gobiglinker.com/sitemap.xml
